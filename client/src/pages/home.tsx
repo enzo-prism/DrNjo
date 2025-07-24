@@ -14,30 +14,35 @@ export default function Home() {
       <div className="max-w-4xl w-full">
         <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
           {/* Professional Photo Section */}
-          <div className="relative h-64 md:h-80 bg-gray-50">
-            <img 
-              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800" 
-              alt="Modern dental office reception area with clean professional design"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 dental-gradient"></div>
+          <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
+            <div className="relative">
+              <img 
+                src="/attached_assets/Dr. Njo_1753322899280.webp"
+                alt="Dr. Michael Njo - Professional headshot"
+                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white professional-headshot"
+              />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent"></div>
+            </div>
           </div>
 
           {/* Content Section */}
           <div className="p-8 md:p-12">
-            {/* Company Name */}
+            {/* Company Name & Introduction */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6 tracking-tight">
-                Dental Strategies
+              <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-4 tracking-tight">
+                Dr. Michael Njo
               </h1>
+              <h2 className="text-2xl md:text-3xl font-light text-gray-600 mb-6">
+                Dental Strategies
+              </h2>
               <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto">
                 Specialized consulting company coaching dentists to achieve and understand their goals
               </p>
             </div>
 
-            {/* Dr. Michael Njo Biography */}
+            {/* Professional Background */}
             <div className="max-w-3xl mx-auto mb-12 text-left">
-              <h2 className="text-2xl font-light text-gray-800 mb-6 text-center">About Dr. Michael Njo</h2>
+              <h3 className="text-xl font-light text-gray-800 mb-6 text-center">Professional Background</h3>
               
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
