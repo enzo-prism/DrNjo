@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, BookOpen, ExternalLink } from "lucide-react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 
@@ -67,11 +67,45 @@ export default function Home() {
                 </p>
                 
                 <p>
-                  Dr. Michael Njo is an Author of Dental Practice Transitions Handbook, Director of the Dugoni 
+                  Dr. Michael Njo is an Author of{" "}
+                  <a 
+                    href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-700 underline font-medium transition-colors"
+                  >
+                    Dental Practice Transitions Handbook
+                  </a>, Director of the Dugoni 
                   Business Club, founded an educational company for transitions - www.practicetransitionsinstitute.com, 
                   he is part of the admission's team for UOP, serves on the Board of Directors at the Dugoni School 
                   of Dentistry, and the CDA Leadership Council.
                 </p>
+              </div>
+            </div>
+
+            {/* Featured Publication */}
+            <div className="max-w-3xl mx-auto mb-12 text-center">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+                <div className="flex items-center justify-center mb-4">
+                  <BookOpen className="w-6 h-6 text-blue-600 mr-3" />
+                  <h3 className="text-lg font-light text-gray-800">Featured Publication</h3>
+                </div>
+                <h4 className="text-xl font-medium text-gray-900 mb-3">
+                  Dental Practice Transitions Handbook
+                </h4>
+                <p className="text-gray-600 font-light mb-6 leading-relaxed">
+                  A comprehensive guide for dental professionals navigating practice transitions, 
+                  partnerships, acquisitions, and strategic planning.
+                </p>
+                <a 
+                  href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors shadow-sm"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View on Amazon
+                </a>
               </div>
             </div>
 
