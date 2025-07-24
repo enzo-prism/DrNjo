@@ -1,4 +1,5 @@
 import { Phone, Mail } from "lucide-react";
+import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 
 export default function Home() {
   const handleCall = () => {
@@ -17,7 +18,7 @@ export default function Home() {
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
             <div className="relative">
               <img 
-                src="/attached_assets/Dr. Njo_1753322899280.webp"
+                src={drNjoHeadshot}
                 alt="Dr. Michael Njo - Professional headshot"
                 className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white professional-headshot"
               />
