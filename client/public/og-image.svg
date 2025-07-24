@@ -1,18 +1,18 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:0.3" />
-      <stop offset="15%" style="stop-color:#fecfef;stop-opacity:0.3" />
-      <stop offset="30%" style="stop-color:#fecfef;stop-opacity:0.3" />
-      <stop offset="45%" style="stop-color:#a8edea;stop-opacity:0.3" />
-      <stop offset="60%" style="stop-color:#fed6e3;stop-opacity:0.3" />
-      <stop offset="75%" style="stop-color:#d299c2;stop-opacity:0.3" />
-      <stop offset="90%" style="stop-color:#fad0c4;stop-opacity:0.3" />
-      <stop offset="100%" style="stop-color:#ffd1ff;stop-opacity:0.3" />
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:0.15" />
+      <stop offset="15%" style="stop-color:#fecfef;stop-opacity:0.15" />
+      <stop offset="30%" style="stop-color:#fecfef;stop-opacity:0.15" />
+      <stop offset="45%" style="stop-color:#a8edea;stop-opacity:0.15" />
+      <stop offset="60%" style="stop-color:#fed6e3;stop-opacity:0.15" />
+      <stop offset="75%" style="stop-color:#d299c2;stop-opacity:0.15" />
+      <stop offset="90%" style="stop-color:#fad0c4;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#ffd1ff;stop-opacity:0.15" />
     </linearGradient>
     <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.98" />
     </linearGradient>
   </defs>
   
