@@ -2,7 +2,15 @@
 
 ## Overview
 
-This is a modern full-stack web application for a dental practice called "Dental Strategies". The application is built with a React frontend and Express backend, featuring a clean, professional design focused on presenting dental services and facilitating patient contact.
+This is an elegant, minimalist landing page for "Dental Strategies" functioning as a digital business card for Dr. Michael Njo's dental consulting practice. The application features Dr. Njo's professional headshot, comprehensive biographical information, and clear call-to-action for free consultations. Built with React frontend and Express backend with a clean, professional design focused on converting visitors into consultation bookings.
+
+## Recent Changes (July 24, 2025)
+- Integrated Dr. Michael Njo's professional headshot using proper Vite asset imports
+- Updated page layout to feature Dr. Njo prominently with company name as secondary
+- Added comprehensive biographical content highlighting 25 years of consulting experience
+- Updated CTA buttons to focus on "Free Consultation" scheduling
+- Set proper contact information: phone +1 (650) 436-2939, email dentalstrategies@gmail.com
+- Optimized SEO with focused title and meta description
 
 ## User Preferences
 

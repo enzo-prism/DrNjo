@@ -3,11 +3,11 @@ import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 
 export default function Home() {
   const handleCall = () => {
-    window.location.href = "tel:+1234567890";
+    window.location.href = "tel:+16504362939";
   };
 
   const handleEmail = () => {
-    window.location.href = "mailto:contact@dentalstrategies.com";
+    window.location.href = "mailto:dentalstrategies@gmail.com";
   };
 
   return (
