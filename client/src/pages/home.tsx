@@ -73,25 +73,30 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              {/* Call Button */}
-              <button 
-                onClick={handleCall}
-                className="dental-button-primary inline-flex items-center justify-center"
-              >
-                <Phone className="w-5 h-5 mr-3" />
-                Call Now
-              </button>
+            {/* Free Consultation CTA */}
+            <div className="text-center mb-8">
+              <h3 className="text-xl font-light text-gray-800 mb-6">
+                Schedule Your Free Consultation
+              </h3>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                {/* Call Button */}
+                <button 
+                  onClick={handleCall}
+                  className="dental-button-primary inline-flex items-center justify-center"
+                >
+                  <Phone className="w-5 h-5 mr-3" />
+                  Call for Free Consultation
+                </button>
 
-              {/* Email Button */}
-              <button 
-                onClick={handleEmail}
-                className="dental-button-secondary inline-flex items-center justify-center"
-              >
-                <Mail className="w-5 h-5 mr-3" />
-                Send Email
-              </button>
+                {/* Email Button */}
+                <button 
+                  onClick={handleEmail}
+                  className="dental-button-secondary inline-flex items-center justify-center"
+                >
+                  <Mail className="w-5 h-5 mr-3" />
+                  Email for Free Consultation
+                </button>
+              </div>
             </div>
 
             {/* Professional Touch */}
