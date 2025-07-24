@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:0.3" />
+      <stop offset="15%" style="stop-color:#fecfef;stop-opacity:0.3" />
+      <stop offset="30%" style="stop-color:#fecfef;stop-opacity:0.3" />
+      <stop offset="45%" style="stop-color:#a8edea;stop-opacity:0.3" />
+      <stop offset="60%" style="stop-color:#fed6e3;stop-opacity:0.3" />
+      <stop offset="75%" style="stop-color:#d299c2;stop-opacity:0.3" />
+      <stop offset="90%" style="stop-color:#fad0c4;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffd1ff;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="overlayGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#ffffff"/>
+  
+  <!-- Rainbow gradient overlay -->
+  <rect width="1200" height="630" fill="url(#rainbowGradient)"/>
+  
+  <!-- Soft white overlay for elegant fade effect -->
+  <rect width="1200" height="630" fill="url(#overlayGradient)"/>
+  
+  <!-- Text content -->
+  <text x="600" y="280" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="72" font-weight="300" text-anchor="middle" fill="#374151">Dental Strategies</text>
+  <text x="600" y="340" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="32" font-weight="300" text-anchor="middle" fill="#6b7280">Dr. Michael Njo</text>
+  <text x="600" y="420" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="300" text-anchor="middle" fill="#9ca3af">Dental Practice Consulting</text>
+</svg>
