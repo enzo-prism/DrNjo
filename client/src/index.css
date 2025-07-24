@@ -49,6 +49,9 @@
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(240, 4.9%, 83.9%);
   --radius: 0.75rem;
+  --dental-blue: hsl(217, 91%, 60%);
+  --dental-gray: hsl(240, 5%, 90%);
+  --dental-light: hsl(240, 3.7%, 15.9%);
 }
 
 @layer base {
@@ -63,10 +66,14 @@
 }
 
 .dental-card {
-  background: white;
+  @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800;
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border: 1px solid hsl(220, 5.9%, 90%);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .dental-card {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .dental-gradient {
@@ -92,9 +99,7 @@
 }
 
 .dental-button-secondary {
-  background: white;
-  color: var(--dental-blue);
-  border: 2px solid var(--dental-blue);
+  @apply bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400;
   border-radius: 0.75rem;
   padding: 1rem 2rem;
   font-weight: 500;

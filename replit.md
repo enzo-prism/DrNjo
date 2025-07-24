@@ -11,6 +11,9 @@ This is an elegant, minimalist landing page for "Dental Strategies" functioning 
 - Updated CTA buttons to focus on "Free Consultation" scheduling
 - Set proper contact information: phone +1 (650) 436-2939, email dentalstrategies@gmail.com
 - Optimized SEO with focused title and meta description
+- Added seamless book and institute website links with elegant inline and card layouts
+- Implemented comprehensive light/dark mode with theme toggle and smooth transitions
+- Updated OpenGraph image to use professional group photo for better social proof
 
 ## User Preferences
 
@@ -24,6 +27,7 @@ The application follows a full-stack monorepo structure with clear separation be
 - **Backend**: Express.js with TypeScript
 - **Database**: PostgreSQL with Drizzle ORM for type-safe database operations
 - **UI Framework**: shadcn/ui components built on Radix UI primitives with Tailwind CSS
+- **Theme System**: Comprehensive light/dark mode with theme provider and toggle component
 - **State Management**: TanStack Query for server state management
 - **Routing**: Wouter for client-side routing
 
