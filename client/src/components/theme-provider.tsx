@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-type Theme = "dark" | "light" | "system" | "auto";
+type Theme = "auto" | "light" | "dark" | "system";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "auto",
   setTheme: () => null,
   actualTheme: "light",
 };
@@ -49,16 +49,16 @@ export function ThemeProvider({
   // Determine actual theme based on user preference
   const determineActualTheme = useCallback((): "dark" | "light" => {
     switch (theme) {
-      case "dark":
-        return "dark";
-      case "light":
-        return "light";
-      case "system":
-        return getSystemTheme();
       case "auto":
         return getTimeBasedTheme();
-      default:
+      case "light":
         return "light";
+      case "dark":
+        return "dark";
+      case "system":
+        return getSystemTheme();
+      default:
+        return getTimeBasedTheme(); // Default to auto behavior
     }
   }, [theme, getSystemTheme, getTimeBasedTheme]);
 

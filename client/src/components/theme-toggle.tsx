@@ -5,14 +5,14 @@ export function ThemeToggle() {
   const { theme, actualTheme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    if (theme === "light") {
+    if (theme === "auto") {
+      setTheme("light");
+    } else if (theme === "light") {
       setTheme("dark");
     } else if (theme === "dark") {
       setTheme("system");
-    } else if (theme === "system") {
-      setTheme("auto");
     } else {
-      setTheme("light");
+      setTheme("auto");
     }
   };
 
@@ -35,11 +35,11 @@ export function ThemeToggle() {
     
     if (theme === "auto") {
       const isNightTime = hour >= 19 || hour < 7;
-      return `Auto mode (${timeString}) - Currently ${isNightTime ? 'dark' : 'light'} theme`;
+      return `Smart auto mode (${timeString}) - Currently ${isNightTime ? 'dark' : 'light'}`;
     }
-    if (theme === "system") return "System theme - Switch to auto mode";
-    if (theme === "dark") return "Dark mode - Switch to system theme";
     if (theme === "light") return "Light mode - Switch to dark mode";
+    if (theme === "dark") return "Dark mode - Switch to system theme";
+    if (theme === "system") return "System theme - Switch to smart auto mode";
     return "Switch theme";
   };
 
@@ -55,13 +55,16 @@ export function ThemeToggle() {
       </button>
       
       {theme === "auto" && (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-lg text-xs text-gray-600 dark:text-gray-300 transition-all duration-300">
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${actualTheme === 'dark' ? 'bg-blue-600' : 'bg-yellow-500'}`}></div>
-            <span>Auto: {actualTheme === 'dark' ? 'Dark' : 'Light'}</span>
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-lg text-xs text-gray-600 dark:text-gray-300 transition-all duration-300 min-w-[120px]">
+          <div className="flex items-center gap-2 justify-center">
+            <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${actualTheme === 'dark' ? 'bg-blue-500' : 'bg-amber-500'}`}></div>
+            <span className="font-medium">Smart Auto</span>
           </div>
-          <div className="text-gray-500 dark:text-gray-400 mt-1">
-            {getCurrentTimeInfo().timeString}
+          <div className="text-center text-gray-500 dark:text-gray-400 mt-1">
+            {actualTheme === 'dark' ? '🌙' : '☀️'} {getCurrentTimeInfo().timeString}
+          </div>
+          <div className="text-center text-[10px] text-gray-400 dark:text-gray-500 mt-1">
+            {actualTheme === 'dark' ? 'Night mode' : 'Day mode'}
           </div>
         </div>
       )}

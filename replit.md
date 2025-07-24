@@ -14,8 +14,9 @@ This is an elegant, minimalist landing page for "Dental Strategies" functioning 
 - Added seamless book and institute website links with elegant inline and card layouts
 - Implemented comprehensive light/dark mode with theme toggle and smooth transitions
 - Added intelligent auto-mode that switches themes based on user's local time (7PM-7AM dark, 7AM-7PM light)
-- Enhanced theme toggle with 4 modes: Light → Dark → System → Auto → Light (cycle)
+- Enhanced theme toggle with 4 modes: Auto → Light → Dark → System → Auto (cycle)
 - Auto mode displays real-time status indicator and current time
+- Set Smart Auto mode as the intelligent default experience for all new users
 - Updated OpenGraph image to use professional group photo for better social proof
 
 ## User Preferences
