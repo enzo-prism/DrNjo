@@ -134,3 +134,19 @@
   transform: scale(1.02);
   box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.3);
 }
+
+.client-success-image {
+  transition: all 0.3s ease-in-out;
+  max-height: 400px;
+}
+
+.client-success-image:hover {
+  transform: scale(1.01);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .client-success-image {
+    max-height: 300px;
+  }
+}

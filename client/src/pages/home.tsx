@@ -1,5 +1,6 @@
 import { Phone, Mail } from "lucide-react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
+import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 
 export default function Home() {
   const handleCall = () => {
@@ -72,6 +73,22 @@ export default function Home() {
                   of Dentistry, and the CDA Leadership Council.
                 </p>
               </div>
+            </div>
+
+            {/* Client Success Section */}
+            <div className="max-w-4xl mx-auto mb-12">
+              <h3 className="text-xl font-light text-gray-800 mb-8 text-center">Working with Dental Professionals Nationwide</h3>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <img 
+                  src={drNjoClients}
+                  alt="Dr. Michael Njo with dental professionals at a consulting workshop"
+                  className="w-full h-auto object-cover client-success-image"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+              <p className="text-center text-sm text-gray-500 mt-4 font-light">
+                Dr. Njo conducting a practice transition workshop with dental professionals
+              </p>
             </div>
 
             {/* Free Consultation CTA */}
