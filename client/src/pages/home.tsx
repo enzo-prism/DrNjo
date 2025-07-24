@@ -11,8 +11,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex items-center justify-center px-4 py-8 md:py-16 bg-white">
-      <div className="max-w-2xl w-full">
-        <div className="dental-card overflow-hidden opacity-0 translate-y-5 animate-in duration-600 fill-mode-forwards">
+      <div className="max-w-4xl w-full">
+        <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
           {/* Professional Photo Section */}
           <div className="relative h-64 md:h-80 bg-gray-50">
             <img 
@@ -24,23 +24,52 @@ export default function Home() {
           </div>
 
           {/* Content Section */}
-          <div className="p-8 md:p-12 text-center">
+          <div className="p-8 md:p-12">
             {/* Company Name */}
-            <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6 tracking-tight">
-              Dental Strategies
-            </h1>
-
-            {/* Body Text */}
-            <div className="max-w-lg mx-auto mb-10">
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light">
-                Comprehensive dental care with a focus on preventive treatment, 
-                aesthetic enhancement, and patient comfort. Experience modern dentistry 
-                in a welcoming, professional environment.
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-light text-gray-800 mb-6 tracking-tight">
+                Dental Strategies
+              </h1>
+              <p className="text-lg text-gray-600 font-light max-w-2xl mx-auto">
+                Specialized consulting company coaching dentists to achieve and understand their goals
               </p>
             </div>
 
+            {/* Dr. Michael Njo Biography */}
+            <div className="max-w-3xl mx-auto mb-12 text-left">
+              <h2 className="text-2xl font-light text-gray-800 mb-6 text-center">About Dr. Michael Njo</h2>
+              
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  Dr. Michael Njo is a proud graduate of UOP, School of Dentistry. After hibernating his disk, 
+                  Dr. Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
+                  coaches Dentist to achieving and understanding their goals.
+                </p>
+                
+                <p>
+                  Just a few goals to mention range from, starting a practice whether a start-up or purchase, 
+                  forming partnerships, expansions, retirement strategies, selling practices, valuations, 
+                  malpractice, and conflict issues, introducing technology, team building, and implementing 
+                  operating systems to achieve the maximum efficiency and profitability for their offices.
+                </p>
+                
+                <p>
+                  Dr. Michael Njo has been consulting for 25 years and has built his consulting company all by 
+                  direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
+                  and practice. He will develop a program to implement and facilitate the goals you desire.
+                </p>
+                
+                <p>
+                  Dr. Michael Njo is an Author of Dental Practice Transitions Handbook, Director of the Dugoni 
+                  Business Club, founded an educational company for transitions - www.practicetransitionsinstitute.com, 
+                  he is part of the admission's team for UOP, serves on the Board of Directors at the Dugoni School 
+                  of Dentistry, and the CDA Leadership Council.
+                </p>
+              </div>
+            </div>
+
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               {/* Call Button */}
               <button 
                 onClick={handleCall}
@@ -60,32 +89,15 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Subtle Professional Touch */}
-            <div className="mt-10 pt-6 border-t border-gray-100">
+            {/* Professional Touch */}
+            <div className="text-center pt-6 border-t border-gray-100">
               <p className="text-sm text-gray-400 font-light">
-                Professional dental care you can trust
+                25 years of consulting excellence • Direct referral based practice
               </p>
             </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .animate-in {
-          animation: slideInUp 0.6s ease-out forwards;
-        }
-        
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </main>
   );
 }
