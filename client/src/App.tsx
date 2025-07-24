@@ -19,7 +19,7 @@ function Router() {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="light" storageKey="dental-strategies-theme">
+    <ThemeProvider defaultTheme="auto" storageKey="dental-strategies-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <ThemeToggle />

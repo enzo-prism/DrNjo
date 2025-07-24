@@ -13,6 +13,9 @@ This is an elegant, minimalist landing page for "Dental Strategies" functioning 
 - Optimized SEO with focused title and meta description
 - Added seamless book and institute website links with elegant inline and card layouts
 - Implemented comprehensive light/dark mode with theme toggle and smooth transitions
+- Added intelligent auto-mode that switches themes based on user's local time (7PM-7AM dark, 7AM-7PM light)
+- Enhanced theme toggle with 4 modes: Light → Dark → System → Auto → Light (cycle)
+- Auto mode displays real-time status indicator and current time
 - Updated OpenGraph image to use professional group photo for better social proof
 
 ## User Preferences
@@ -27,7 +30,7 @@ The application follows a full-stack monorepo structure with clear separation be
 - **Backend**: Express.js with TypeScript
 - **Database**: PostgreSQL with Drizzle ORM for type-safe database operations
 - **UI Framework**: shadcn/ui components built on Radix UI primitives with Tailwind CSS
-- **Theme System**: Comprehensive light/dark mode with theme provider and toggle component
+- **Theme System**: Intelligent 4-mode theme system (Light/Dark/System/Auto) with time-based automatic switching
 - **State Management**: TanStack Query for server state management
 - **Routing**: Wouter for client-side routing
 

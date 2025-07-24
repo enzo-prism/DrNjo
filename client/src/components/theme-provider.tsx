@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "dark" | "light" | "system" | "auto";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -11,45 +11,113 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  actualTheme: "dark" | "light";
 };
 
 const initialState: ThemeProviderState = {
   theme: "system",
   setTheme: () => null,
+  actualTheme: "light",
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "auto",
   storageKey = "dental-strategies-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
+  const [actualTheme, setActualTheme] = useState<"dark" | "light">("light");
+
+  // Time-based theme calculation
+  const getTimeBasedTheme = useCallback((): "dark" | "light" => {
+    const hour = new Date().getHours();
+    // Dark mode from 7 PM (19:00) to 7 AM (07:00)
+    // Light mode from 7 AM (07:00) to 7 PM (19:00)
+    return (hour >= 19 || hour < 7) ? "dark" : "light";
+  }, []);
+
+  // System theme detection
+  const getSystemTheme = useCallback((): "dark" | "light" => {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }, []);
+
+  // Determine actual theme based on user preference
+  const determineActualTheme = useCallback((): "dark" | "light" => {
+    switch (theme) {
+      case "dark":
+        return "dark";
+      case "light":
+        return "light";
+      case "system":
+        return getSystemTheme();
+      case "auto":
+        return getTimeBasedTheme();
+      default:
+        return "light";
+    }
+  }, [theme, getSystemTheme, getTimeBasedTheme]);
 
   useEffect(() => {
     const root = window.document.documentElement;
-
+    const newActualTheme = determineActualTheme();
+    
     root.classList.remove("light", "dark");
+    root.classList.add(newActualTheme);
+    setActualTheme(newActualTheme);
+
+    // Set up listeners for system theme changes and time-based updates
+    let intervalId: NodeJS.Timeout | null = null;
+    let mediaQuery: MediaQueryList | null = null;
 
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
+      mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handleSystemThemeChange = () => {
+        const systemTheme = getSystemTheme();
+        root.classList.remove("light", "dark");
+        root.classList.add(systemTheme);
+        setActualTheme(systemTheme);
+      };
+      
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener("change", handleSystemThemeChange);
+      } else {
+        // Fallback for older browsers
+        mediaQuery.addListener(handleSystemThemeChange);
+      }
     }
 
-    root.classList.add(theme);
-  }, [theme]);
+    if (theme === "auto") {
+      // Check every minute for time changes
+      intervalId = setInterval(() => {
+        const timeTheme = getTimeBasedTheme();
+        if (timeTheme !== actualTheme) {
+          root.classList.remove("light", "dark");
+          root.classList.add(timeTheme);
+          setActualTheme(timeTheme);
+        }
+      }, 60000); // Check every minute
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+      if (mediaQuery) {
+        if (mediaQuery.removeEventListener) {
+          mediaQuery.removeEventListener("change", () => {});
+        } else {
+          mediaQuery.removeListener(() => {});
+        }
+      }
+    };
+  }, [theme, actualTheme, determineActualTheme, getSystemTheme, getTimeBasedTheme]);
 
   const value = {
     theme,
+    actualTheme,
     setTheme: (theme: Theme) => {
       localStorage.setItem(storageKey, theme);
       setTheme(theme);
