@@ -1,4 +1,5 @@
 import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, MessageCircle, Star, Users } from "lucide-react";
+import { useEffect, useRef } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 
@@ -10,6 +11,29 @@ export default function Home() {
   const handleEmail = () => {
     window.location.href = "mailto:dentalstrategies@gmail.com";
   };
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const elements = document.querySelectorAll('.scroll-fade-in');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -32,7 +56,7 @@ export default function Home() {
           <div className="p-8 md:p-12">
             {/* Company Name & Introduction */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-6 tracking-tight transition-colors duration-300">
+              <h1 className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-6 tracking-tight transition-colors duration-300 opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]">
                 Dr. Michael Njo
               </h1>
               <div className="mb-8">
@@ -40,16 +64,16 @@ export default function Home() {
                   Founder:
                 </p>
                 <div className="space-y-3">
-                  <h2 className="text-2xl md:text-3xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                  <h2 className="text-2xl md:text-3xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300 stagger-fade-in">
                     Dental Strategies
                   </h2>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
                     HealthcareStrategiesMD
                   </h3>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
                     Business Strategies
                   </h3>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
                     Practice Transitions Institute
                   </h3>
                 </div>
@@ -63,18 +87,18 @@ export default function Home() {
                     href="https://practicetransitionsinstitute.com/client-testimonials/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group"
                   >
-                    <Star className="w-4 h-4 mr-1 fill-current" />
-                    <span>Trusted by hundreds of healthcare professionals</span>
-                    <ExternalLink className="w-3 h-3 ml-1" />
+                    <Star className="w-4 h-4 mr-1 fill-current animate-[starSparkle_2s_ease-in-out_infinite]" />
+                    <span className="hover-underline">Trusted by hundreds of healthcare professionals</span>
+                    <ExternalLink className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Professional Background */}
-            <div className="max-w-3xl mx-auto mb-12 text-left">
+            <div className="max-w-3xl mx-auto mb-12 text-left scroll-fade-in">
               <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-6 text-center transition-colors duration-300">Professional Background</h3>
               
               <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">
@@ -139,7 +163,7 @@ export default function Home() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 {/* Featured Publication */}
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 transition-all duration-300">
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 transition-all duration-300 card-hover-lift scroll-fade-in">
                   <div className="flex items-center mb-4">
                     <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
                     <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">Published Book</h4>
@@ -162,7 +186,7 @@ export default function Home() {
                 </div>
 
                 {/* Educational Institute */}
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-700 transition-all duration-300">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-blue-200 dark:border-blue-700 transition-all duration-300 card-hover-lift scroll-fade-in">
                   <div className="flex items-center mb-4">
                     <GraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-3 transition-colors duration-300" />
                     <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">Educational Institute</h4>
@@ -188,25 +212,25 @@ export default function Home() {
 
             {/* Client Success Section */}
             <div className="max-w-4xl mx-auto mb-12">
-              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-8 text-center transition-colors duration-300">Working with Dental Professionals Nationwide</h3>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6">
+              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-8 text-center transition-colors duration-300 scroll-fade-in">Working with Dental Professionals Nationwide</h3>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 scroll-fade-in">
                 <img 
                   src={drNjoClients}
                   alt="Dr. Michael Njo with dental professionals at a consulting workshop"
-                  className="w-full h-auto object-cover client-success-image"
+                  className="w-full h-auto object-cover client-success-image parallax-slow"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
               </div>
               <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-8 font-light transition-colors duration-300">
                 Dr. Njo conducting a practice transition workshop with dental professionals
               </p>
               
               {/* Testimonials Call to Action */}
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800 transition-all duration-300">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800 transition-all duration-300 scroll-fade-in">
                 <div className="flex justify-center mb-4">
                   <div className="flex items-center space-x-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                      <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500 opacity-0 animate-[fadeInStagger_0.4s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{animationDelay: `${1.5 + i * 0.1}s`}} />
                     ))}
                   </div>
                 </div>
@@ -230,7 +254,7 @@ export default function Home() {
             </div>
 
             {/* Free Consultation CTA */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-8 scroll-fade-in">
               <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-6 transition-colors duration-300">
                 Schedule Your Free Consultation
               </h3>
@@ -238,18 +262,18 @@ export default function Home() {
                 {/* Call Button */}
                 <button 
                   onClick={handleCall}
-                  className="dental-button-primary inline-flex items-center justify-center"
+                  className="dental-button-primary inline-flex items-center justify-center magnetic-button"
                 >
-                  <Phone className="w-5 h-5 mr-3" />
+                  <Phone className="w-5 h-5 mr-3 transition-transform group-hover:rotate-12" />
                   Call for Free Consultation
                 </button>
 
                 {/* Email Button */}
                 <button 
                   onClick={handleEmail}
-                  className="dental-button-secondary inline-flex items-center justify-center"
+                  className="dental-button-secondary inline-flex items-center justify-center magnetic-button"
                 >
-                  <Mail className="w-5 h-5 mr-3" />
+                  <Mail className="w-5 h-5 mr-3 transition-transform group-hover:translate-x-1" />
                   Email for Free Consultation
                 </button>
               </div>
