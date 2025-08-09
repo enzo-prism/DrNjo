@@ -1,4 +1,4 @@
-import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, MessageCircle } from "lucide-react";
+import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, MessageCircle, Star, Users } from "lucide-react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 
@@ -13,17 +13,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Testimonials Link Banner */}
-      <div className="absolute top-24 right-8 z-40">
-        <a 
-          href="#testimonials"
-          className="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all duration-200"
-        >
-          <MessageCircle className="w-4 h-4 mr-2" />
-          Client Testimonials
-        </a>
-      </div>
-      
       <div className="flex items-center justify-center px-4 py-8 md:py-16">
         <div className="max-w-4xl w-full">
         <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
@@ -69,6 +58,18 @@ export default function Home() {
                 <p className="text-lg text-gray-600 dark:text-gray-300 font-light leading-relaxed transition-colors duration-300">
                   Specialized consulting company coaching dentists, MDs, Podiatrists, Osteopaths, and general business owners to achieve and understand their goals
                 </p>
+                <div className="mt-6">
+                  <a 
+                    href="https://practicetransitionsinstitute.com/client-testimonials/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    <Star className="w-4 h-4 mr-1 fill-current" />
+                    <span>Trusted by hundreds of healthcare professionals</span>
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -93,7 +94,16 @@ export default function Home() {
                 <p>
                   Dr. Michael Njo has been consulting for 25 years and has built his consulting company all by 
                   direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
-                  and practice. He will develop a program to implement and facilitate the goals you desire.
+                  and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
+                  <a 
+                    href="https://practicetransitionsinstitute.com/client-testimonials/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+                  >
+                    <span className="underline">Read what clients are saying</span>
+                    <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
                 </p>
                 
                 <p>
@@ -179,7 +189,7 @@ export default function Home() {
             {/* Client Success Section */}
             <div className="max-w-4xl mx-auto mb-12">
               <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-8 text-center transition-colors duration-300">Working with Dental Professionals Nationwide</h3>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6">
                 <img 
                   src={drNjoClients}
                   alt="Dr. Michael Njo with dental professionals at a consulting workshop"
@@ -187,9 +197,36 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
-              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4 font-light transition-colors duration-300">
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-8 font-light transition-colors duration-300">
                 Dr. Njo conducting a practice transition workshop with dental professionals
               </p>
+              
+              {/* Testimonials Call to Action */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800 transition-all duration-300">
+                <div className="flex justify-center mb-4">
+                  <div className="flex items-center space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                    ))}
+                  </div>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 transition-colors duration-300">
+                  Trusted by Healthcare Professionals for 25+ Years
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto font-light transition-colors duration-300">
+                  Discover how Dr. Njo has helped hundreds of dentists, physicians, and healthcare professionals achieve their practice goals.
+                </p>
+                <a 
+                  href="https://practicetransitionsinstitute.com/client-testimonials/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
+                >
+                  <Users className="w-5 h-5 mr-2" />
+                  Read Client Testimonials
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              </div>
             </div>
 
             {/* Free Consultation CTA */}
