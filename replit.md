@@ -4,7 +4,7 @@
 
 This is an elegant, minimalist landing page for "Dental Strategies" functioning as a digital business card for Dr. Michael Njo's dental consulting practice. The application features Dr. Njo's professional headshot, comprehensive biographical information, and clear call-to-action for free consultations. Built with React frontend and Express backend with a clean, professional design focused on converting visitors into consultation bookings.
 
-## Recent Changes (July 24, 2025)
+## Recent Changes (January 10, 2025)
 - Integrated Dr. Michael Njo's professional headshot using proper Vite asset imports
 - Updated page layout to feature Dr. Njo prominently with company name as secondary
 - Added comprehensive biographical content highlighting 25 years of consulting experience
@@ -17,6 +17,9 @@ This is an elegant, minimalist landing page for "Dental Strategies" functioning 
 - Enhanced theme toggle with 4 modes: Auto → Light → Dark → System → Auto (cycle)
 - Auto mode displays real-time status indicator and current time
 - Set Smart Auto mode as the intelligent default experience for all new users
+- Enhanced header to showcase Dr. Njo as founder of multiple companies (Dental Strategies, HealthcareStrategiesMD, Business Strategies, Practice Transitions Institute)
+- Expanded tagline to include all healthcare professionals served (dentists, MDs, Podiatrists, Osteopaths, and general business owners)
+- Added client testimonials link for easy access to social proof
 - Updated OpenGraph image to use professional group photo for better social proof
 
 ## User Preferences

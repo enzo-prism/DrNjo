@@ -1,4 +1,4 @@
-import { Phone, Mail, BookOpen, ExternalLink, GraduationCap } from "lucide-react";
+import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, MessageCircle } from "lucide-react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 
@@ -12,8 +12,20 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-8 md:py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
-      <div className="max-w-4xl w-full">
+    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      {/* Testimonials Link Banner */}
+      <div className="absolute top-24 right-8 z-40">
+        <a 
+          href="#testimonials"
+          className="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm hover:shadow-md text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all duration-200"
+        >
+          <MessageCircle className="w-4 h-4 mr-2" />
+          Client Testimonials
+        </a>
+      </div>
+      
+      <div className="flex items-center justify-center px-4 py-8 md:py-16">
+        <div className="max-w-4xl w-full">
         <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
           {/* Professional Photo Section */}
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center transition-colors duration-300">
@@ -31,15 +43,33 @@ export default function Home() {
           <div className="p-8 md:p-12">
             {/* Company Name & Introduction */}
             <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-4 tracking-tight transition-colors duration-300">
+              <h1 className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-6 tracking-tight transition-colors duration-300">
                 Dr. Michael Njo
               </h1>
-              <h2 className="text-2xl md:text-3xl font-light text-gray-600 dark:text-gray-300 mb-6 transition-colors duration-300">
-                Dental Strategies
-              </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 font-light max-w-2xl mx-auto transition-colors duration-300">
-                Specialized consulting company coaching dentists to achieve and understand their goals
-              </p>
+              <div className="mb-8">
+                <p className="text-base text-gray-500 dark:text-gray-400 mb-4 font-light uppercase tracking-wider transition-colors duration-300">
+                  Founder:
+                </p>
+                <div className="space-y-3">
+                  <h2 className="text-2xl md:text-3xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                    Dental Strategies
+                  </h2>
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                    HealthcareStrategiesMD
+                  </h3>
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                    Business Strategies
+                  </h3>
+                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300">
+                    Practice Transitions Institute
+                  </h3>
+                </div>
+              </div>
+              <div className="max-w-3xl mx-auto">
+                <p className="text-lg text-gray-600 dark:text-gray-300 font-light leading-relaxed transition-colors duration-300">
+                  Specialized consulting company coaching dentists, MDs, Podiatrists, Osteopaths, and general business owners to achieve and understand their goals
+                </p>
+              </div>
             </div>
 
             {/* Professional Background */}
@@ -196,6 +226,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </main>
   );
