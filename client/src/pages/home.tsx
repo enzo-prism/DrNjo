@@ -103,7 +103,7 @@ export default function Home() {
               
               <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">
                 <p>
-                  Dr. Michael Njo is a proud graduate of UOP, School of Dentistry. After hibernating his disk, 
+                  Dr. Michael Njo is a proud graduate of UOP, School of Dentistry. After herniating his disc, 
                   Dr. Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
                   coaches Dentist to achieving and understanding their goals.
                 </p>
