@@ -241,7 +241,7 @@ export default function Home() {
                   Discover how Dr. Njo has helped hundreds of dentists, physicians, and healthcare professionals achieve their practice goals.
                 </p>
                 <a 
-                  href="https://practicetransitionsinstitute.com/client-testimonials/"
+                  href="https://practicetransitionsinstitute.com/testimonials"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
