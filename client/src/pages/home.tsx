@@ -84,7 +84,7 @@ export default function Home() {
                 </p>
                 <div className="mt-6">
                   <a 
-                    href="https://practicetransitionsinstitute.com/client-testimonials/"
+                    href="https://practicetransitionsinstitute.com/testimonials"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group"
@@ -120,7 +120,7 @@ export default function Home() {
                   direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
                   and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
                   <a 
-                    href="https://practicetransitionsinstitute.com/client-testimonials/"
+                    href="https://practicetransitionsinstitute.com/testimonials"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
