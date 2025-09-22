@@ -12,6 +12,11 @@ export default function Home() {
     window.location.href = "mailto:dentalstrategies@gmail.com";
   };
 
+  // Scroll to top on page load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Intersection Observer for scroll animations
   useEffect(() => {
     const observerOptions = {
