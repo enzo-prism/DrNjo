@@ -8,6 +8,7 @@ The repo is a small monorepo: Vite/React frontend in `client/`, Express server i
 ## Tech Stack
 
 - **Frontend**: React 18 + Vite + TailwindCSS + shadcn/ui + Wouter routing.
+- **Lead Capture**: `/contact` page powered by react-hook-form + Zod with a Formspree backend endpoint.
 - **Backend**: Express 4 with TypeScript, bundled by esbuild for production.
 - **Data Layer**: Drizzle ORM + Zod schemas under `shared/`, currently backed by an in-memory storage adapter.
 - **Tooling**: tsx for dev runtime, TanStack Query client, Cartographer & runtime error overlay in dev environments.
@@ -18,7 +19,7 @@ The repo is a small monorepo: Vite/React frontend in `client/`, Express server i
 
 | Path | Purpose |
 |------|---------|
-| `client/` | Vite app (root index, pages, components, Tailwind styles, and public assets). |
+| `client/` | Vite app (root index, pages, components, Tailwind styles, `/contact` form, and public assets). |
 | `server/` | Express entry (`index.ts`), route registration, storage abstraction, and Vite middleware helpers. |
 | `shared/` | Database schema (`schema.ts`) + shared types used by both client and server. |
 | `attached_assets/` | Imported media (WebP photos, PDFs) aliased as `@assets`. |
@@ -147,4 +148,3 @@ The logging middleware in `server/index.ts` automatically times every `/api` res
 - Implement the first real `/api` route (e.g., lead capture) using the shared schema.
 - Swap `MemStorage` with a Drizzle-powered Postgres adapter once a database is provisioned.
 - Add forms/pages that exercise the existing TanStack Query + react-hook-form setup so the installed dependencies provide value.
-

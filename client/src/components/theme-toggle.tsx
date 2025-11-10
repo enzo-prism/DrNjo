@@ -53,21 +53,6 @@ export function ThemeToggle() {
       >
         {getIcon()}
       </button>
-      
-      {theme === "auto" && (
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-lg text-xs text-gray-600 dark:text-gray-300 transition-all duration-300 min-w-[120px]">
-          <div className="flex items-center gap-2 justify-center">
-            <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${actualTheme === 'dark' ? 'bg-blue-500' : 'bg-amber-500'}`}></div>
-            <span className="font-medium">Smart Auto</span>
-          </div>
-          <div className="text-center text-gray-500 dark:text-gray-400 mt-1">
-            {actualTheme === 'dark' ? '🌙' : '☀️'} {getCurrentTimeInfo().timeString}
-          </div>
-          <div className="text-center text-[10px] text-gray-400 dark:text-gray-500 mt-1">
-            {actualTheme === 'dark' ? 'Night mode' : 'Day mode'}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

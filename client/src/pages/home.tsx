@@ -1,7 +1,12 @@
-import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, MessageCircle, Star, Users } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
+import { Link } from "wouter";
+import { useEffect, useState } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { testimonials, type Testimonial } from "@/data/testimonials";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function Home() {
   const handleCall = () => {
@@ -40,17 +45,56 @@ export default function Home() {
     };
   }, []);
 
+  const founderCompanies = [
+    {
+      name: "Dental Strategies",
+      accent: "from-blue-50 to-blue-100/70 dark:from-blue-900/40 dark:to-blue-900/10 border-blue-200 dark:border-blue-700",
+    },
+    {
+      name: "HealthcareStrategiesMD",
+      accent: "from-emerald-50 to-emerald-100/70 dark:from-emerald-900/40 dark:to-emerald-900/10 border-emerald-200 dark:border-emerald-700",
+    },
+    {
+      name: "Business Strategies",
+      accent: "from-amber-50 to-amber-100/70 dark:from-amber-900/40 dark:to-amber-900/10 border-amber-200 dark:border-amber-700",
+    },
+    {
+      name: "Practice Transitions Institute",
+      accent: "from-indigo-50 to-indigo-100/70 dark:from-indigo-900/40 dark:to-indigo-900/10 border-indigo-200 dark:border-indigo-700",
+    },
+  ];
+
+  const faqs = [
+    {
+      question: "Who is Dr. Michael Njo?",
+      answer:
+        "Dr. Michael Njo, also known as Michael Njo, DDS, is a University of the Pacific alum and the founder of Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute. He mentors dentists, physicians, and entrepreneurs through every phase of practice ownership.",
+    },
+    {
+      question: "What services does Michael Njo, DDS provide?",
+      answer:
+        "Michael Njo, DDS delivers bespoke consulting across practice startups, acquisitions, valuations, transitions, leadership development, and team training. His playbooks combine clinical experience with business strategy to elevate growth while protecting patient care standards.",
+    },
+    {
+      question: "How can I work with Dr. Michael Njo?",
+      answer:
+        "You can call +1 (650) 436-2939 or email dentalstrategies@gmail.com to schedule a complimentary consultation with Dr. Michael Njo. He begins with an assessment of your goals, timeline, and financial targets before crafting a road map tailored to your practice.",
+    },
+  ];
+
+  const [activeTestimonial, setActiveTestimonial] = useState<Testimonial | null>(null);
+
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="flex items-center justify-center px-4 py-8 md:py-16">
         <div className="max-w-4xl w-full">
-        <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
+          <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
           {/* Professional Photo Section */}
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center transition-colors duration-300">
             <div className="relative">
               <img 
                 src={drNjoHeadshot}
-                alt="Dr. Michael Njo - Professional headshot"
+                alt="Michael Njo, DDS - Professional headshot"
                 className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white dark:ring-gray-800 professional-headshot transition-all duration-300"
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent"></div>
@@ -60,32 +104,40 @@ export default function Home() {
           {/* Content Section */}
           <div className="p-8 md:p-12">
             {/* Company Name & Introduction */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-6 tracking-tight transition-colors duration-300 opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]">
-                Dr. Michael Njo
+            <div className="text-center mb-12" aria-labelledby="hero-heading">
+              <h1
+                id="hero-heading"
+                className="text-4xl md:text-5xl font-light text-gray-800 dark:text-gray-100 mb-4 tracking-tight transition-colors duration-300 opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]"
+              >
+                Michael Njo, DDS
               </h1>
-              <div className="mb-8">
-                <p className="text-base text-gray-500 dark:text-gray-400 mb-4 font-light uppercase tracking-wider transition-colors duration-300">
-                  Founder:
-                </p>
-                <div className="space-y-3">
-                  <h2 className="text-2xl md:text-3xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300 stagger-fade-in">
-                    Dental Strategies
-                  </h2>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
-                    HealthcareStrategiesMD
-                  </h3>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
-                    Business Strategies
-                  </h3>
-                  <h3 className="text-xl md:text-2xl font-light text-gray-700 dark:text-gray-200 transition-colors duration-300 stagger-fade-in">
-                    Practice Transitions Institute
-                  </h3>
+              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                Dr. Michael Njo—widely known as Michael Njo, DDS—is a consultant, educator, and entrepreneur who has spent 25+ years guiding healthcare owners through practice launches, growth, and transitions while protecting clinical excellence.
+              </p>
+              <div className="mb-10" aria-labelledby="founder-label">
+                <h2
+                  id="founder-label"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 text-sm font-medium tracking-wide uppercase transition-colors duration-300"
+                >
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                  Founder of
+                </h2>
+                <div className="mt-6 grid gap-4 md:grid-cols-2">
+                  {founderCompanies.map(({ name, accent }) => (
+                    <div
+                      key={name}
+                      className={`rounded-2xl border ${accent} px-5 py-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg scroll-fade-in`}
+                    >
+                      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+                        {name}
+                      </h2>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="max-w-3xl mx-auto">
                 <p className="text-lg text-gray-600 dark:text-gray-300 font-light leading-relaxed transition-colors duration-300">
-                  Specialized consulting company coaching dentists, MDs, Podiatrists, Osteopaths, and general business owners to achieve and understand their goals
+                  Michael Njo, DDS leads a specialized consulting collective that coaches dentists, physicians, podiatrists, osteopaths, and business owners to launch, scale, or transition their practices with confidence.
                 </p>
                 <div className="mt-6">
                   <a 
@@ -100,16 +152,195 @@ export default function Home() {
                   </a>
                 </div>
               </div>
+              <div className="mt-8 flex justify-center">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-lg shadow-blue-600/30"
+                >
+                  Contact Dr. Njo
+                </Link>
+              </div>
+              <div className="mt-10 scroll-fade-in">
+                <div className="rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-lg">
+                  <img
+                    src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp"
+                    alt="Michael Njo, DDS at the Dugoni Business Club donation ceremony"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
 
+            {/* Testimonials / Social Proof */}
+            <section
+              id="testimonials"
+              className="max-w-4xl mx-auto mb-12"
+              aria-labelledby="testimonials-heading"
+            >
+              <h2
+                id="testimonials-heading"
+                className="text-2xl font-light text-gray-800 dark:text-gray-100 mb-6 text-center transition-colors duration-300"
+              >
+                Testimonials for Dr. Michael Njo
+              </h2>
+              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+                Real-world stories from the doctors, teams, and advisors mentored by Dr. Michael Njo across Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute.
+              </p>
+              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 scroll-fade-in">
+                <img 
+                  src={drNjoClients}
+                  alt="Michael Njo, DDS with dental professionals at a consulting workshop"
+                  className="w-full h-auto object-cover client-success-image parallax-slow"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+              </div>
+              <div className="scroll-fade-in">
+                <Carousel
+                  opts={{ align: "start", loop: true }}
+                  className="pb-12"
+                >
+                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.35em] text-blue-500 dark:text-blue-300 font-semibold">
+                        Testimonials · {testimonials.length} stories
+                      </p>
+                      <h4 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mt-2">
+                        Stories from doctors, teams, and advisors
+                      </h4>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        Real experiences from clients whose practices Michael has guided.
+                      </p>
+                    </div>
+                    <div className="hidden md:flex gap-3">
+                      <CarouselPrevious className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
+                      <CarouselNext className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
+                    </div>
+                  </div>
+                  <CarouselContent className="-ml-3 md:-ml-4">
+                    {testimonials.map((testimonial, index) => (
+                      <CarouselItem
+                        key={`${testimonial.author}-${index}`}
+                        className="pl-3 md:pl-4 md:basis-1/2 lg:basis-1/3"
+                      >
+                        <div className="h-full rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm p-6 shadow-sm flex flex-col relative overflow-hidden">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center gap-1 text-amber-500">
+                              {Array.from({ length: 5 }).map((_, starIndex) => (
+                                <Star
+                                  key={starIndex}
+                                  className={`w-4 h-4 ${starIndex < testimonial.stars ? "fill-current" : "text-gray-300 dark:text-gray-600"}`}
+                                />
+                              ))}
+                            </div>
+                            <Quote className="w-6 h-6 text-blue-600/60 dark:text-blue-300/60" />
+                          </div>
+                          <div className="relative flex-1 pb-10">
+                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-h-32 overflow-hidden">
+                              {testimonial.quote}
+                            </p>
+                            <div className="pointer-events-none absolute inset-x-0 bottom-10 h-16 bg-gradient-to-t from-white dark:from-gray-900 via-white/70 dark:via-gray-900/70 to-transparent"></div>
+                          </div>
+                          <div className="mt-4 flex flex-col gap-2">
+                            <div>
+                              <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                                {testimonial.author}
+                              </p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400">
+                                Dental Strategies Client
+                              </p>
+                            </div>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-fit"
+                              onClick={() => setActiveTestimonial(testimonial)}
+                            >
+                              Read full story
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center gap-3 md:hidden">
+                    <CarouselPrevious className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
+                    <CarouselNext className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
+                  </div>
+                </Carousel>
+                <Dialog
+                  open={Boolean(activeTestimonial)}
+                  onOpenChange={(open) => {
+                    if (!open) {
+                      setActiveTestimonial(null);
+                    }
+                  }}
+                >
+                  <DialogContent className="max-w-3xl max-h-[85vh] overflow-hidden">
+                    {activeTestimonial && (
+                      <>
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl text-gray-900 dark:text-gray-50">
+                            {activeTestimonial.author}
+                          </DialogTitle>
+                          <div className="flex items-center gap-1 text-amber-500 mt-2">
+                            {Array.from({ length: 5 }).map((_, starIndex) => (
+                              <Star
+                                key={starIndex}
+                                className={`w-4 h-4 ${
+                                  starIndex < activeTestimonial.stars
+                                    ? "fill-current"
+                                    : "text-gray-300 dark:text-gray-600"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </DialogHeader>
+                        <div className="overflow-y-auto pr-2 text-sm text-gray-700 dark:text-gray-200 leading-relaxed space-y-4">
+                          <p>{activeTestimonial.quote}</p>
+                        </div>
+                      </>
+                    )}
+                  </DialogContent>
+                </Dialog>
+              </div>
+              
+              {/* Testimonials Call to Action */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800 transition-all duration-300 scroll-fade-in">
+                <div className="flex justify-center mb-4">
+                  <div className="flex items-center space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500 opacity-0 animate-[fadeInStagger_0.4s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{animationDelay: `${1.5 + i * 0.1}s`}} />
+                    ))}
+                  </div>
+                </div>
+                <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 transition-colors duration-300">
+                  Trusted by Healthcare Professionals for 25+ Years
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto font-light transition-colors duration-300">
+                  Discover how Dr. Michael Njo has helped hundreds of dentists, physicians, and healthcare professionals achieve their practice goals.
+                </p>
+                <a 
+                  href="https://practicetransitionsinstitute.com/testimonials"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
+                >
+                  <Users className="w-5 h-5 mr-2" />
+                  Read Client Testimonials
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              </div>
+            </section>
+
             {/* Professional Background */}
-            <div className="max-w-3xl mx-auto mb-12 text-left scroll-fade-in">
-              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-6 text-center transition-colors duration-300">Professional Background</h3>
+            <section id="bio" className="max-w-3xl mx-auto mb-12 text-left scroll-fade-in" aria-labelledby="bio-heading">
+              <h2 id="bio-heading" className="text-2xl font-light text-gray-800 dark:text-gray-100 mb-6 text-center transition-colors duration-300">Professional Background</h2>
               
               <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">
                 <p>
-                  Dr. Michael Njo is a proud graduate of UOP, School of Dentistry. After herniating his disc, 
-                  Dr. Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
+                  Michael Njo, DDS is a proud graduate of UOP, School of Dentistry. After herniating his disc, 
+                  Dr. Michael Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
                   coaches Dentist to achieving and understanding their goals.
                 </p>
                 
@@ -121,7 +352,7 @@ export default function Home() {
                 </p>
                 
                 <p>
-                  Dr. Michael Njo has been consulting for 25 years and has built his consulting company all by 
+                  Michael Njo, DDS has been consulting for 25 years and has built his consulting company all by 
                   direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
                   and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
                   <a 
@@ -136,7 +367,7 @@ export default function Home() {
                 </p>
                 
                 <p>
-                  Dr. Michael Njo is an Author of{" "}
+                  Michael Njo, DDS is an Author of{" "}
                   <a 
                     href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
                     target="_blank"
@@ -158,12 +389,12 @@ export default function Home() {
                   of Dentistry, and the CDA Leadership Council.
                 </p>
               </div>
-            </div>
+            </section>
 
             {/* Education & Resources */}
-            <div className="max-w-4xl mx-auto mb-12">
+            <section id="resources" className="max-w-4xl mx-auto mb-12" aria-labelledby="resources-heading">
               <div className="text-center mb-8">
-                <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300">Education & Resources</h3>
+                <h2 id="resources-heading" className="text-2xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300">Education &amp; Resources</h2>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -213,58 +444,33 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            </div>
+            </section>
 
-            {/* Client Success Section */}
-            <div className="max-w-4xl mx-auto mb-12">
-              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-8 text-center transition-colors duration-300 scroll-fade-in">Working with Dental Professionals Nationwide</h3>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 scroll-fade-in">
-                <img 
-                  src={drNjoClients}
-                  alt="Dr. Michael Njo with dental professionals at a consulting workshop"
-                  className="w-full h-auto object-cover client-success-image parallax-slow"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-              </div>
-              <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-8 font-light transition-colors duration-300">
-                Dr. Njo conducting a practice transition workshop with dental professionals
-              </p>
-              
-              {/* Testimonials Call to Action */}
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 rounded-2xl p-8 text-center border border-blue-100 dark:border-blue-800 transition-all duration-300 scroll-fade-in">
-                <div className="flex justify-center mb-4">
-                  <div className="flex items-center space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500 opacity-0 animate-[fadeInStagger_0.4s_cubic-bezier(0.16,1,0.3,1)_forwards]" style={{animationDelay: `${1.5 + i * 0.1}s`}} />
-                    ))}
+            {/* FAQ */}
+            <section id="faq" className="max-w-4xl mx-auto mb-12 scroll-fade-in" aria-labelledby="faq-heading">
+              <h2 id="faq-heading" className="text-2xl font-light text-gray-800 dark:text-gray-100 mb-6 text-center transition-colors duration-300">
+                Frequently Asked Questions about Dr. Michael Njo
+              </h2>
+              <div className="space-y-4">
+                {faqs.map((faq) => (
+                  <div key={faq.question} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-5 shadow-sm">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                      {faq.question}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                      {faq.answer}
+                    </p>
                   </div>
-                </div>
-                <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 transition-colors duration-300">
-                  Trusted by Healthcare Professionals for 25+ Years
-                </h4>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto font-light transition-colors duration-300">
-                  Discover how Dr. Njo has helped hundreds of dentists, physicians, and healthcare professionals achieve their practice goals.
-                </p>
-                <a 
-                  href="https://practicetransitionsinstitute.com/testimonials"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
-                >
-                  <Users className="w-5 h-5 mr-2" />
-                  Read Client Testimonials
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
+                ))}
               </div>
-            </div>
+            </section>
 
             {/* Free Consultation CTA */}
-            <div className="text-center mb-8 scroll-fade-in">
-              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 mb-6 transition-colors duration-300">
-                Schedule Your Free Consultation
+            <div className="text-center mb-8 scroll-fade-in space-y-4">
+              <h3 className="text-xl font-light text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                Talk directly with Dr. Michael Njo
               </h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                {/* Call Button */}
                 <button 
                   onClick={handleCall}
                   className="dental-button-primary inline-flex items-center justify-center magnetic-button"
@@ -272,8 +478,6 @@ export default function Home() {
                   <Phone className="w-5 h-5 mr-3 transition-transform group-hover:rotate-12" />
                   Call for Free Consultation
                 </button>
-
-                {/* Email Button */}
                 <button 
                   onClick={handleEmail}
                   className="dental-button-secondary inline-flex items-center justify-center magnetic-button"
@@ -282,6 +486,9 @@ export default function Home() {
                   Email for Free Consultation
                 </button>
               </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Prefer a form? <Link href="/contact" className="text-blue-600 dark:text-blue-400 underline">Visit the contact page</Link> to share your goals.
+              </p>
             </div>
 
             {/* Professional Touch */}
@@ -293,7 +500,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      </div>
-    </main>
+    </div>
+  </main>
   );
 }
