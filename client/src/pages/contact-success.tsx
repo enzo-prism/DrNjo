@@ -1,10 +1,14 @@
 import { Link } from "wouter";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { StructuredData } from "@/components/structured-data";
+import { getContactSuccessStructuredData } from "@/seo/structured-data";
 
 export default function ContactSuccess() {
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12 flex items-center">
+    <>
+      <StructuredData data={getContactSuccessStructuredData()} id="structured-data-contact-success" />
+      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12 flex items-center">
       <div className="max-w-2xl mx-auto text-center space-y-6">
         <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
         <div className="space-y-3">
@@ -25,6 +29,7 @@ export default function ContactSuccess() {
           </Button>
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 }

@@ -7,6 +7,8 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { testimonials, type Testimonial } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { StructuredData } from "@/components/structured-data";
+import { faqItems, getHomeStructuredData } from "@/seo/structured-data";
 
 export default function Home() {
   const handleCall = () => {
@@ -64,28 +66,12 @@ export default function Home() {
     },
   ];
 
-  const faqs = [
-    {
-      question: "Who is Dr. Michael Njo?",
-      answer:
-        "Dr. Michael Njo, also known as Michael Njo, DDS, is a University of the Pacific alum and the founder of Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute. He mentors dentists, physicians, and entrepreneurs through every phase of practice ownership.",
-    },
-    {
-      question: "What services does Michael Njo, DDS provide?",
-      answer:
-        "Michael Njo, DDS delivers bespoke consulting across practice startups, acquisitions, valuations, transitions, leadership development, and team training. His playbooks combine clinical experience with business strategy to elevate growth while protecting patient care standards.",
-    },
-    {
-      question: "How can I work with Dr. Michael Njo?",
-      answer:
-        "You can call +1 (650) 436-2939 or email dentalstrategies@gmail.com to schedule a complimentary consultation with Dr. Michael Njo. He begins with an assessment of your goals, timeline, and financial targets before crafting a road map tailored to your practice.",
-    },
-  ];
-
   const [activeTestimonial, setActiveTestimonial] = useState<Testimonial | null>(null);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <>
+      <StructuredData data={getHomeStructuredData()} id="structured-data-home" />
+      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="flex items-center justify-center px-4 py-8 md:py-16">
         <div className="max-w-4xl w-full">
           <div className="dental-card overflow-hidden opacity-0 translate-y-5 fade-in-up">
@@ -452,7 +438,7 @@ export default function Home() {
                 Frequently Asked Questions about Dr. Michael Njo
               </h2>
               <div className="space-y-4">
-                {faqs.map((faq) => (
+                {faqItems.map((faq) => (
                   <div key={faq.question} className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-5 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-50">
                       {faq.question}
@@ -501,6 +487,7 @@ export default function Home() {
         </div>
       </div>
     </div>
-  </main>
+      </main>
+    </>
   );
 }

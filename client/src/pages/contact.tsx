@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
+import { StructuredData } from "@/components/structured-data";
+import { getContactStructuredData } from "@/seo/structured-data";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Please enter your full name."),
@@ -67,7 +69,9 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12">
+    <>
+      <StructuredData data={getContactStructuredData()} id="structured-data-contact" />
+      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-4">
           <p className="text-sm uppercase tracking-[0.4em] text-blue-500 dark:text-blue-300">Contact</p>
@@ -176,6 +180,7 @@ export default function Contact() {
         </Card>
 
       </div>
-    </main>
+      </main>
+    </>
   );
 }
