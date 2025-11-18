@@ -16,6 +16,17 @@ export type ResourceHighlight = {
   description: string;
   url: string;
   type: "Book" | "EducationalOrganization";
+  editorialReview?: string;
+};
+
+export type BookReview = {
+  author: string;
+  title: string;
+  rating: number;
+  body: string;
+  datePublished: string;
+  context: string;
+  meta: string;
 };
 
 export const siteMetadata = {
@@ -31,8 +42,6 @@ export const siteMetadata = {
 };
 
 export const contactDetails = {
-  phone: "+1 (650) 436-2939",
-  phoneInternational: "+16504362939",
   email: "dentalstrategies@gmail.com",
 };
 
@@ -67,7 +76,7 @@ export const faqItems: FAQItem[] = [
   {
     question: "How can I work with Dr. Michael Njo?",
     answer:
-      "You can call +1 (650) 436-2939 or email dentalstrategies@gmail.com to schedule a complimentary consultation with Dr. Michael Njo. He begins with an assessment of your goals, timeline, and financial targets before crafting a road map tailored to your practice.",
+      "You can email dentalstrategies@gmail.com to schedule a complimentary consultation with Dr. Michael Njo. He begins with an assessment of your goals, timeline, and financial targets before crafting a road map tailored to your practice.",
   },
 ];
 
@@ -102,8 +111,11 @@ export const resources: ResourceHighlight[] = [
   {
     type: "Book",
     name: "Dental Practice Transitions Handbook",
-    description: "Comprehensive guide for navigating practice transitions, partnerships, and strategic planning.",
+    description:
+      "Dental Practice Transitions Handbook prepares you to evaluate associate roles, partnerships, and purchase options with a global understanding of how sellers and buyers think, the mistakes to avoid, and the questions to ask before any transition.",
     url: "https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718",
+    editorialReview:
+      "Dr. Michael Njo has three-plus decades of experience in the dental industry and two decades of experience in the healthcare transition business. After being injured, he joined Pride Transitions and worked with Hy Smith his mentor. He left Pride to develop his own consulting companies, Dental Strategies, Healthcare Strategies, and Your Business Strategies. He has been on faculty at the UOP, School of Dentistry, lectured for many venues and residency programs including, USDTA, UCSF Orthodontic program, UMC, and many other general residency programs. He has consulted for lenders such as Bank of San Francisco and is a guest lecturer for the Dugoni Business Club. Dr. Njo was a founding member of a development company for startup healthcare professionals, Western Professional Buildings. He is the recipient of the Faculty award given by second-year students at UOP, School of Dentistry, and the recipient of the Distinguished Service Award presented by the San Mateo County Dental Society, where he served as editor of \"The Mouthpiece,\" board member, and as secretary. Dr. Njo's successful consulting business has been built all by word of mouth. Dr. Njo has been passed the baton by Hy Smith. Not until now has Dr. Njo publicly shared his knowledge, insight, and guidance. Thanks to Hy Smith for facilitating the passing of the baton in the creation of this Dental Practice Transitions Handbook.",
   },
   {
     type: "EducationalOrganization",
@@ -111,6 +123,49 @@ export const resources: ResourceHighlight[] = [
     description:
       "Specialized education and training for dental professionals on practice transitions and growth strategies.",
     url: "https://practicetransitionsinstitute.com/",
+  },
+];
+
+export const bookReviews: BookReview[] = [
+  {
+    author: "Dr. A. Jaraha",
+    title: "Very insightful!",
+    rating: 5,
+    datePublished: "2023-06-18",
+    context: "Reviewed in the United States on June 18, 2023",
+    meta: "Format: Paperback • Verified Purchase",
+    body:
+      "Very insightful book! I found the chapters in this book extremely informative. It covers topics that every Dentist should know, but are rarely talked about in dental school or dental circles. It was a great read coming right out of dental school. I highly recommend.",
+  },
+  {
+    author: "Technoguru",
+    title: "Exceptional Value and Advice",
+    rating: 5,
+    datePublished: "2024-01-11",
+    context: "Reviewed in the United States on January 11, 2024",
+    meta: "Format: Paperback",
+    body:
+      "In Dental Practice Transitions Handbook, Dr. Michael A. Njo deftly navigates the ever-changing landscape of dental practice transitions, providing insightful advice and guidance to dental professionals at any stage of their career. Dr. Njo's approach emphasizes the importance of careful planning and educated decision-making to ensure long-term success in a field that has seen significant changes in recent years.\n\nOne of the shining aspects of the book is the pacing, which moves smoothly from one topic to another. Each chapter builds upon previous concepts, gradually introducing more nuanced aspects of dental practice transitions while maintaining reader engagement. Dr. Njo's writing style is clear and accessible, reflecting his experience in both dentistry and practice management.\n\nCompared with similar books, the handbook stands out by focusing on specific transition options and the impact of varying economic climates. Dr. Njo skillfully delves into each scenario, providing readers with actionable advice and guidance that can be personalized to their individual situations.\n\nThe ideal audience is dental professionals at any stage, particularly those considering a transition such as a partnership, acquisition, or sale of a practice. Whether you are a new graduate or an experienced dentist, this book provides valuable insights to help you navigate the complexities of the process. I wholeheartedly recommend it.",
+  },
+  {
+    author: "Amazon Customer",
+    title: "Worth its weight in gold!",
+    rating: 5,
+    datePublished: "2024-02-02",
+    context: "Reviewed in the United States on February 2, 2024",
+    meta: "Format: Paperback",
+    body:
+      "Dr. Njo is very knowledgeable on all aspects of private practice dentistry. Reading this book will give you a lot of valuable insight into what decisions you should and shouldn't make in order to maximize your success in your dental career.",
+  },
+  {
+    author: "Sloane",
+    title: "Great read!",
+    rating: 5,
+    datePublished: "2024-01-11",
+    context: "Reviewed in the United States on January 11, 2024",
+    meta: "Format: Paperback",
+    body:
+      "I listened to the author lecture about this book and the topic. I have started reading it and am so thankful that I have the resource at my fingertips!",
   },
 ];
 
@@ -123,11 +178,27 @@ export const reviewStats = {
   worstRating: 1,
 };
 
+const totalBookRating = bookReviews.reduce((sum, review) => sum + review.rating, 0);
+
+const bookReviewStats = {
+  reviewCount: bookReviews.length,
+  ratingValue: bookReviews.length ? Number((totalBookRating / bookReviews.length).toFixed(2)) : undefined,
+  bestRating: 5,
+  worstRating: 1,
+};
+
 export const heroImage = {
   url: "https://www.drnjo.com/og-image.webp",
   width: 1024,
   height: 768,
   type: "image/webp",
+};
+
+export const bookEditorialReview = {
+  heading: "Editorial Reviews • About the Author",
+  body:
+    resources.find((resource) => resource.type === "Book")?.editorialReview ||
+    "Dr. Michael Njo has three-plus decades of experience in the dental industry and two decades of experience in the healthcare transition business.",
 };
 
 type SchemaNode = Record<string, unknown>;
@@ -184,6 +255,19 @@ const getFAQEntity = (): SchemaNode => ({
 const getResourceNodes = (): SchemaNode[] =>
   resources.map((resource) => {
     if (resource.type === "Book") {
+      const editorialReviewNode = resource.editorialReview
+        ? {
+            "@type": "Review",
+            "@id": `${siteMetadata.siteUrl}#book-editorial-review`,
+            name: "Editorial Review from Amazon",
+            reviewBody: resource.editorialReview,
+            author: {
+              "@type": "Organization",
+              name: "Amazon Editorial Reviews",
+            },
+          }
+        : undefined;
+
       return {
         "@type": "Book",
         "@id": `${siteMetadata.siteUrl}#book`,
@@ -196,6 +280,33 @@ const getResourceNodes = (): SchemaNode[] =>
         },
         publisher: {
           "@id": organizationProfile.id,
+        },
+        review: [
+          ...bookReviews.map((review, index) => ({
+            "@type": "Review",
+            "@id": `${siteMetadata.siteUrl}#book-review-${index + 1}`,
+            name: review.title,
+            reviewBody: review.body,
+            datePublished: review.datePublished,
+            author: {
+              "@type": "Person",
+              name: review.author,
+            },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: review.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          })),
+          editorialReviewNode,
+        ].filter(Boolean),
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: bookReviewStats.ratingValue,
+          reviewCount: bookReviewStats.reviewCount,
+          bestRating: bookReviewStats.bestRating,
+          worstRating: bookReviewStats.worstRating,
         },
       };
     }
@@ -216,7 +327,6 @@ const getBaseGraphNodes = (): SchemaNode[] => {
   const contactPoint = {
     "@type": "ContactPoint",
     contactType: "Consultation",
-    telephone: contactDetails.phoneInternational,
     email: contactDetails.email,
     availableLanguage: ["English"],
   };

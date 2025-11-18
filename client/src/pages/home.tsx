@@ -1,4 +1,4 @@
-import { Phone, Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
+import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
@@ -8,13 +8,9 @@ import { testimonials, type Testimonial } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { StructuredData } from "@/components/structured-data";
-import { faqItems, getHomeStructuredData } from "@/seo/structured-data";
+import { bookEditorialReview, bookReviews, faqItems, getHomeStructuredData } from "@/seo/structured-data";
 
 export default function Home() {
-  const handleCall = () => {
-    window.location.href = "tel:+16504362939";
-  };
-
   const handleEmail = () => {
     window.location.href = "mailto:dentalstrategies@gmail.com";
   };
@@ -394,7 +390,7 @@ export default function Home() {
                     Dental Practice Transitions Handbook
                   </h5>
                   <p className="text-gray-600 dark:text-gray-300 font-light mb-4 text-sm leading-relaxed transition-colors duration-300">
-                    Comprehensive guide for navigating practice transitions, partnerships, and strategic planning.
+                    Dental Practice Transitions Handbook answers the core questions around associate roles, partnerships, and purchase paths while highlighting the mindsets of sellers and buyers so you can plan a smooth transition.
                   </p>
                   <a 
                     href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
@@ -430,6 +426,65 @@ export default function Home() {
                   </a>
                 </div>
               </div>
+
+              <div className="mt-10 scroll-fade-in" aria-labelledby="book-reviews-heading">
+                <div className="text-center mb-6">
+                  <h3 id="book-reviews-heading" className="text-xl font-light text-gray-800 dark:text-gray-100">
+                    Amazon reviews for Dental Practice Transitions Handbook
+                  </h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Highlights from verified readers in the United States.
+                  </p>
+                </div>
+                <div className="grid gap-6">
+                  {bookReviews.map((review, index) => (
+                    <article
+                      key={`${review.author}-${index}`}
+                      className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 shadow-sm"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-center gap-1 text-amber-500">
+                          {Array.from({ length: 5 }).map((_, starIndex) => (
+                            <Star
+                              key={starIndex}
+                              className={`w-4 h-4 ${starIndex < review.rating ? "fill-current" : "text-gray-300 dark:text-gray-600"}`}
+                            />
+                          ))}
+                        </div>
+                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                          {review.context}
+                        </p>
+                      </div>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-50 mt-4">
+                        {review.title}
+                      </h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mt-3 whitespace-pre-line">
+                        {review.body}
+                      </p>
+                      <div className="mt-4 text-sm font-semibold text-gray-900 dark:text-gray-50">
+                        {review.author}
+                      </div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{review.meta}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              {bookEditorialReview.body && (
+                <div className="mt-10 scroll-fade-in" aria-labelledby="book-editorial-heading">
+                  <div className="rounded-3xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 p-6">
+                    <p className="text-xs uppercase tracking-[0.3em] text-blue-500 dark:text-blue-300 mb-2">
+                      {bookEditorialReview.heading}
+                    </p>
+                    <h3 id="book-editorial-heading" className="text-lg font-semibold text-gray-900 dark:text-gray-50">
+                      From the Amazon product page
+                    </h3>
+                    <div className="mt-4 space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+                      {bookEditorialReview.body}
+                    </div>
+                  </div>
+                </div>
+              )}
             </section>
 
             {/* FAQ */}
@@ -458,15 +513,8 @@ export default function Home() {
               </h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <button 
-                  onClick={handleCall}
-                  className="dental-button-primary inline-flex items-center justify-center magnetic-button"
-                >
-                  <Phone className="w-5 h-5 mr-3 transition-transform group-hover:rotate-12" />
-                  Call for Free Consultation
-                </button>
-                <button 
                   onClick={handleEmail}
-                  className="dental-button-secondary inline-flex items-center justify-center magnetic-button"
+                  className="dental-button-primary inline-flex items-center justify-center magnetic-button"
                 >
                   <Mail className="w-5 h-5 mr-3 transition-transform group-hover:translate-x-1" />
                   Email for Free Consultation
@@ -480,7 +528,7 @@ export default function Home() {
             {/* Professional Touch */}
             <div className="text-center pt-6 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
               <p className="text-sm text-gray-400 dark:text-gray-500 font-light transition-colors duration-300">
-                25 years of consulting excellence • Direct referral based practice
+                25 years of consulting excellence • Direct referral based
               </p>
             </div>
           </div>

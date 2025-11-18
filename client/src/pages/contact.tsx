@@ -129,7 +129,7 @@ export default function Contact() {
                       <FormItem>
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
-                          <Input type="tel" placeholder="+1 (650) 436-2939" {...field} />
+                          <Input type="tel" placeholder="Phone number" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
