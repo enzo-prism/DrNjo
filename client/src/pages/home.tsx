@@ -1,7 +1,6 @@
-import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
+import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect } from "react";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { testimonialPages } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
@@ -19,24 +18,45 @@ export default function Home() {
 
   // Intersection Observer for scroll animations
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+    let observer: IntersectionObserver | null = null;
+    let elements: Element[] = [];
+
+    const setupObserver = () => {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      elements = Array.from(document.querySelectorAll(".scroll-fade-in"));
+      elements.forEach((el) => observer?.observe(el));
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
+    const idleCallback = (window as any).requestIdleCallback as ((cb: () => void) => number) | undefined;
+    const cancelIdle = (window as any).cancelIdleCallback as ((id: number) => void) | undefined;
+    let cancel = () => {};
 
-    const elements = document.querySelectorAll('.scroll-fade-in');
-    elements.forEach(el => observer.observe(el));
+    if (typeof idleCallback === "function") {
+      const id = idleCallback(setupObserver);
+      cancel = () => cancelIdle?.(id);
+    } else {
+      const id = window.setTimeout(setupObserver, 0);
+      cancel = () => window.clearTimeout(id);
+    }
 
     return () => {
-      elements.forEach(el => observer.unobserve(el));
+      cancel();
+      if (observer) {
+        elements.forEach((el) => observer?.unobserve(el));
+        observer.disconnect();
+      }
     };
   }, []);
 
@@ -199,74 +219,59 @@ export default function Home() {
 	                />
 	                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
 	              </div>
-              <div className="scroll-fade-in">
-                <Carousel
-                  opts={{ align: "start", loop: true }}
-                  className="pb-12"
-                >
-                  <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-                    <div>
-	                      <p className="text-sm uppercase tracking-[0.35em] text-blue-500 dark:text-blue-300 font-semibold">
-	                        Testimonials · {testimonialPages.length} stories
-	                      </p>
-                      <h4 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mt-2">
-                        Stories from doctors, teams, and advisors
-                      </h4>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        Real experiences from clients whose practices Michael has guided.
+              <div className="scroll-fade-in space-y-6">
+                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.35em] text-blue-500 dark:text-blue-300 font-semibold">
+                      Testimonials · {testimonialPages.length} stories
+                    </p>
+                    <h4 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mt-2">
+                      Stories from doctors, teams, and advisors
+                    </h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                      Real experiences from clients whose practices Michael has guided.
+                    </p>
+                  </div>
+                  <a
+                    href="/testimonials"
+                    className="text-sm font-medium text-blue-600 dark:text-blue-400 underline underline-offset-4"
+                  >
+                    View all testimonials
+                  </a>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {testimonialPages.slice(0, 6).map((testimonial, index) => (
+                    <article
+                      key={`${testimonial.author}-${testimonial.slug}-${index}`}
+                      className="h-full rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm p-6 shadow-sm flex flex-col"
+                    >
+                      <div className="flex items-center gap-1 text-amber-500">
+                        {Array.from({ length: 5 }).map((_, starIndex) => (
+                          <Star
+                            key={starIndex}
+                            className={`w-4 h-4 ${starIndex < testimonial.stars ? "fill-current" : "text-gray-300 dark:text-gray-600"}`}
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        {testimonial.excerpt}
                       </p>
-                    </div>
-                    <div className="hidden md:flex gap-3">
-                      <CarouselPrevious className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
-                      <CarouselNext className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
-                    </div>
-                  </div>
-                  <CarouselContent className="-ml-3 md:-ml-4">
-                    {testimonialPages.map((testimonial, index) => (
-                      <CarouselItem
-                        key={`${testimonial.author}-${index}`}
-                        className="pl-3 md:pl-4 md:basis-1/2 lg:basis-1/3"
-                      >
-                        <div className="h-full rounded-3xl border border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/80 backdrop-blur-sm p-6 shadow-sm flex flex-col relative overflow-hidden">
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex items-center gap-1 text-amber-500">
-                              {Array.from({ length: 5 }).map((_, starIndex) => (
-                                <Star
-                                  key={starIndex}
-                                  className={`w-4 h-4 ${starIndex < testimonial.stars ? "fill-current" : "text-gray-300 dark:text-gray-600"}`}
-                                />
-                              ))}
-                            </div>
-                            <Quote className="w-6 h-6 text-blue-600/60 dark:text-blue-300/60" />
-                          </div>
-                          <div className="relative flex-1 pb-10">
-                            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-h-32 overflow-hidden">
-                              {testimonial.quote}
-                            </p>
-                            <div className="pointer-events-none absolute inset-x-0 bottom-10 h-16 bg-gradient-to-t from-white dark:from-gray-900 via-white/70 dark:via-gray-900/70 to-transparent"></div>
-                          </div>
-                          <div className="mt-4 flex flex-col gap-2">
-                            <div>
-                              <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
-                                {testimonial.author}
-                              </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">
-                                Dental Strategies Client
-                              </p>
-                            </div>
-		                            <Button variant="outline" size="sm" className="w-fit" asChild>
-		                              <a href={`/testimonials/${testimonial.slug}`}>Read full story</a>
-		                            </Button>
-                          </div>
+                      <div className="mt-4 flex flex-col gap-2">
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900 dark:text-gray-50">
+                            {testimonial.author}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            Dental Strategies Client
+                          </p>
                         </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center gap-3 md:hidden">
-                    <CarouselPrevious className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
-                    <CarouselNext className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
-                  </div>
-                </Carousel>
+                        <Button variant="outline" size="sm" className="w-fit" asChild>
+                          <a href={`/testimonials/${testimonial.slug}`}>Read full story</a>
+                        </Button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
               
               {/* Testimonials Call to Action */}
