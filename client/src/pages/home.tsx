@@ -1,7 +1,6 @@
 import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect } from "react";
-import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { testimonialPages } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
@@ -71,7 +70,7 @@ export default function Home() {
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center transition-colors duration-300">
             <div className="relative">
 	              <img 
-	                src={drNjoHeadshot}
+	                src="/dr-njo-headshot.webp"
 	                alt="Michael Njo, DDS - Professional headshot"
 	                width={383}
 	                height={460}

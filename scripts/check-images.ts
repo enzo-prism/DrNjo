@@ -47,7 +47,7 @@ function main() {
     assertAltPresent(tag, "home page");
   }
 
-  const heroImg = homeImgs.find((tag) => tag.includes("drNjoHeadshot"));
+  const heroImg = homeImgs.find((tag) => tag.includes("dr-njo-headshot.webp"));
   if (!heroImg) {
     throw new Error("Could not find hero image tag on home page.");
   }
@@ -66,7 +66,7 @@ function main() {
   const profileImgs = extractImgTags(profileSource);
   for (const tag of profileImgs) {
     assertAltPresent(tag, "michael-njo-dds page");
-    if (tag.includes("drNjoHeadshot")) {
+    if (tag.includes("dr-njo-headshot.webp")) {
       assertNotLazy(tag, "michael-njo-dds hero");
     }
   }
@@ -80,4 +80,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-

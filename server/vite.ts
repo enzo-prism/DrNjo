@@ -5,7 +5,7 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
-import { buildCanonicalUrl, CANONICAL_ORIGIN } from "./canonical";
+import { buildCanonicalUrl, CANONICAL_ORIGIN, normalizePathname } from "./canonical";
 import { buildPageDescription, buildPageTitle } from "./head";
 
 const viteLogger = createLogger();
@@ -69,6 +69,7 @@ export async function setupVite(app: Express, server: Server) {
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(import.meta.dirname, "public");
+  const prerenderDir = path.join(distPath, "prerendered");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -81,7 +82,14 @@ export function serveStatic(app: Express) {
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (req, res) => {
-    const html = injectHeadTags(indexTemplate, req.originalUrl);
+    const pathname = normalizePathname(new URL(req.originalUrl, CANONICAL_ORIGIN).pathname);
+    const prerenderFile =
+      pathname === "/"
+        ? path.join(prerenderDir, "index.html")
+        : path.join(prerenderDir, `${pathname.replace(/^\//, "")}.html`);
+
+    const template = fs.existsSync(prerenderFile) ? fs.readFileSync(prerenderFile, "utf8") : indexTemplate;
+    const html = injectHeadTags(template, req.originalUrl);
     res.status(200).set({ "Content-Type": "text/html" }).end(html);
   });
 }

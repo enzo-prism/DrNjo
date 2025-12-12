@@ -1,4 +1,3 @@
-import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
@@ -27,7 +26,7 @@ export default function MichaelNjoDDS() {
 
           <section aria-labelledby="background-heading" className="grid gap-8 md:grid-cols-3 items-start">
             <img
-              src={drNjoHeadshot}
+              src="/dr-njo-headshot.webp"
               alt="Michael Njo, DDS headshot"
               width={383}
               height={460}

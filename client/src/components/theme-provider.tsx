@@ -28,9 +28,14 @@ export function ThemeProvider({
   storageKey = "dental-strategies-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return defaultTheme;
+    try {
+      return (window.localStorage.getItem(storageKey) as Theme) || defaultTheme;
+    } catch {
+      return defaultTheme;
+    }
+  });
   const [actualTheme, setActualTheme] = useState<"dark" | "light">("light");
 
   // Time-based theme calculation
@@ -43,6 +48,7 @@ export function ThemeProvider({
 
   // System theme detection
   const getSystemTheme = useCallback((): "dark" | "light" => {
+    if (typeof window === "undefined" || !window.matchMedia) return "light";
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }, []);
 
@@ -119,7 +125,13 @@ export function ThemeProvider({
     theme,
     actualTheme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      try {
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(storageKey, theme);
+        }
+      } catch {
+        // ignore storage errors (e.g., SSR or private mode)
+      }
       setTheme(theme);
     },
   };
