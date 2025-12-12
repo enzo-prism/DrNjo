@@ -14,7 +14,7 @@ export default function TestimonialDetailPage({ params }: TestimonialDetailProps
     return (
       <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12">
         <div className="max-w-3xl mx-auto space-y-6 text-center">
-          <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">Testimonial not found</h1>
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-gray-50">Testimonial not found</h2>
           <p className="text-gray-600 dark:text-gray-300">
             The testimonial you&apos;re looking for isn&apos;t available. Browse all testimonials below.
           </p>
@@ -82,4 +82,3 @@ export default function TestimonialDetailPage({ params }: TestimonialDetailProps
     </main>
   );
 }
-
