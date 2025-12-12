@@ -5,8 +5,88 @@ import path from "node:path";
 
 const THRESHOLD = Number(process.env.LHCI_THRESHOLD || "0.9");
 
+function parseEnvBoolean(value: string | undefined): boolean | undefined {
+  if (!value) return undefined;
+  const normalized = value.trim().toLowerCase();
+  if (["1", "true", "yes", "y", "on"].includes(normalized)) return true;
+  if (["0", "false", "no", "n", "off"].includes(normalized)) return false;
+  return undefined;
+}
+
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function isExecutable(filePath: string) {
+  try {
+    fs.accessSync(filePath, fs.constants.X_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function findExecutableInPath(executableNames: string[]) {
+  const pathValue = process.env.PATH;
+  if (!pathValue) return undefined;
+
+  const dirs = pathValue.split(path.delimiter).filter(Boolean);
+  for (const dir of dirs) {
+    for (const name of executableNames) {
+      const candidate = path.join(dir, name);
+      if (fs.existsSync(candidate) && isExecutable(candidate)) {
+        return candidate;
+      }
+    }
+  }
+
+  return undefined;
+}
+
+function resolveChromePath() {
+  const envCandidates = [
+    process.env.CHROME_PATH,
+    process.env.CHROMIUM_PATH,
+    process.env.PUPPETEER_EXECUTABLE_PATH,
+  ].filter(Boolean) as string[];
+
+  for (const candidate of envCandidates) {
+    if (fs.existsSync(candidate) && isExecutable(candidate)) {
+      return candidate;
+    }
+  }
+
+  const fromPath = findExecutableInPath(
+    process.platform === "win32"
+      ? ["chrome.exe", "msedge.exe"]
+      : ["google-chrome", "google-chrome-stable", "chromium", "chromium-browser"],
+  );
+  if (fromPath) return fromPath;
+
+  const absoluteCandidates: string[] = [];
+
+  if (process.platform === "darwin") {
+    absoluteCandidates.push(
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+      "/Applications/Chromium.app/Contents/MacOS/Chromium",
+      "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+    );
+  } else if (process.platform === "linux") {
+    absoluteCandidates.push(
+      "/usr/bin/google-chrome-stable",
+      "/usr/bin/google-chrome",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/chromium",
+    );
+  }
+
+  for (const candidate of absoluteCandidates) {
+    if (fs.existsSync(candidate) && isExecutable(candidate)) {
+      return candidate;
+    }
+  }
+
+  return undefined;
 }
 
 async function getFreePort(): Promise<number> {
@@ -47,6 +127,29 @@ function getAuditValue(audits: Record<string, any>, id: string): number | undefi
 }
 
 async function main() {
+  const shouldSkip =
+    parseEnvBoolean(process.env.LHCI_SKIP) ??
+    parseEnvBoolean(process.env.SKIP_LIGHTHOUSE) ??
+    false;
+
+  if (shouldSkip) {
+    console.log("Skipping Lighthouse CI (LHCI_SKIP/SKIP_LIGHTHOUSE enabled).");
+    return;
+  }
+
+  const requireChrome = parseEnvBoolean(process.env.LHCI_REQUIRE_CHROME) ?? false;
+  const chromePath = resolveChromePath();
+
+  if (!chromePath) {
+    const message =
+      "Skipping Lighthouse CI: Chrome/Chromium not found. Set CHROME_PATH to a Chrome/Chromium executable (or set LHCI_REQUIRE_CHROME=1 to fail instead of skipping).";
+    if (requireChrome) {
+      throw new Error(message);
+    }
+    console.warn(message);
+    return;
+  }
+
   const port = await getFreePort();
 
   if (!fs.existsSync(path.resolve(process.cwd(), "dist", "index.js"))) {
@@ -77,7 +180,7 @@ async function main() {
         "--chrome-flags=--headless=new --no-sandbox",
         "--quiet",
       ],
-      { stdio: "inherit" },
+      { stdio: "inherit", env: { ...process.env, CHROME_PATH: chromePath } },
     );
 
     const report = JSON.parse(fs.readFileSync(outputPath, "utf8"));
@@ -111,4 +214,3 @@ main().catch((err) => {
   console.error(err);
   process.exitCode = 1;
 });
-

@@ -25,14 +25,13 @@ export default function MichaelNjoDDS() {
           </header>
 
           <section aria-labelledby="background-heading" className="grid gap-8 md:grid-cols-3 items-start">
-            <img
-              src="/dr-njo-headshot.webp"
-              alt="Michael Njo, DDS headshot"
-              width={383}
-              height={460}
-              className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
-              fetchPriority="high"
-            />
+	            <img
+	              src="/dr-njo-headshot.webp"
+	              alt="Michael Njo, DDS headshot"
+	              width={383}
+	              height={460}
+	              className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
+	            />
             <div className="md:col-span-2 space-y-4 text-gray-600 leading-relaxed">
               <h2 id="background-heading" className="text-2xl font-semibold text-gray-900">
                 Background

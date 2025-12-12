@@ -89,14 +89,13 @@ export default function Home() {
           {/* Professional Photo Section */}
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center">
             <div className="relative">
-	              <img 
-	                src="/dr-njo-headshot.webp"
-	                alt="Michael Njo, DDS - Professional headshot"
-	                width={383}
-	                height={460}
-	                fetchPriority="high"
-	                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white professional-headshot transition-all duration-300"
-	              />
+		              <img 
+		                src="/dr-njo-headshot.webp"
+		                alt="Michael Njo, DDS - Professional headshot"
+		                width={383}
+		                height={460}
+		                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white professional-headshot transition-all duration-300"
+		              />
               <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent"></div>
             </div>
           </div>
