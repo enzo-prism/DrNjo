@@ -10,14 +10,14 @@ export default function MichaelNjoDDS() {
   return (
     <>
       <StructuredData data={getMichaelNjoStructuredData()} id="structured-data-michael-njo-dds" />
-      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12">
+      <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
         <div className="max-w-4xl mx-auto space-y-10">
           <header className="text-center space-y-4">
-            <p className="text-sm uppercase tracking-[0.4em] text-blue-500 dark:text-blue-300">About</p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-gray-50">
+            <p className="text-sm uppercase tracking-[0.4em] text-blue-500">About</p>
+            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Michael Njo DDS
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
               Michael Njo, DDS is a dental practice transitions consultant and founder of Dental Strategies Consulting. He
               mentors dentists and healthcare owners through practice launches, growth planning, valuations, leadership
               development, and successful practice transitions.
@@ -33,8 +33,8 @@ export default function MichaelNjoDDS() {
               className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
               fetchPriority="high"
             />
-            <div className="md:col-span-2 space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-              <h2 id="background-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+            <div className="md:col-span-2 space-y-4 text-gray-600 leading-relaxed">
+              <h2 id="background-heading" className="text-2xl font-semibold text-gray-900">
                 Background
               </h2>
               <p>
@@ -55,25 +55,25 @@ export default function MichaelNjoDDS() {
           </section>
 
         <section aria-labelledby="services-heading" className="space-y-4">
-          <h2 id="services-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50 text-center">
+          <h2 id="services-heading" className="text-2xl font-semibold text-gray-900 text-center">
             Services
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {services.map((service) => (
               <div
                 key={service.name}
-                className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 shadow-sm"
+                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
               >
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">{service.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{service.description}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{service.audience}</p>
+                <h3 className="text-lg font-medium text-gray-900">{service.name}</h3>
+                <p className="text-sm text-gray-600 mt-2">{service.description}</p>
+                <p className="text-xs text-gray-500 mt-2">{service.audience}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section aria-labelledby="organizations-heading" className="space-y-4">
-          <h2 id="organizations-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50 text-center">
+          <h2 id="organizations-heading" className="text-2xl font-semibold text-gray-900 text-center">
             Organizations
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -101,43 +101,43 @@ export default function MichaelNjoDDS() {
             ].map((org) => (
               <div
                 key={org.name}
-                className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 shadow-sm"
+                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
               >
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">{org.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{org.description}</p>
+                <h3 className="text-lg font-medium text-gray-900">{org.name}</h3>
+                <p className="text-sm text-gray-600 mt-2">{org.description}</p>
               </div>
             ))}
           </div>
         </section>
 
         <section aria-labelledby="media-heading" className="space-y-4">
-          <h2 id="media-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50 text-center">
+          <h2 id="media-heading" className="text-2xl font-semibold text-gray-900 text-center">
             Media &amp; Resources
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {book && (
-              <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 shadow-sm space-y-2">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">{book.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{book.description}</p>
+              <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-2">
+                <h3 className="text-lg font-medium text-gray-900">{book.name}</h3>
+                <p className="text-sm text-gray-600">{book.description}</p>
                 <a
                   href={book.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-blue-600 dark:text-blue-400 underline font-medium"
+                  className="text-sm text-blue-600 underline font-medium"
                 >
                   View the book
                 </a>
               </div>
             )}
             {institute && (
-              <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-5 shadow-sm space-y-2">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-50">{institute.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{institute.description}</p>
+              <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-2">
+                <h3 className="text-lg font-medium text-gray-900">{institute.name}</h3>
+                <p className="text-sm text-gray-600">{institute.description}</p>
                 <a
                   href={institute.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-blue-600 dark:text-blue-400 underline font-medium"
+                  className="text-sm text-blue-600 underline font-medium"
                 >
                   Visit the institute
                 </a>
@@ -147,14 +147,14 @@ export default function MichaelNjoDDS() {
         </section>
 
         <section aria-labelledby="contact-heading" className="space-y-4 text-center">
-          <h2 id="contact-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
+          <h2 id="contact-heading" className="text-2xl font-semibold text-gray-900">
             Contact
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
             For consulting inquiries, speaking requests, or practice transition support, email{" "}
             <a
               href={`mailto:${contactDetails.email}`}
-              className="text-blue-600 dark:text-blue-400 underline font-medium"
+              className="text-blue-600 underline font-medium"
             >
               {contactDetails.email}
             </a>{" "}

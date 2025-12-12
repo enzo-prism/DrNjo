@@ -28,32 +28,6 @@
   --dental-light: hsl(220, 23%, 98%);
 }
 
-.dark {
-  --background: hsl(240, 10%, 3.9%);
-  --foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --popover: hsl(240, 10%, 3.9%);
-  --popover-foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
-  --card-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(217, 91%, 60%);
-  --primary-foreground: hsl(222, 100%, 99%);
-  --secondary: hsl(240, 3.7%, 15.9%);
-  --secondary-foreground: hsl(0, 0%, 98%);
-  --accent: hsl(240, 3.7%, 15.9%);
-  --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.75rem;
-  --dental-blue: hsl(217, 91%, 60%);
-  --dental-gray: hsl(240, 5%, 90%);
-  --dental-light: hsl(240, 3.7%, 15.9%);
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -66,14 +40,10 @@
 }
 
 .dental-card {
-  @apply bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800;
+  @apply bg-white border border-gray-200;
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease-in-out;
-}
-
-.dark .dental-card {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .dental-gradient {
@@ -119,7 +89,7 @@
 }
 
 .dental-button-secondary {
-  @apply bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-400;
+  @apply bg-white text-blue-600 border-2 border-blue-600;
   border-radius: 0.75rem;
   padding: 1rem 2rem;
   font-weight: 500;
@@ -280,10 +250,6 @@
 .card-hover-lift:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
-}
-
-.dark .card-hover-lift:hover {
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
 }
 
 /* Scroll Triggered Animations */

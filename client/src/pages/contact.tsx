@@ -71,22 +71,22 @@ export default function Contact() {
   return (
     <>
       <StructuredData data={getContactStructuredData()} id="structured-data-contact" />
-      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 px-4 py-12">
+      <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-blue-500 dark:text-blue-300">Contact</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-gray-50">
+          <p className="text-sm uppercase tracking-[0.4em] text-blue-500">Contact</p>
+          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
             Send a message to Michael Njo, DDS
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+          <p className="text-gray-600 leading-relaxed">
             Share a message directly with Dr. Michael Njo, DDS. Let him know about your practice, goals, or questions and
             he’ll personally reach out with next steps.
           </p>
         </div>
 
-        <Card className="shadow-xl border border-gray-200 dark:border-gray-800">
+        <Card className="shadow-xl border border-gray-200">
           <CardHeader>
-            <CardTitle className="text-2xl text-gray-900 dark:text-gray-50">Send a message to Dr. Njo</CardTitle>
+            <CardTitle className="text-2xl text-gray-900">Send a message to Dr. Njo</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
