@@ -1,9 +1,23 @@
 import compression from "compression";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { getCanonicalRedirectLocation } from "./canonical";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+app.set("trust proxy", true);
+app.use((req, res, next) => {
+  if (app.get("env") !== "production") return next();
+  const redirectLocation = getCanonicalRedirectLocation({
+    host: req.get("host") || undefined,
+    protocol: req.protocol,
+    originalUrl: req.originalUrl,
+  });
+  if (redirectLocation) {
+    return res.redirect(301, redirectLocation);
+  }
+  next();
+});
 app.use(
   compression({
     threshold: 0,

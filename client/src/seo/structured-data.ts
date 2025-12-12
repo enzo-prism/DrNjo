@@ -31,7 +31,8 @@ export type BookReview = {
 
 export const siteMetadata = {
   siteUrl: "https://michaelnjodds.com",
-  name: "Michael Njo, DDS | Dental Strategies",
+  name: "Michael Njo, DDS",
+  alternateName: "Michael Njo DDS",
   description:
     "Dr. Michael Njo mentors dentists, physicians, and entrepreneurs through Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute.",
   sameAs: [
@@ -47,8 +48,8 @@ export const contactDetails = {
 
 export const personProfile = {
   id: `${siteMetadata.siteUrl}/#person`,
-  name: "Dr. Michael Njo",
-  alternateName: "Michael Njo, DDS",
+  name: "Michael Njo, DDS",
+  alternateName: "Michael Njo DDS",
   jobTitle: "Founder & Strategy Consultant",
   description:
     "Dr. Michael Njo leads Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute to mentor healthcare owners through practice launches, growth, and transitions.",
@@ -380,6 +381,7 @@ const getBaseGraphNodes = (): SchemaNode[] => {
     "@id": `${siteMetadata.siteUrl}#website`,
     url: siteMetadata.siteUrl,
     name: siteMetadata.name,
+    alternateName: siteMetadata.alternateName,
     description: siteMetadata.description,
     publisher: {
       "@id": organizationProfile.id,
@@ -447,17 +449,52 @@ export const getHomeStructuredData = () => {
     { name: "Home", item: siteMetadata.siteUrl },
   ]);
 
-  const homePage = buildWebPage({
-    id: `${siteMetadata.siteUrl}#home`,
-    name: siteMetadata.name,
-    description: siteMetadata.description,
-    url: siteMetadata.siteUrl,
-    breadcrumbId: breadcrumb["@id"] as string,
-  });
+  const homePage: SchemaNode = {
+    ...buildWebPage({
+      id: `${siteMetadata.siteUrl}#home`,
+      name: siteMetadata.name,
+      description: siteMetadata.description,
+      url: siteMetadata.siteUrl,
+      breadcrumbId: breadcrumb["@id"] as string,
+    }),
+    "@type": ["WebPage", "ProfilePage"],
+    mainEntity: {
+      "@id": personProfile.id,
+    },
+  };
 
   const faqEntity = getFAQEntity();
 
   const graph = [...getBaseGraphNodes(), homePage, faqEntity, breadcrumb];
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
+};
+
+export const getMichaelNjoStructuredData = () => {
+  const profileUrl = `${siteMetadata.siteUrl}/michael-njo-dds`;
+  const breadcrumb = buildBreadcrumb([
+    { name: "Home", item: siteMetadata.siteUrl },
+    { name: "Michael Njo DDS", item: profileUrl },
+  ]);
+
+  const profilePage: SchemaNode = {
+    ...buildWebPage({
+      id: `${profileUrl}#webpage`,
+      name: "Michael Njo DDS",
+      description:
+        "Learn about Michael Njo DDS, founder of Dental Strategies Consulting and Practice Transitions Institute, specializing in dental practice transitions and growth strategy.",
+      url: profileUrl,
+      breadcrumbId: breadcrumb["@id"] as string,
+    }),
+    "@type": ["WebPage", "ProfilePage"],
+    mainEntity: {
+      "@id": personProfile.id,
+    },
+  };
+
+  const graph = [...getBaseGraphNodes(), profilePage, breadcrumb];
   return {
     "@context": "https://schema.org",
     "@graph": graph,

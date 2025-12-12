@@ -1,12 +1,11 @@
 import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from "lucide-react";
 import { Link } from "wouter";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { testimonials, type Testimonial } from "@/data/testimonials";
+import { testimonials } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { StructuredData } from "@/components/structured-data";
 import { bookEditorialReview, bookReviews, faqItems, getHomeStructuredData } from "@/seo/structured-data";
 
@@ -62,8 +61,6 @@ export default function Home() {
     },
   ];
 
-  const [activeTestimonial, setActiveTestimonial] = useState<Testimonial | null>(null);
-
   return (
     <>
       <StructuredData data={getHomeStructuredData()} id="structured-data-home" />
@@ -93,10 +90,15 @@ export default function Home() {
               >
                 Michael Njo, DDS
               </h1>
-              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-                Dr. Michael Njo—widely known as Michael Njo, DDS—is a consultant, educator, and entrepreneur who has spent 25+ years guiding healthcare owners through practice launches, growth, and transitions while protecting clinical excellence.
-              </p>
-              <div className="mb-10" aria-labelledby="founder-label">
+	              <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+	                Dr. Michael Njo—widely known as Michael Njo, DDS—is a consultant, educator, and entrepreneur who has spent 25+ years guiding healthcare owners through practice launches, growth, and transitions while protecting clinical excellence.
+	              </p>
+	              <div className="flex justify-center mb-8">
+	                <Button variant="outline" asChild>
+	                  <Link href="/michael-njo-dds">Read Michael Njo DDS profile</Link>
+	                </Button>
+	              </div>
+	              <div className="mb-10" aria-labelledby="founder-label">
                 <h2
                   id="founder-label"
                   className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-200 text-sm font-medium tracking-wide uppercase transition-colors duration-300"
@@ -110,11 +112,11 @@ export default function Home() {
                       key={name}
                       className={`rounded-2xl border ${accent} px-5 py-4 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg scroll-fade-in`}
                     >
-                      <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
-                        {name}
-                      </h2>
-                    </div>
-                  ))}
+	                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+	                        {name}
+	                      </h3>
+	                    </div>
+	                  ))}
                 </div>
               </div>
               <div className="max-w-3xl mx-auto">
@@ -122,16 +124,13 @@ export default function Home() {
                   Michael Njo, DDS leads a specialized consulting collective that coaches dentists, physicians, podiatrists, osteopaths, and business owners to launch, scale, or transition their practices with confidence.
                 </p>
                 <div className="mt-6">
-                  <a 
-                    href="https://practicetransitionsinstitute.com/testimonials"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group"
-                  >
-                    <Star className="w-4 h-4 mr-1 fill-current animate-[starSparkle_2s_ease-in-out_infinite]" />
-                    <span className="hover-underline">Trusted by hundreds of healthcare professionals</span>
-                    <ExternalLink className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-1" />
-                  </a>
+	                <Link
+	                  href="/testimonials"
+	                  className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group"
+	                >
+	                  <Star className="w-4 h-4 mr-1 fill-current animate-[starSparkle_2s_ease-in-out_infinite]" />
+	                  <span className="hover-underline">Trusted by hundreds of healthcare professionals</span>
+	                </Link>
                 </div>
               </div>
               <div className="mt-8 flex justify-center">
@@ -232,14 +231,9 @@ export default function Home() {
                                 Dental Strategies Client
                               </p>
                             </div>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="w-fit"
-                              onClick={() => setActiveTestimonial(testimonial)}
-                            >
-                              Read full story
-                            </Button>
+	                            <Button variant="outline" size="sm" className="w-fit" asChild>
+	                              <Link href={`/testimonials#testimonial-${index + 1}`}>Read full story</Link>
+	                            </Button>
                           </div>
                         </div>
                       </CarouselItem>
@@ -250,41 +244,6 @@ export default function Home() {
                     <CarouselNext className="relative static h-10 w-10 rounded-full border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-900/30" />
                   </div>
                 </Carousel>
-                <Dialog
-                  open={Boolean(activeTestimonial)}
-                  onOpenChange={(open) => {
-                    if (!open) {
-                      setActiveTestimonial(null);
-                    }
-                  }}
-                >
-                  <DialogContent className="max-w-3xl max-h-[85vh] overflow-hidden">
-                    {activeTestimonial && (
-                      <>
-                        <DialogHeader>
-                          <DialogTitle className="text-2xl text-gray-900 dark:text-gray-50">
-                            {activeTestimonial.author}
-                          </DialogTitle>
-                          <div className="flex items-center gap-1 text-amber-500 mt-2">
-                            {Array.from({ length: 5 }).map((_, starIndex) => (
-                              <Star
-                                key={starIndex}
-                                className={`w-4 h-4 ${
-                                  starIndex < activeTestimonial.stars
-                                    ? "fill-current"
-                                    : "text-gray-300 dark:text-gray-600"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </DialogHeader>
-                        <div className="overflow-y-auto pr-2 text-sm text-gray-700 dark:text-gray-200 leading-relaxed space-y-4">
-                          <p>{activeTestimonial.quote}</p>
-                        </div>
-                      </>
-                    )}
-                  </DialogContent>
-                </Dialog>
               </div>
               
               {/* Testimonials Call to Action */}
@@ -302,16 +261,13 @@ export default function Home() {
                 <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto font-light transition-colors duration-300">
                   Discover how Dr. Michael Njo has helped hundreds of dentists, physicians, and healthcare professionals achieve their practice goals.
                 </p>
-                <a 
-                  href="https://practicetransitionsinstitute.com/testimonials"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
-                >
-                  <Users className="w-5 h-5 mr-2" />
-                  Read Client Testimonials
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                </a>
+	                <Link
+	                  href="/testimonials"
+	                  className="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-medium rounded-lg border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
+	                >
+	                  <Users className="w-5 h-5 mr-2" />
+	                  Read Client Testimonials
+	                </Link>
               </div>
             </section>
 
@@ -337,15 +293,12 @@ export default function Home() {
                   Michael Njo, DDS has been consulting for 25 years and has built his consulting company all by 
                   direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
                   and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
-                  <a 
-                    href="https://practicetransitionsinstitute.com/testimonials"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
-                  >
-                    <span className="underline">Read what clients are saying</span>
-                    <ExternalLink className="w-3 h-3 ml-1" />
-                  </a>
+	                  <Link
+	                    href="/testimonials"
+	                    className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+	                  >
+	                    <span className="underline">Read what clients are saying</span>
+	                  </Link>
                 </p>
                 
                 <p>
