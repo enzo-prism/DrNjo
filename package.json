@@ -17,7 +17,8 @@
     "audit:canonical": "tsx scripts/audit-canonical.ts",
     "check:meta": "tsx scripts/check-meta-descriptions.ts",
     "check:crawl": "tsx scripts/check-crawlable-links.ts",
-    "check:structured-data": "tsx scripts/check-structured-data.ts"
+    "check:structured-data": "tsx scripts/check-structured-data.ts",
+    "check:favicon": "tsx scripts/check-favicon.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
