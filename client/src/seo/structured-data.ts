@@ -30,7 +30,7 @@ export type BookReview = {
 };
 
 export const siteMetadata = {
-  siteUrl: "https://www.drnjo.com",
+  siteUrl: "https://michaelnjodds.com",
   name: "Michael Njo, DDS | Dental Strategies",
   description:
     "Dr. Michael Njo mentors dentists, physicians, and entrepreneurs through Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute.",
@@ -38,7 +38,7 @@ export const siteMetadata = {
     "https://practicetransitionsinstitute.com/",
     "https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718",
   ],
-  logo: "https://www.drnjo.com/og-image.webp",
+  logo: "https://michaelnjodds.com/og-image.webp",
 };
 
 export const contactDetails = {
@@ -46,7 +46,7 @@ export const contactDetails = {
 };
 
 export const personProfile = {
-  id: "https://www.drnjo.com/#person",
+  id: `${siteMetadata.siteUrl}/#person`,
   name: "Dr. Michael Njo",
   alternateName: "Michael Njo, DDS",
   jobTitle: "Founder & Strategy Consultant",
@@ -55,7 +55,7 @@ export const personProfile = {
 };
 
 export const organizationProfile = {
-  id: "https://www.drnjo.com/#organization",
+  id: `${siteMetadata.siteUrl}/#organization`,
   name: "Dental Strategies",
   legalName: "Dental Strategies Consulting",
   url: siteMetadata.siteUrl,
@@ -188,7 +188,7 @@ const bookReviewStats = {
 };
 
 export const heroImage = {
-  url: "https://www.drnjo.com/og-image.webp",
+  url: `${siteMetadata.siteUrl}/og-image.webp`,
   width: 1024,
   height: 768,
   type: "image/webp",
@@ -386,23 +386,6 @@ const getBaseGraphNodes = (): SchemaNode[] => {
     },
   };
 
-  const professionalService = {
-    "@type": "ProfessionalService",
-    "@id": `${siteMetadata.siteUrl}#professional-service`,
-    name: "Dental Strategies Consulting",
-    description:
-      "Specialized consulting collective serving dentists, physicians, podiatrists, osteopaths, and healthcare entrepreneurs across practice launches, growth, and transitions.",
-    url: siteMetadata.siteUrl,
-    provider: {
-      "@id": organizationProfile.id,
-    },
-    serviceType: services.map((service) => service.name),
-    audience: {
-      "@type": "Audience",
-      audienceType: "Dentists, physicians, podiatrists, osteopaths, and business owners",
-    },
-  };
-
   const heroImageNode = {
     "@type": "ImageObject",
     "@id": `${siteMetadata.siteUrl}#hero-image`,
@@ -412,7 +395,7 @@ const getBaseGraphNodes = (): SchemaNode[] => {
     encodingFormat: heroImage.type,
   };
 
-  return [webSite, organization, person, professionalService, heroImageNode, ...getServiceNodes(), ...getResourceNodes()];
+  return [webSite, organization, person, heroImageNode, ...getServiceNodes(), ...getResourceNodes()];
 };
 
 const buildBreadcrumb = (items: { name: string; item: string }[]): SchemaNode => ({
