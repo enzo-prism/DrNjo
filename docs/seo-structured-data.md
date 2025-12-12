@@ -22,7 +22,7 @@ Base graph nodes (shared across pages):
 - `ImageObject` for the hero image
 - `Service` nodes derived from the on‑page services list
 - `Book` and `EducationalOrganization` nodes for public resources
-- `Review` + `AggregateRating` from visible testimonials
+- `Review` + `AggregateRating` only for third‑party book reviews (not for testimonials about our services)
 
 Per‑page nodes:
 - `/`: `WebPage` + `ProfilePage`, `FAQPage`, `BreadcrumbList`
@@ -36,4 +36,3 @@ Only add `sameAs` URLs (LinkedIn, X, YouTube, etc.) if they are also linked visi
 Build‑time check: `npm run check:structured-data`
 - Ensures JSON‑LD is rendered on `/` and `/michael-njo-dds`
 - Ensures the JSON produced by the generators serializes cleanly
-

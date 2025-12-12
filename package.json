@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
-    "prebuild": "npm run generate:sitemap && npm run check:meta && npm run check:structured-data",
+    "prebuild": "npm run generate:sitemap && npm run check:meta && npm run check:structured-data && npm run check:reviews",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc",
@@ -18,7 +18,8 @@
     "check:meta": "tsx scripts/check-meta-descriptions.ts",
     "check:crawl": "tsx scripts/check-crawlable-links.ts",
     "check:structured-data": "tsx scripts/check-structured-data.ts",
-    "check:favicon": "tsx scripts/check-favicon.ts"
+    "check:favicon": "tsx scripts/check-favicon.ts",
+    "check:reviews": "tsx scripts/check-review-schema.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

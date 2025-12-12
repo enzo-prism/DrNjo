@@ -1,7 +1,27 @@
 import { normalizePathname } from "./canonical";
+import { testimonialPages } from "../client/src/data/testimonials";
+
+function getTestimonialBySlug(slug: string) {
+  return testimonialPages.find((item) => item.slug === slug);
+}
+
+function buildTestimonialMetaExcerpt(quote: string, maxLength = 155): string {
+  const cleaned = quote.replace(/\s+/g, " ").trim();
+  if (cleaned.length <= maxLength) return cleaned;
+  return `${cleaned.slice(0, maxLength - 1).trimEnd()}…`;
+}
 
 export function buildPageTitle(pathname: string): string {
   const normalizedPath = normalizePathname(pathname);
+
+  if (normalizedPath.startsWith("/testimonials/")) {
+    const slug = normalizedPath.replace("/testimonials/", "");
+    const testimonial = getTestimonialBySlug(slug);
+    if (testimonial) {
+      return `Testimonial from ${testimonial.author} | Michael Njo DDS`;
+    }
+    return "Testimonials | Michael Njo DDS";
+  }
 
   switch (normalizedPath) {
     case "/":
@@ -24,6 +44,16 @@ export function buildPageTitle(pathname: string): string {
 
 export function buildPageDescription(pathname: string): string {
   const normalizedPath = normalizePathname(pathname);
+
+  if (normalizedPath.startsWith("/testimonials/")) {
+    const slug = normalizedPath.replace("/testimonials/", "");
+    const testimonial = getTestimonialBySlug(slug);
+    if (testimonial) {
+      const excerpt = buildTestimonialMetaExcerpt(testimonial.quote);
+      return `${excerpt} Testimonial for Michael Njo DDS and Dental Strategies Consulting.`;
+    }
+    return "Read client testimonials for Michael Njo DDS and Dental Strategies Consulting.";
+  }
 
   switch (normalizedPath) {
     case "/":

@@ -9,6 +9,7 @@ import Contact from "@/pages/contact";
 import ContactSuccess from "@/pages/contact-success";
 import MichaelNjoDDS from "@/pages/michael-njo-dds";
 import TestimonialsPage from "@/pages/testimonials";
+import TestimonialDetailPage from "@/pages/testimonial-detail";
 import ResourcesPage from "@/pages/resources";
 import { ThemeProvider } from "./components/theme-provider";
 import { ThemeToggle } from "./components/theme-toggle";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" component={Home} />
             <Route path="/michael-njo-dds" component={MichaelNjoDDS} />
             <Route path="/testimonials" component={TestimonialsPage} />
+            <Route path="/testimonials/:slug" component={TestimonialDetailPage} />
             <Route path="/resources" component={ResourcesPage} />
             <Route path="/contact" component={Contact} />
             <Route path="/contact/success" component={ContactSuccess} />

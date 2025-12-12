@@ -1,5 +1,3 @@
-import { testimonials } from "@/data/testimonials";
-
 export type FAQItem = {
   question: string;
   answer: string;
@@ -170,15 +168,6 @@ export const bookReviews: BookReview[] = [
   },
 ];
 
-const totalStars = testimonials.reduce((sum, testimonial) => sum + testimonial.stars, 0);
-
-export const reviewStats = {
-  reviewCount: testimonials.length,
-  ratingValue: testimonials.length ? Number((totalStars / testimonials.length).toFixed(2)) : undefined,
-  bestRating: 5,
-  worstRating: 1,
-};
-
 const totalBookRating = bookReviews.reduce((sum, review) => sum + review.rating, 0);
 
 const bookReviewStats = {
@@ -219,24 +208,6 @@ const getServiceNodes = (): SchemaNode[] =>
     audience: {
       "@type": "Audience",
       audienceType: service.audience,
-    },
-  }));
-
-const getReviewList = (): SchemaNode[] =>
-  testimonials.map((testimonial, index) => ({
-    "@type": "Review",
-    "@id": `${siteMetadata.siteUrl}#review-${index + 1}`,
-    name: `Client testimonial ${index + 1}`,
-    reviewBody: testimonial.quote,
-    author: {
-      "@type": "Person",
-      name: testimonial.author,
-    },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: testimonial.stars,
-      bestRating: 5,
-      worstRating: 1,
     },
   }));
 
@@ -366,14 +337,6 @@ const getBaseGraphNodes = (): SchemaNode[] => {
       "Practice valuations",
       "Leadership development",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: reviewStats.ratingValue,
-      bestRating: reviewStats.bestRating,
-      worstRating: reviewStats.worstRating,
-      reviewCount: reviewStats.reviewCount,
-    },
-    review: getReviewList(),
   };
 
   const webSite = {

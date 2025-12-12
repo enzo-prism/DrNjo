@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
 import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { testimonials } from "@/data/testimonials";
+import { testimonialPages } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { bookEditorialReview, bookReviews, faqItems, getHomeStructuredData } from "@/seo/structured-data";
@@ -183,9 +183,9 @@ export default function Home() {
                 >
                   <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.35em] text-blue-500 dark:text-blue-300 font-semibold">
-                        Testimonials · {testimonials.length} stories
-                      </p>
+	                      <p className="text-sm uppercase tracking-[0.35em] text-blue-500 dark:text-blue-300 font-semibold">
+	                        Testimonials · {testimonialPages.length} stories
+	                      </p>
                       <h4 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mt-2">
                         Stories from doctors, teams, and advisors
                       </h4>
@@ -199,7 +199,7 @@ export default function Home() {
                     </div>
                   </div>
                   <CarouselContent className="-ml-3 md:-ml-4">
-                    {testimonials.map((testimonial, index) => (
+                    {testimonialPages.map((testimonial, index) => (
                       <CarouselItem
                         key={`${testimonial.author}-${index}`}
                         className="pl-3 md:pl-4 md:basis-1/2 lg:basis-1/3"
@@ -231,9 +231,9 @@ export default function Home() {
                                 Dental Strategies Client
                               </p>
                             </div>
-	                            <Button variant="outline" size="sm" className="w-fit" asChild>
-	                              <Link href={`/testimonials#testimonial-${index + 1}`}>Read full story</Link>
-	                            </Button>
+		                            <Button variant="outline" size="sm" className="w-fit" asChild>
+		                              <a href={`/testimonials/${testimonial.slug}`}>Read full story</a>
+		                            </Button>
                           </div>
                         </div>
                       </CarouselItem>

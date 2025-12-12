@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { testimonialPages } from "../client/src/data/testimonials";
 
 const DEFAULT_BASE_URL = "https://michaelnjodds.com";
 
@@ -77,7 +78,10 @@ function writeSitemap(xml: string) {
 
 function main() {
   const baseUrl = normalizeBaseUrl(process.env.SITEMAP_BASE_URL || DEFAULT_BASE_URL);
-  const routes = getRoutesFromApp().filter(isIndexableRoute);
+  const staticRoutes = getRoutesFromApp().filter(isIndexableRoute);
+  const testimonialRoutes = testimonialPages.map((testimonial) => `/testimonials/${testimonial.slug}`);
+
+  const routes = Array.from(new Set([...staticRoutes, ...testimonialRoutes])).filter(isIndexableRoute);
   const locs = routes.map((route) => buildLoc(baseUrl, route)).sort();
   const xml = buildSitemapXml(locs);
   writeSitemap(xml);
@@ -85,4 +89,3 @@ function main() {
 }
 
 main();
-

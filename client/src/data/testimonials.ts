@@ -4,6 +4,24 @@ export type Testimonial = {
   stars: number;
 };
 
+export type TestimonialPage = Testimonial & {
+  slug: string;
+  excerpt: string;
+};
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+
+const buildExcerpt = (quote: string, maxLength = 200) => {
+  const cleaned = quote.replace(/\s+/g, " ").trim();
+  if (cleaned.length <= maxLength) return cleaned;
+  return `${cleaned.slice(0, maxLength - 1).trimEnd()}…`;
+};
+
 export const testimonials: Testimonial[] = [
   {
     quote: `I started with Michael in 2018 and have had an outstanding experience! He brings a wealth of knowledge and a truly professional, friendly approach to my dental practice. His advice is not only practical but also easy to implement, and I've seen improvements in patient satisfaction and office efficiency. Most recently, Michael and his team helped facilitate a chart sale that was fair to both seller and buyer (myself). He expertly guided us through the process and continues to monitor our progress, ensuring a smooth and successful transfer of patients. I highly recommend Michael to any dental team looking to level up their game!`,
@@ -270,4 +288,20 @@ export const testimonials: Testimonial[] = [
     author: "Sloane",
     stars: 5,
   },
-]
+];
+
+export const testimonialPages: TestimonialPage[] = (() => {
+  const seen = new Map<string, number>();
+  return testimonials.map((testimonial) => {
+    const base = slugify(testimonial.author || "testimonial");
+    const nextCount = (seen.get(base) || 0) + 1;
+    seen.set(base, nextCount);
+    const slug = nextCount === 1 ? base : `${base}-${nextCount}`;
+
+    return {
+      ...testimonial,
+      slug,
+      excerpt: buildExcerpt(testimonial.quote),
+    };
+  });
+})();

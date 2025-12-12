@@ -1,4 +1,4 @@
-import { testimonials } from "@/data/testimonials";
+import { testimonialPages } from "@/data/testimonials";
 import { Star } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -19,11 +19,10 @@ export default function TestimonialsPage() {
         </header>
 
         <div className="grid gap-6">
-          {testimonials.map((testimonial, index) => (
+          {testimonialPages.map((testimonial, index) => (
             <article
-              id={`testimonial-${index + 1}`}
-              key={`${testimonial.author}-${index}`}
-              className="rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 shadow-sm scroll-mt-24"
+              key={`${testimonial.author}-${testimonial.slug}-${index}`}
+              className="rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-6 shadow-sm"
             >
               <div className="flex items-center gap-1 text-amber-500">
                 {Array.from({ length: 5 }).map((_, starIndex) => (
@@ -34,9 +33,17 @@ export default function TestimonialsPage() {
                 ))}
               </div>
               <p className="mt-4 text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-line">
-                {testimonial.quote}
+                {testimonial.excerpt}
               </p>
-              <p className="mt-4 text-sm font-semibold text-gray-900 dark:text-gray-50">{testimonial.author}</p>
+              <p className="mt-4 text-sm font-semibold text-gray-900 dark:text-gray-50">
+                {testimonial.author}
+              </p>
+              <a
+                href={`/testimonials/${testimonial.slug}`}
+                className="inline-flex mt-3 text-sm text-blue-600 dark:text-blue-400 underline font-medium"
+              >
+                Read full story
+              </a>
             </article>
           ))}
         </div>
@@ -53,4 +60,3 @@ export default function TestimonialsPage() {
     </main>
   );
 }
-
