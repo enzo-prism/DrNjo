@@ -168,15 +168,6 @@ export const bookReviews: BookReview[] = [
   },
 ];
 
-const totalBookRating = bookReviews.reduce((sum, review) => sum + review.rating, 0);
-
-const bookReviewStats = {
-  reviewCount: bookReviews.length,
-  ratingValue: bookReviews.length ? Number((totalBookRating / bookReviews.length).toFixed(2)) : undefined,
-  bestRating: 5,
-  worstRating: 1,
-};
-
 export const heroImage = {
   url: `${siteMetadata.siteUrl}/og-image.webp`,
   width: 1024,
@@ -224,7 +215,7 @@ const getFAQEntity = (): SchemaNode => ({
   })),
 });
 
-const getResourceNodes = ({ includeBookReviews }: { includeBookReviews: boolean }): SchemaNode[] =>
+const getResourceNodes = (): SchemaNode[] =>
   resources.map((resource) => {
     if (resource.type === "Book") {
       const bookId = `${siteMetadata.siteUrl}#book`;
@@ -243,45 +234,7 @@ const getResourceNodes = ({ includeBookReviews }: { includeBookReviews: boolean 
           "@id": organizationProfile.id,
         },
       };
-
-      if (!includeBookReviews) {
-        return bookNode;
-      }
-
-      return {
-        ...bookNode,
-        review: bookReviews.map((review, index) => ({
-          "@type": "Review",
-          "@id": `${siteMetadata.siteUrl}#book-review-${index + 1}`,
-          itemReviewed: {
-            "@id": bookId,
-          },
-          name: review.title,
-          reviewBody: review.body,
-          datePublished: review.datePublished,
-          author: {
-            "@type": "Person",
-            name: review.author,
-          },
-          reviewRating: {
-            "@type": "Rating",
-            ratingValue: review.rating,
-            bestRating: 5,
-            worstRating: 1,
-          },
-        })),
-        ...(bookReviewStats.ratingValue
-          ? {
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: bookReviewStats.ratingValue,
-                reviewCount: bookReviewStats.reviewCount,
-                bestRating: bookReviewStats.bestRating,
-                worstRating: bookReviewStats.worstRating,
-              },
-            }
-          : {}),
-      };
+      return bookNode;
     }
 
     return {
@@ -431,7 +384,7 @@ export const getHomeStructuredData = () => {
 
   const graph = [
     ...getCoreGraphNodes(),
-    ...getResourceNodes({ includeBookReviews: true }),
+    ...getResourceNodes(),
     homePage,
     faqEntity,
     breadcrumb,
@@ -467,7 +420,7 @@ export const getMichaelNjoStructuredData = () => {
   const graph = [
     ...getCoreGraphNodes(),
     ...getServiceNodes(),
-    ...getResourceNodes({ includeBookReviews: false }),
+    ...getResourceNodes(),
     profilePage,
     breadcrumb,
   ];

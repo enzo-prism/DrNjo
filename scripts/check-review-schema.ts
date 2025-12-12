@@ -7,8 +7,7 @@ import {
 
 type SchemaValue = unknown;
 
-const PROHIBITED_TYPES = new Set(["Review", "AggregateRating"]);
-const ALLOWED_ANCESTOR_TYPES = new Set(["Book"]);
+const PROHIBITED_TYPES = new Set(["Review", "AggregateRating", "Rating"]);
 
 function toTypeArray(value: SchemaValue): string[] {
   if (typeof value === "string") return [value];
@@ -30,14 +29,11 @@ function walk(value: SchemaValue, ancestors: string[], path: string[], errors: s
 
   const hasProhibited = nodeTypes.some((type) => PROHIBITED_TYPES.has(type));
   if (hasProhibited) {
-    const allowed = ancestors.some((type) => ALLOWED_ANCESTOR_TYPES.has(type));
-    if (!allowed) {
-      errors.push(
-        `Disallowed schema type ${nodeTypes.join(", ")} at ${path.join(".") || "root"} (ancestors: ${ancestors.join(
-          ", ",
-        ) || "none"})`,
-      );
-    }
+    errors.push(
+      `Disallowed schema type ${nodeTypes.join(", ")} at ${path.join(".") || "root"} (ancestors: ${ancestors.join(
+        ", ",
+      ) || "none"})`,
+    );
   }
 
   for (const [key, child] of Object.entries(record)) {
@@ -66,7 +62,7 @@ function main() {
     assertNoSelfServingReviews(data, label);
   }
 
-  console.log("Review schema policy OK (no self‑serving Review/AggregateRating).");
+  console.log("Review schema policy OK (no Review/AggregateRating/Rating).");
 }
 
 try {
@@ -75,4 +71,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-

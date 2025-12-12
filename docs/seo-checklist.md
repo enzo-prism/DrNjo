@@ -49,7 +49,7 @@ Use this checklist before every deploy and whenever adding new routes/content.
 - **What we ship**
   - JSON‑LD is generated in `client/src/seo/structured-data.ts`.
   - Home and `/michael-njo-dds` include `WebSite`, `Organization`, `Person`, and `ProfilePage`.
-  - We do **not** include self‑serving `Review` or `AggregateRating` for testimonials.
+  - We do **not** include `Review` / `AggregateRating` / `Rating` schema anywhere.
 - **Validation**
   - Run build checks:
     - `npm run check:structured-data`
@@ -70,4 +70,3 @@ Use this checklist before every deploy and whenever adding new routes/content.
 5. Check **Enhancements**:
    - Fix any structured data errors.
 6. Re‑crawl after major changes via **URL Inspection → Request indexing**.
-

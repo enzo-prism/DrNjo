@@ -22,7 +22,7 @@ Base graph nodes (shared across pages):
 - `ImageObject` for the hero image
 - `Service` nodes derived from the on‑page services list
 - `Book` and `EducationalOrganization` nodes for public resources
-- `Review` + `AggregateRating` only for third‑party book reviews (not for testimonials about our services)
+- No `Review` / `AggregateRating` / `Rating` schema (avoids “Review snippet” errors and self‑serving review risks)
 
 Per‑page nodes:
 - `/`: `WebPage` + `ProfilePage`, `FAQPage`, `BreadcrumbList`
