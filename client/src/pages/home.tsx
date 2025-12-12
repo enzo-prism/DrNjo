@@ -357,6 +357,13 @@ export default function Home() {
             <section id="resources" className="max-w-4xl mx-auto mb-12" aria-labelledby="resources-heading">
               <div className="text-center mb-8">
 	                <h2 id="resources-heading" className="text-2xl font-light text-gray-800 transition-colors duration-300">Education &amp; Resources</h2>
+                  <p className="mt-3 text-sm text-gray-600">
+                    Prefer a single overview page?{" "}
+                    <a href="/resources" className="text-blue-600 underline font-medium">
+                      Visit Resources
+                    </a>
+                    .
+                  </p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-6">

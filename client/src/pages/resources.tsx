@@ -17,7 +17,11 @@ export default function ResourcesPage() {
           </h1>
           <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Explore Dr. Michael Njo’s book and educational programs designed to help healthcare owners navigate growth
-            and practice transitions.
+            and practice transitions.{" "}
+            <a href="/michael-njo-dds" className="text-blue-600 underline font-medium">
+              Learn more about Michael Njo DDS
+            </a>
+            .
           </p>
         </header>
 

@@ -182,6 +182,11 @@ export default function MichaelNjoDDS() {
               </div>
             )}
           </div>
+          <div className="text-center">
+            <a href="/resources" className="inline-flex text-sm text-blue-600 underline font-medium">
+              Browse all resources
+            </a>
+          </div>
         </section>
 
         <section aria-labelledby="contact-heading" className="space-y-4 text-center">

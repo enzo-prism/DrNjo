@@ -16,6 +16,13 @@ export default function TestimonialsPage() {
             Stories from dentists and healthcare professionals guided through Dental Strategies and Practice Transitions
             Institute.
           </p>
+          <p className="text-sm text-gray-600">
+            Learn more about{" "}
+            <a href="/michael-njo-dds" className="text-blue-600 underline font-medium">
+              Michael Njo DDS
+            </a>
+            .
+          </p>
         </header>
 
         <div className="grid gap-6">
