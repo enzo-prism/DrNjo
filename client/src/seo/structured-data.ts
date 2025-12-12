@@ -224,25 +224,14 @@ const getFAQEntity = (): SchemaNode => ({
   })),
 });
 
-const getResourceNodes = (): SchemaNode[] =>
+const getResourceNodes = ({ includeBookReviews }: { includeBookReviews: boolean }): SchemaNode[] =>
   resources.map((resource) => {
     if (resource.type === "Book") {
-      const editorialReviewNode = resource.editorialReview
-        ? {
-            "@type": "Review",
-            "@id": `${siteMetadata.siteUrl}#book-editorial-review`,
-            name: "Editorial Review from Amazon",
-            reviewBody: resource.editorialReview,
-            author: {
-              "@type": "Organization",
-              name: "Amazon Editorial Reviews",
-            },
-          }
-        : undefined;
+      const bookId = `${siteMetadata.siteUrl}#book`;
 
-      return {
+      const bookNode: SchemaNode = {
         "@type": "Book",
-        "@id": `${siteMetadata.siteUrl}#book`,
+        "@id": bookId,
         name: resource.name,
         description: resource.description,
         isbn: "1627878718",
@@ -253,33 +242,45 @@ const getResourceNodes = (): SchemaNode[] =>
         publisher: {
           "@id": organizationProfile.id,
         },
-        review: [
-          ...bookReviews.map((review, index) => ({
-            "@type": "Review",
-            "@id": `${siteMetadata.siteUrl}#book-review-${index + 1}`,
-            name: review.title,
-            reviewBody: review.body,
-            datePublished: review.datePublished,
-            author: {
-              "@type": "Person",
-              name: review.author,
-            },
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: review.rating,
-              bestRating: 5,
-              worstRating: 1,
-            },
-          })),
-          editorialReviewNode,
-        ].filter(Boolean),
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: bookReviewStats.ratingValue,
-          reviewCount: bookReviewStats.reviewCount,
-          bestRating: bookReviewStats.bestRating,
-          worstRating: bookReviewStats.worstRating,
-        },
+      };
+
+      if (!includeBookReviews) {
+        return bookNode;
+      }
+
+      return {
+        ...bookNode,
+        review: bookReviews.map((review, index) => ({
+          "@type": "Review",
+          "@id": `${siteMetadata.siteUrl}#book-review-${index + 1}`,
+          itemReviewed: {
+            "@id": bookId,
+          },
+          name: review.title,
+          reviewBody: review.body,
+          datePublished: review.datePublished,
+          author: {
+            "@type": "Person",
+            name: review.author,
+          },
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: review.rating,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        })),
+        ...(bookReviewStats.ratingValue
+          ? {
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: bookReviewStats.ratingValue,
+                reviewCount: bookReviewStats.reviewCount,
+                bestRating: bookReviewStats.bestRating,
+                worstRating: bookReviewStats.worstRating,
+              },
+            }
+          : {}),
       };
     }
 
@@ -295,7 +296,7 @@ const getResourceNodes = (): SchemaNode[] =>
     };
   });
 
-const getBaseGraphNodes = (): SchemaNode[] => {
+const getCoreGraphNodes = (): SchemaNode[] => {
   const contactPoint = {
     "@type": "ContactPoint",
     contactType: "Consultation",
@@ -360,7 +361,7 @@ const getBaseGraphNodes = (): SchemaNode[] => {
     encodingFormat: heroImage.type,
   };
 
-  return [webSite, organization, person, heroImageNode, ...getServiceNodes(), ...getResourceNodes()];
+  return [webSite, organization, person, heroImageNode];
 };
 
 const buildBreadcrumb = (items: { name: string; item: string }[]): SchemaNode => ({
@@ -428,7 +429,13 @@ export const getHomeStructuredData = () => {
 
   const faqEntity = getFAQEntity();
 
-  const graph = [...getBaseGraphNodes(), homePage, faqEntity, breadcrumb];
+  const graph = [
+    ...getCoreGraphNodes(),
+    ...getResourceNodes({ includeBookReviews: true }),
+    homePage,
+    faqEntity,
+    breadcrumb,
+  ];
   return {
     "@context": "https://schema.org",
     "@graph": graph,
@@ -457,7 +464,13 @@ export const getMichaelNjoStructuredData = () => {
     },
   };
 
-  const graph = [...getBaseGraphNodes(), profilePage, breadcrumb];
+  const graph = [
+    ...getCoreGraphNodes(),
+    ...getServiceNodes(),
+    ...getResourceNodes({ includeBookReviews: false }),
+    profilePage,
+    breadcrumb,
+  ];
   return {
     "@context": "https://schema.org",
     "@graph": graph,
@@ -491,7 +504,7 @@ export const getContactStructuredData = () => {
     },
   };
 
-  const graph = [...getBaseGraphNodes(), contactPage, breadcrumb];
+  const graph = [...getCoreGraphNodes(), contactPage, breadcrumb];
 
   return {
     "@context": "https://schema.org",
@@ -515,7 +528,7 @@ export const getContactSuccessStructuredData = () => {
     breadcrumbId: breadcrumb["@id"] as string,
   });
 
-  const graph = [...getBaseGraphNodes(), webPage, breadcrumb];
+  const graph = [...getCoreGraphNodes(), webPage, breadcrumb];
 
   return {
     "@context": "https://schema.org",
