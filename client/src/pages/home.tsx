@@ -2,7 +2,6 @@ import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users, Quote } from 
 import { Link } from "wouter";
 import { useEffect } from "react";
 import drNjoHeadshot from "@assets/Dr. Njo_1753322899280.webp";
-import drNjoClients from "@assets/dr njo clients_1753323486111.webp";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { testimonialPages } from "@/data/testimonials";
 import { Button } from "@/components/ui/button";
@@ -71,11 +70,14 @@ export default function Home() {
           {/* Professional Photo Section */}
           <div className="relative h-80 md:h-96 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center transition-colors duration-300">
             <div className="relative">
-              <img 
-                src={drNjoHeadshot}
-                alt="Michael Njo, DDS - Professional headshot"
-                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white dark:ring-gray-800 professional-headshot transition-all duration-300"
-              />
+	              <img 
+	                src={drNjoHeadshot}
+	                alt="Michael Njo, DDS - Professional headshot"
+	                width={383}
+	                height={460}
+	                fetchPriority="high"
+	                className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover object-center shadow-2xl ring-4 ring-white dark:ring-gray-800 professional-headshot transition-all duration-300"
+	              />
               <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent"></div>
             </div>
           </div>
@@ -143,12 +145,22 @@ export default function Home() {
               </div>
               <div className="mt-10 scroll-fade-in">
                 <div className="rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-lg">
-                  <img
-                    src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp"
-                    alt="Michael Njo, DDS at the Dugoni Business Club donation ceremony"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+	                  <img
+	                    src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp"
+	                    srcSet={[
+	                      "https://res.cloudinary.com/dhqpqfw6w/image/upload/c_limit,w_640,f_auto,q_auto/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp 640w",
+	                      "https://res.cloudinary.com/dhqpqfw6w/image/upload/c_limit,w_960,f_auto,q_auto/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp 960w",
+	                      "https://res.cloudinary.com/dhqpqfw6w/image/upload/c_limit,w_1280,f_auto,q_auto/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp 1280w",
+	                      "https://res.cloudinary.com/dhqpqfw6w/image/upload/c_limit,w_1600,f_auto,q_auto/v1762786458/dugoni-business-club-donation-ceremony_plth4r.webp 1600w",
+	                    ].join(", ")}
+	                    sizes="(max-width: 768px) 100vw, 768px"
+	                    width={1645}
+	                    height={1095}
+	                    alt="Michael Njo, DDS at the Dugoni Business Club donation ceremony"
+	                    className="w-full h-full object-cover"
+	                    loading="lazy"
+	                    decoding="async"
+	                  />
                 </div>
               </div>
             </div>
@@ -168,14 +180,26 @@ export default function Home() {
               <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
                 Real-world stories from the doctors, teams, and advisors mentored by Dr. Michael Njo across Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute.
               </p>
-              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 scroll-fade-in">
-                <img 
-                  src={drNjoClients}
-                  alt="Michael Njo, DDS with dental professionals at a consulting workshop"
-                  className="w-full h-auto object-cover client-success-image parallax-slow"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-              </div>
+	              <div className="relative overflow-hidden rounded-2xl shadow-xl mb-6 scroll-fade-in">
+	                <img 
+	                  src="/dr-njo-clients-1280.webp"
+	                  srcSet={[
+	                    "/dr-njo-clients-640.webp 640w",
+	                    "/dr-njo-clients-960.webp 960w",
+	                    "/dr-njo-clients-1280.webp 1280w",
+	                    "/dr-njo-clients-1600.webp 1600w",
+	                    "/dr-njo-clients-1920.webp 1920w",
+	                  ].join(", ")}
+	                  sizes="(max-width: 768px) 100vw, 1024px"
+	                  width={1920}
+	                  height={1279}
+	                  alt="Michael Njo, DDS with dental professionals at a consulting workshop"
+	                  className="w-full h-auto object-cover client-success-image parallax-slow"
+	                  loading="lazy"
+	                  decoding="async"
+	                />
+	                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+	              </div>
               <div className="scroll-fade-in">
                 <Carousel
                   opts={{ align: "start", loop: true }}

@@ -29,8 +29,10 @@ export default function MichaelNjoDDS() {
             <img
               src={drNjoHeadshot}
               alt="Michael Njo, DDS headshot"
+              width={383}
+              height={460}
               className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
-              loading="lazy"
+              fetchPriority="high"
             />
             <div className="md:col-span-2 space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <h2 id="background-heading" className="text-2xl font-semibold text-gray-900 dark:text-gray-50">
