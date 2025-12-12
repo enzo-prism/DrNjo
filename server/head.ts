@@ -5,6 +5,22 @@ function getTestimonialBySlug(slug: string) {
   return testimonialPages.find((item) => item.slug === slug);
 }
 
+const testimonialAuthorCounts = (() => {
+  const counts = new Map<string, number>();
+  for (const testimonial of testimonialPages) {
+    counts.set(testimonial.author, (counts.get(testimonial.author) || 0) + 1);
+  }
+  return counts;
+})();
+
+function getTestimonialTitleSuffix(slug: string, author: string): string {
+  const count = testimonialAuthorCounts.get(author) || 0;
+  if (count <= 1) return "";
+  const match = slug.match(/-(\d+)$/);
+  if (!match) return "";
+  return ` (${match[1]})`;
+}
+
 function buildTestimonialMetaExcerpt(quote: string, maxLength = 155): string {
   const cleaned = quote.replace(/\s+/g, " ").trim();
   if (cleaned.length <= maxLength) return cleaned;
@@ -18,7 +34,8 @@ export function buildPageTitle(pathname: string): string {
     const slug = normalizedPath.replace("/testimonials/", "");
     const testimonial = getTestimonialBySlug(slug);
     if (testimonial) {
-      return `Testimonial from ${testimonial.author} | Michael Njo DDS`;
+      const suffix = getTestimonialTitleSuffix(slug, testimonial.author);
+      return `Testimonial from ${testimonial.author}${suffix} | Michael Njo DDS`;
     }
     return "Testimonials | Michael Njo DDS";
   }

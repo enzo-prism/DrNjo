@@ -80,6 +80,7 @@ function main() {
 
   const rows: AuditRow[] = [];
   const failures: string[] = [];
+  const titleToPaths = new Map<string, string[]>();
 
   for (const pathname of paths) {
     const title = buildPageTitle(pathname);
@@ -125,6 +126,18 @@ function main() {
     if (h1Ok !== "-" && !h1Ok) failures.push(`${pathname}: expected exactly one H1 (found ${h1Count})`);
     if (!noindexOkGlobal) failures.push(`${pathname}: noindex/nofollow found in template`);
     if (structuredDataOk !== "-" && !structuredDataOk) failures.push(`${pathname}: missing JSON-LD StructuredData`);
+
+    if (titleOk) {
+      const existing = titleToPaths.get(title) || [];
+      existing.push(pathname);
+      titleToPaths.set(title, existing);
+    }
+  }
+
+  for (const [title, titlePaths] of titleToPaths.entries()) {
+    if (titlePaths.length > 1) {
+      failures.push(`Duplicate title "${title}" on: ${titlePaths.join(", ")}`);
+    }
   }
 
   console.table(
@@ -151,4 +164,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-
