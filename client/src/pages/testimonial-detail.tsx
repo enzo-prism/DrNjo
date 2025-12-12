@@ -2,13 +2,33 @@ import type { RouteComponentProps } from "wouter";
 import { Link } from "wouter";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { testimonialPages } from "@/data/testimonials";
+import { testimonialPages, type TestimonialPage } from "@/data/testimonials";
 
 type TestimonialDetailProps = RouteComponentProps<{ slug?: string }>;
 
 export default function TestimonialDetailPage({ params }: TestimonialDetailProps) {
   const slug = params.slug || "";
-  const testimonial = testimonialPages.find((item) => item.slug === slug);
+  const testimonialIndex = testimonialPages.findIndex((item) => item.slug === slug);
+  const testimonial = testimonialIndex >= 0 ? testimonialPages[testimonialIndex] : null;
+  const previousTestimonial = testimonialIndex > 0 ? testimonialPages[testimonialIndex - 1] : null;
+  const nextTestimonial =
+    testimonialIndex >= 0 && testimonialIndex < testimonialPages.length - 1 ? testimonialPages[testimonialIndex + 1] : null;
+  const relatedTestimonials = (() => {
+    const related: TestimonialPage[] = [];
+    const maxRelated = 6;
+
+    if (testimonialIndex < 0) return related;
+
+    for (let offset = 1; offset < testimonialPages.length && related.length < maxRelated; offset++) {
+      const candidate = testimonialPages[(testimonialIndex + offset) % testimonialPages.length];
+      if (candidate.slug === slug) continue;
+      if (candidate.slug === previousTestimonial?.slug) continue;
+      if (candidate.slug === nextTestimonial?.slug) continue;
+      related.push(candidate);
+    }
+
+    return related;
+  })();
 
   if (!testimonial) {
     return (
@@ -69,6 +89,86 @@ export default function TestimonialDetailPage({ params }: TestimonialDetailProps
             {testimonial.author}
           </p>
         </article>
+
+        <section aria-labelledby="more-testimonials-heading" className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
+          <div className="text-center space-y-2">
+            <h2 id="more-testimonials-heading" className="text-2xl font-semibold text-gray-900">
+              More testimonials
+            </h2>
+            <p className="text-sm text-gray-600">
+              Explore additional stories from doctors, teams, and advisors.
+            </p>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {previousTestimonial && (
+              <a
+                href={`/testimonials/${previousTestimonial.slug}`}
+                rel="prev"
+                className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-gray-500">Previous</p>
+                <p className="mt-2 text-base font-semibold text-gray-900 group-hover:text-blue-700">
+                  Testimonial from {previousTestimonial.author}
+                </p>
+                <p className="mt-2 text-sm text-gray-600 line-clamp-3 whitespace-pre-line">
+                  {previousTestimonial.excerpt}
+                </p>
+              </a>
+            )}
+            {nextTestimonial && (
+              <a
+                href={`/testimonials/${nextTestimonial.slug}`}
+                rel="next"
+                className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition"
+              >
+                <p className="text-xs uppercase tracking-[0.25em] text-gray-500">Next</p>
+                <p className="mt-2 text-base font-semibold text-gray-900 group-hover:text-blue-700">
+                  Testimonial from {nextTestimonial.author}
+                </p>
+                <p className="mt-2 text-sm text-gray-600 line-clamp-3 whitespace-pre-line">
+                  {nextTestimonial.excerpt}
+                </p>
+              </a>
+            )}
+          </div>
+
+          {relatedTestimonials.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold text-gray-900 text-center">
+                More stories
+              </h3>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {relatedTestimonials.map((item) => (
+                  <a
+                    key={item.slug}
+                    href={`/testimonials/${item.slug}`}
+                    className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition"
+                  >
+                    <p className="text-base font-semibold text-gray-900 group-hover:text-blue-700">
+                      Testimonial from {item.author}
+                    </p>
+                    <p className="mt-2 text-sm text-gray-600 line-clamp-3 whitespace-pre-line">
+                      {item.excerpt}
+                    </p>
+                    <p className="mt-3 text-sm text-blue-600 underline font-medium">
+                      Read full story
+                    </p>
+                  </a>
+                ))}
+              </div>
+
+              <div className="mt-6 text-center">
+                <a
+                  href="/testimonials"
+                  className="inline-flex text-sm text-blue-600 underline font-medium"
+                >
+                  View all testimonials
+                </a>
+              </div>
+            </div>
+          )}
+        </section>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
           <Button asChild>

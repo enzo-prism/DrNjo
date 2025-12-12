@@ -2,10 +2,12 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
+import { testimonialPages } from "@/data/testimonials";
 
 export default function MichaelNjoDDS() {
   const book = resources.find((resource) => resource.type === "Book");
   const institute = resources.find((resource) => resource.type === "EducationalOrganization");
+  const featuredTestimonials = testimonialPages.slice(0, 6);
 
   return (
     <>
@@ -50,6 +52,43 @@ export default function MichaelNjoDDS() {
                 Through his organizations, he works hands‑on with doctors and teams to build systems that reduce
                 operational friction, improve profitability, and protect the patient experience during periods of change.
               </p>
+            </div>
+          </section>
+
+          <section aria-labelledby="testimonials-heading" className="space-y-4">
+            <header className="text-center space-y-2">
+              <h2 id="testimonials-heading" className="text-2xl font-semibold text-gray-900">
+                Testimonials
+              </h2>
+              <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                What dentists, teams, and healthcare leaders say about working with Michael Njo, DDS.
+              </p>
+            </header>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {featuredTestimonials.map((testimonial) => (
+                <a
+                  key={testimonial.slug}
+                  href={`/testimonials/${testimonial.slug}`}
+                  className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition"
+                >
+                  <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                    {testimonial.excerpt}
+                  </p>
+                  <p className="mt-4 text-sm font-semibold text-gray-900 group-hover:text-blue-700">
+                    {testimonial.author}
+                  </p>
+                  <p className="mt-3 text-sm text-blue-600 underline font-medium">
+                    Read full story
+                  </p>
+                </a>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <a href="/testimonials" className="inline-flex text-sm text-blue-600 underline font-medium">
+                View all testimonials
+              </a>
             </div>
           </section>
 
