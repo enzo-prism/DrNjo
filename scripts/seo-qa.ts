@@ -81,6 +81,7 @@ function main() {
   const rows: AuditRow[] = [];
   const failures: string[] = [];
   const titleToPaths = new Map<string, string[]>();
+  const descriptionToPaths = new Map<string, string[]>();
 
   for (const pathname of paths) {
     const title = buildPageTitle(pathname);
@@ -132,11 +133,23 @@ function main() {
       existing.push(pathname);
       titleToPaths.set(title, existing);
     }
+
+    if (descriptionOk) {
+      const existing = descriptionToPaths.get(description) || [];
+      existing.push(pathname);
+      descriptionToPaths.set(description, existing);
+    }
   }
 
   for (const [title, titlePaths] of titleToPaths.entries()) {
     if (titlePaths.length > 1) {
       failures.push(`Duplicate title "${title}" on: ${titlePaths.join(", ")}`);
+    }
+  }
+
+  for (const [description, descriptionPaths] of descriptionToPaths.entries()) {
+    if (descriptionPaths.length > 1) {
+      failures.push(`Duplicate meta description "${description}" on: ${descriptionPaths.join(", ")}`);
     }
   }
 

@@ -27,6 +27,28 @@ function buildTestimonialMetaExcerpt(quote: string, maxLength = 155): string {
   return `${cleaned.slice(0, maxLength - 1).trimEnd()}…`;
 }
 
+function buildTestimonialMetaDescription({
+  quote,
+  author,
+  suffix,
+  maxLength = 155,
+}: {
+  quote: string;
+  author: string;
+  suffix: string;
+  maxLength?: number;
+}) {
+  const authorLabel = `${author}${suffix}`;
+  const prefix = `Testimonial from ${authorLabel} for Michael Njo DDS. `;
+
+  if (prefix.length >= maxLength) {
+    return `${prefix.slice(0, maxLength - 1).trimEnd()}…`;
+  }
+
+  const excerpt = buildTestimonialMetaExcerpt(quote, maxLength - prefix.length);
+  return `${prefix}${excerpt}`;
+}
+
 export function buildPageTitle(pathname: string): string {
   const normalizedPath = normalizePathname(pathname);
 
@@ -66,8 +88,12 @@ export function buildPageDescription(pathname: string): string {
     const slug = normalizedPath.replace("/testimonials/", "");
     const testimonial = getTestimonialBySlug(slug);
     if (testimonial) {
-      const excerpt = buildTestimonialMetaExcerpt(testimonial.quote);
-      return `${excerpt} Testimonial for Michael Njo DDS and Dental Strategies Consulting.`;
+      const suffix = getTestimonialTitleSuffix(slug, testimonial.author);
+      return buildTestimonialMetaDescription({
+        quote: testimonial.quote,
+        author: testimonial.author,
+        suffix,
+      });
     }
     return "Read client testimonials for Michael Njo DDS and Dental Strategies Consulting.";
   }
