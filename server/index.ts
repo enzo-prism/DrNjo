@@ -1,7 +1,7 @@
 import compression from "compression";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { getCanonicalRedirectLocation } from "./canonical";
+import { buildCanonicalUrl, getCanonicalRedirectLocation } from "./canonical";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
@@ -18,6 +18,18 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+const LEGACY_REDIRECTS: Record<string, string> = {
+  "/testimonials/team-member-2": "/testimonials/team-member",
+};
+
+app.get(Object.keys(LEGACY_REDIRECTS), (req, res) => {
+  const targetPath = LEGACY_REDIRECTS[req.path];
+  const queryIndex = req.originalUrl.indexOf("?");
+  const search = queryIndex >= 0 ? req.originalUrl.slice(queryIndex) : "";
+  res.redirect(301, `${buildCanonicalUrl(targetPath)}${search}`);
+});
+
 app.use(
   compression({
     threshold: 0,

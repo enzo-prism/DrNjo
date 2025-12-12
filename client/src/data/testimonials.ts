@@ -254,11 +254,6 @@ export const testimonials: Testimonial[] = [
     stars: 5,
   },
   {
-    quote: `PURPOSE..... Michael, your purpose in making Queensboro Oral Surgery an amazing and truly functioning workplace is definitely working. There have been many positive changes since you have arrived and as for me it has helped me immensely. After your first visit I was hesitant in believing that change can occur here but it has. So a huge thank you to you!!!`,
-    author: "Team Member",
-    stars: 5,
-  },
-  {
     quote: `Michael, I just want to say THANK YOU for being so instrumental in the purchase of my practice. I have been so fortunate of meeting you and working with you for the past (almost) two years. I still can't believe that we did it! Now, it is going to take lots of work to get to where I want to be, but purchasing the practice (this practice) is a great beginning and I owe you soo much. Please let me know when you are around this area to take you to a good lunch or dinner, which is the least I can do to show you my appreciation.`,
     author: "Eugenio",
     stars: 5,
