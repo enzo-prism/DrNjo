@@ -144,7 +144,7 @@ export const bookReviews: BookReview[] = [
     context: "Reviewed in the United States on January 11, 2024",
     meta: "Format: Paperback",
     body:
-      "In Dental Practice Transitions Handbook, Dr. Michael A. Njo deftly navigates the ever-changing landscape of dental practice transitions, providing insightful advice and guidance to dental professionals at any stage of their career. Dr. Njo's approach emphasizes the importance of careful planning and educated decision-making to ensure long-term success in a field that has seen significant changes in recent years.\n\nOne of the shining aspects of the book is the pacing, which moves smoothly from one topic to another. Each chapter builds upon previous concepts, gradually introducing more nuanced aspects of dental practice transitions while maintaining reader engagement. Dr. Njo's writing style is clear and accessible, reflecting his experience in both dentistry and practice management.\n\nCompared with similar books, the handbook stands out by focusing on specific transition options and the impact of varying economic climates. Dr. Njo skillfully delves into each scenario, providing readers with actionable advice and guidance that can be personalized to their individual situations.\n\nThe ideal audience is dental professionals at any stage, particularly those considering a transition such as a partnership, acquisition, or sale of a practice. Whether you are a new graduate or an experienced dentist, this book provides valuable insights to help you navigate the complexities of the process. I wholeheartedly recommend it.",
+      "In Dental Practice Transitions Handbook, Dr. Michael A. Njo deftly navigates the ever-changing landscape of dental practice transitions, providing insightful advice and guidance to dental professionals at any stage of their career... I wholeheartedly recommend Dental Practice Transitions Handbook by Dr. Michael A. Njo. The author's expertise, engaging writing style, and nuanced discussion of practical topics make this book a valuable addition to any dental professional's library.",
   },
   {
     author: "Amazon Customer",
@@ -154,7 +154,7 @@ export const bookReviews: BookReview[] = [
     context: "Reviewed in the United States on February 2, 2024",
     meta: "Format: Paperback",
     body:
-      "Dr. Njo is very knowledgeable on all aspects of private practice dentistry. Reading this book will give you a lot of valuable insight into what decisions you should and shouldn't make in order to maximize your success in your dental career.",
+      "Dr. Njo is very knowledgeable on all aspects of private practice dentistry. Reading this book will give you a lot of valuable insight to what decisions you should and shouldn't make in order to maximize your success in your dental career.",
   },
   {
     author: "Sloane",
