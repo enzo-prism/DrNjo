@@ -1,10 +1,26 @@
-import compression from "compression";
+import { createRequire } from "node:module";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { buildCanonicalUrl, getCanonicalRedirectLocation } from "./canonical";
 import { setupVite, serveStatic, log } from "./vite";
 
+const require = createRequire(import.meta.url);
+
 const app = express();
+
+const compressionFactory = (() => {
+  try {
+    const mod = require("compression") as { default?: typeof import("compression") } | typeof import("compression");
+    return (mod as { default?: typeof import("compression") }).default || mod;
+  } catch (err) {
+    if (app.get("env") !== "production") {
+      log("compression not installed; skipping gzip middleware in development.");
+      return null;
+    }
+    throw err;
+  }
+})();
+
 app.set("trust proxy", true);
 app.use((req, res, next) => {
   if (app.get("env") !== "production") return next();
@@ -30,12 +46,14 @@ app.get(Object.keys(LEGACY_REDIRECTS), (req, res) => {
   res.redirect(301, `${buildCanonicalUrl(targetPath)}${search}`);
 });
 
-app.use(
-  compression({
-    threshold: 0,
-    enforceEncoding: "gzip",
-  }),
-);
+if (compressionFactory) {
+  app.use(
+    compressionFactory({
+      threshold: 0,
+      enforceEncoding: "gzip",
+    }),
+  );
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
