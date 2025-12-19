@@ -65,7 +65,7 @@ export default function ResourcesPage() {
               Reader reviews
             </h2>
             <div className="grid gap-4">
-              {bookReviews.slice(0, 3).map((review, index) => (
+              {bookReviews.map((review, index) => (
                 <article
                   key={`${review.author}-${index}`}
                   className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
