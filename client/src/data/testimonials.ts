@@ -101,7 +101,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: `Practice sales are emotional and trying and yet also exciting. I was glad I had PRACTICE TRANSITION INSTITUTE and Michael Njo in my corner. Thank you Michael.`,
     author: "Scott Smith",
-    stars: 4,
+    stars: 5,
   },
   {
     quote: `I have worked with Michael on several deals now, and I can honestly say there aren't many people capable of doing what Michael does. I have even sent many dentist friends his way and they all say the same thing. He is efficient, incredibly responsive, very thoughtful about crafting win-win deals for both the buyer and seller. I honestly would never consider working with anyone else. I give him my highest recommendation possible!`,
@@ -281,6 +281,26 @@ export const testimonials: Testimonial[] = [
   {
     quote: `I listened to the author lecture about this book and the topic. I have started reading it and am so thankful that I have the resource at my fingertips!`,
     author: "Sloane",
+    stars: 5,
+  },
+  {
+    quote: `I began working with Dr. Michale Njo in 2006 during the purchase of a highly respected Prosthodontic practice. While the practice was already well established, transitioning ownership at that level required thoughtful leadership and experienced guidance. Dr. Njo was instrumental in making that transition seamless. He helped me establish credibility as the new owner, maintain patient confidence, and guide an established team through change with clarity and professionalism. His business and team coaching strengthened systems, workflows, and accountability, and his ability to coach people through change while maintaining morale was invaluable. His leadership coaching had an equally meaningful impact. He helped me create a culture rooted in pride, expertise, and professionalism, and supported my growth not only as a practice owner, but as a leader within the broader dental community. I firmly believe that without his guidance, the transition would have been far more challenging and my success significantly slower to achieve. His influence sharpened my leadership, strengthened the practice, and accelerated meaningful, sustainable growth. I recommend Dr. Michael Njo without reservation to any clinician seeking a successful transition and sustained, high-level practice performance.`,
+    author: "Diana Fat, DDS",
+    stars: 5,
+  },
+  {
+    quote: `I had the privilege of meeting Michael through my dental architect, who highly recommended him. At the time, I was already working with a startup and business coach, but I was dissatisfied with the level of service relative to the fees I was paying. Despite the premium cost, most of my interactions were with assistants rather than the coach directly. In contrast, Michael is consistently accessible by text, email, or phone and provides direct, hands-on guidance. He has a strong understanding of the business aspects of running a dental practice and has supported my startup office in multiple areas, including leadership development, staff management, and overall business coaching. I feel very fortunate to have worked with him and would confidently recommend his services to any dentist seeking to grow their practice in a thoughtful and effective way.`,
+    author: "John Yun",
+    stars: 5,
+  },
+  {
+    quote: `When I first started working with Michael at Dental Strategies, I wasn't sure exactly how he could help my practice. I quickly learned that the key was actively reaching out and using him as a resource, and I'm so glad I did. Over the past several years, Michael has had a profound impact on both my professional and personal life. He's been instrumental in helping me improve my communication skills and coaching me through the complexities of managing staff effectively. What sets him apart is his ability to serve as an excellent liaison between me and my team. My staff knows they can turn to him with questions or concerns, which has created a valuable support system for everyone. The results speak for themselves: Michael has significantly strengthened my relationship with my office manager and helped us achieve consistent growth year after year. For the right practice, Michael is an exceptional resource, and I recommend him without reservation.`,
+    author: "Matthew Asaro",
+    stars: 5,
+  },
+  {
+    quote: `Mike Njo was instrumental in helping me relocate from Chicago to California and guiding me through my practice acquisition. His book and webinars were also incredibly helpful, offering clear, practical insight throughout the process. Mike combines deep industry knowledge with genuine care and professionalism. I'm very grateful for his guidance and highly recommend him to any dentist considering a transition or practice purchase.`,
+    author: "J C",
     stars: 5,
   },
 ];
