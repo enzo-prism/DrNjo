@@ -2,6 +2,7 @@ import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users } from "lucide
 import { Link } from "wouter";
 import { useEffect } from "react";
 import { testimonialPages } from "@/data/testimonials";
+import { dugoniCollaborationImage } from "@/data/media";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { bookEditorialReview, bookReviews, faqItems, getHomeStructuredData } from "@/seo/structured-data";
@@ -301,56 +302,75 @@ export default function Home() {
             {/* Professional Background */}
             <section id="bio" className="max-w-3xl mx-auto mb-12 text-left scroll-fade-in" aria-labelledby="bio-heading">
 	              <h2 id="bio-heading" className="text-2xl font-light text-gray-800 mb-6 text-center transition-colors duration-300">Professional Background</h2>
-              
-	              <div className="space-y-4 text-gray-600 leading-relaxed transition-colors duration-300">
-                <p>
-                  Michael Njo, DDS is a proud graduate of UOP, School of Dentistry. After herniating his disc, 
-                  Dr. Michael Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
-                  coaches Dentist to achieving and understanding their goals.
-                </p>
-                
-                <p>
-                  Just a few goals to mention range from, starting a practice whether a start-up or purchase, 
-                  forming partnerships, expansions, retirement strategies, selling practices, valuations, 
-                  malpractice, and conflict issues, introducing technology, team building, and implementing 
-                  operating systems to achieve the maximum efficiency and profitability for their offices.
-                </p>
-                
-                <p>
-                  Michael Njo, DDS has been consulting for 25 years and has built his consulting company all by 
-                  direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
-                  and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
-	                  <Link
-	                    href="/testimonials"
-		                    className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
-	                  >
-	                    <span className="underline">Read what clients are saying</span>
-	                  </Link>
-                </p>
-                
-                <p>
-                  Michael Njo, DDS is an Author of{" "}
-                  <a 
-                    href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
-                    target="_blank"
-                    rel="noopener noreferrer"
-	                    className="text-blue-600 hover:text-blue-700 underline font-medium transition-colors"
-                  >
-                    Dental Practice Transitions Handbook
-                  </a>, Director of the Dugoni 
-                  Business Club, founded an educational company for transitions -{" "}
-                  <a 
-                    href="https://practicetransitionsinstitute.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-	                    className="text-blue-600 hover:text-blue-700 underline font-medium transition-colors"
-                  >
-                    Practice Transitions Institute
-                  </a>, 
-                  he is part of the admission's team for UOP, serves on the Board of Directors at the Dugoni School 
-                  of Dentistry, and the CDA Leadership Council.
-                </p>
-              </div>
+
+	              <div className="grid gap-6 md:grid-cols-[1.2fr_0.8fr] items-start">
+	                <div className="space-y-4 text-gray-600 leading-relaxed transition-colors duration-300">
+	                  <p>
+	                    Michael Njo, DDS is a proud graduate of UOP, School of Dentistry. After herniating his disc, 
+	                    Dr. Michael Njo founded Dental Strategies. Dental Strategies is a specialized consulting company which 
+	                    coaches Dentist to achieving and understanding their goals.
+	                  </p>
+
+	                  <p>
+	                    Just a few goals to mention range from, starting a practice whether a start-up or purchase, 
+	                    forming partnerships, expansions, retirement strategies, selling practices, valuations, 
+	                    malpractice, and conflict issues, introducing technology, team building, and implementing 
+	                    operating systems to achieve the maximum efficiency and profitability for their offices.
+	                  </p>
+
+	                  <p>
+	                    Michael Njo, DDS has been consulting for 25 years and has built his consulting company all by 
+	                    direct referral. Dental Strategies customizes his program for the specific needs of the doctor 
+	                    and practice. He will develop a program to implement and facilitate the goals you desire.{" "}
+		                    <Link
+		                      href="/testimonials"
+		                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+		                    >
+		                      <span className="underline">Read what clients are saying</span>
+		                    </Link>
+	                  </p>
+
+	                  <p>
+	                    Michael Njo, DDS is an Author of{" "}
+	                    <a 
+	                      href="https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718"
+	                      target="_blank"
+	                      rel="noopener noreferrer"
+	                      className="text-blue-600 hover:text-blue-700 underline font-medium transition-colors"
+	                    >
+	                      Dental Practice Transitions Handbook
+	                    </a>, Director of the Dugoni 
+	                    Business Club, founded an educational company for transitions -{" "}
+	                    <a 
+	                      href="https://practicetransitionsinstitute.com/"
+	                      target="_blank"
+	                      rel="noopener noreferrer"
+	                      className="text-blue-600 hover:text-blue-700 underline font-medium transition-colors"
+	                    >
+	                      Practice Transitions Institute
+	                    </a>, 
+	                    he is part of the admission's team for UOP, serves on the Board of Directors at the Dugoni School 
+	                    of Dentistry, and the CDA Leadership Council.
+	                  </p>
+	                </div>
+
+	                <figure className="rounded-3xl border border-gray-200 bg-white shadow-lg overflow-hidden">
+	                  <img
+	                    src={dugoniCollaborationImage.src}
+	                    srcSet={dugoniCollaborationImage.srcSet}
+	                    sizes={dugoniCollaborationImage.sizes}
+	                    width={dugoniCollaborationImage.width}
+	                    height={dugoniCollaborationImage.height}
+	                    alt={dugoniCollaborationImage.alt}
+	                    className="w-full h-auto object-cover"
+	                    loading="lazy"
+	                    decoding="async"
+	                  />
+	                  <figcaption className="px-4 py-3 text-xs text-gray-500">
+	                    {dugoniCollaborationImage.caption}
+	                  </figcaption>
+	                </figure>
+	              </div>
             </section>
 
             {/* Education & Resources */}

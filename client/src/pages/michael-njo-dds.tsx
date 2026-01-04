@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
 import { testimonialPages } from "@/data/testimonials";
+import { dugoniCollaborationImage } from "@/data/media";
 
 export default function MichaelNjoDDS() {
   const book = resources.find((resource) => resource.type === "Book");
@@ -27,13 +28,31 @@ export default function MichaelNjoDDS() {
           </header>
 
           <section aria-labelledby="background-heading" className="grid gap-8 md:grid-cols-3 items-start">
-	            <img
-	              src="/dr-njo-headshot.webp"
-	              alt="Michael Njo, DDS headshot"
-	              width={383}
-	              height={460}
-	              className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
-	            />
+            <div className="w-full space-y-6">
+              <img
+                src="/dr-njo-headshot.webp"
+                alt="Michael Njo, DDS headshot"
+                width={383}
+                height={460}
+                className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
+              />
+              <figure className="rounded-3xl border border-gray-200 bg-white shadow-lg overflow-hidden">
+                <img
+                  src={dugoniCollaborationImage.src}
+                  srcSet={dugoniCollaborationImage.srcSet}
+                  sizes={dugoniCollaborationImage.sizes}
+                  width={dugoniCollaborationImage.width}
+                  height={dugoniCollaborationImage.height}
+                  alt={dugoniCollaborationImage.alt}
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption className="px-4 py-3 text-xs text-gray-500">
+                  {dugoniCollaborationImage.caption}
+                </figcaption>
+              </figure>
+            </div>
             <div className="md:col-span-2 space-y-4 text-gray-600 leading-relaxed">
               <h2 id="background-heading" className="text-2xl font-semibold text-gray-900">
                 Background
