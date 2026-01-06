@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
 import { testimonialPages } from "@/data/testimonials";
-import { dugoniCollaborationImage } from "@/data/media";
+import { dugoniCollaborationImage, njoLifeGalleryImages } from "@/data/media";
 
 export default function MichaelNjoDDS() {
   const book = resources.find((resource) => resource.type === "Book");
@@ -71,6 +71,40 @@ export default function MichaelNjoDDS() {
                 Through his organizations, he works hands‑on with doctors and teams to build systems that reduce
                 operational friction, improve profitability, and protect the patient experience during periods of change.
               </p>
+            </div>
+          </section>
+
+          <section aria-labelledby="life-impact-heading" className="space-y-4">
+            <header className="text-center space-y-2">
+              <h2 id="life-impact-heading" className="text-2xl font-semibold text-gray-900">
+                Life &amp; Impact
+              </h2>
+              <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                Moments from Dr. Njo's leadership, mentorship, and community partnerships across his career.
+              </p>
+            </header>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {njoLifeGalleryImages.map((image) => (
+                <figure
+                  key={image.src}
+                  className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+                >
+                  <img
+                    src={image.src}
+                    srcSet={image.srcSet}
+                    sizes={image.sizes}
+                    alt={image.alt}
+                    className="h-56 w-full object-cover transition duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {image.caption ? (
+                    <figcaption className="px-4 py-3 text-xs text-gray-500">
+                      {image.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ))}
             </div>
           </section>
 
