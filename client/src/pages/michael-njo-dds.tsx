@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { StructuredData } from "@/components/structured-data";
 import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
 import { testimonialPages } from "@/data/testimonials";
 import { dugoniCollaborationImage, njoLifeGalleryImages } from "@/data/media";
 
+type GalleryImage = (typeof njoLifeGalleryImages)[number];
+
 export default function MichaelNjoDDS() {
   const book = resources.find((resource) => resource.type === "Book");
   const institute = resources.find((resource) => resource.type === "EducationalOrganization");
   const featuredTestimonials = testimonialPages.slice(0, 6);
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   return (
     <>
@@ -87,17 +92,25 @@ export default function MichaelNjoDDS() {
               {njoLifeGalleryImages.map((image) => (
                 <figure
                   key={image.src}
-                  className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
+                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
                 >
-                  <img
-                    src={image.src}
-                    srcSet={image.srcSet}
-                    sizes={image.sizes}
-                    alt={image.alt}
-                    className="h-56 w-full object-cover transition duration-300 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage(image)}
+                    className="group block w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                    aria-haspopup="dialog"
+                    aria-label={`View photo: ${image.alt}`}
+                  >
+                    <img
+                      src={image.src}
+                      srcSet={image.srcSet}
+                      sizes={image.sizes}
+                      alt={image.alt}
+                      className="h-56 w-full object-cover transition duration-300 group-hover:scale-105 group-focus-visible:scale-105 cursor-zoom-in"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </button>
                   {image.caption ? (
                     <figcaption className="px-4 py-3 text-xs text-gray-500">
                       {image.caption}
@@ -106,6 +119,41 @@ export default function MichaelNjoDDS() {
                 </figure>
               ))}
             </div>
+            <Dialog
+              open={Boolean(selectedImage)}
+              onOpenChange={(open) => {
+                if (!open) {
+                  setSelectedImage(null);
+                }
+              }}
+            >
+              <DialogContent className="max-w-6xl w-[95vw] border-none bg-transparent p-0 shadow-none">
+                {selectedImage ? (
+                  <>
+                    <DialogTitle className="sr-only">{selectedImage.alt}</DialogTitle>
+                    <DialogDescription className="sr-only">
+                      {selectedImage.caption ?? "Expanded view of the selected photo."}
+                    </DialogDescription>
+                    <figure className="rounded-2xl bg-black/90 p-3 sm:p-4">
+                      <img
+                        src={selectedImage.src}
+                        srcSet={selectedImage.srcSet}
+                        sizes="100vw"
+                        alt={selectedImage.alt}
+                        className="max-h-[80vh] w-full rounded-xl object-contain"
+                        loading="eager"
+                        decoding="async"
+                      />
+                      {selectedImage.caption ? (
+                        <figcaption className="mt-3 text-center text-sm text-gray-200">
+                          {selectedImage.caption}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  </>
+                ) : null}
+              </DialogContent>
+            </Dialog>
           </section>
 
           <section aria-labelledby="testimonials-heading" className="space-y-4">
