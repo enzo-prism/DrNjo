@@ -57,16 +57,16 @@ export default function MichaelNjoDDS() {
 
           <Tabs defaultValue={defaultTab} className="space-y-8">
             <div className="flex justify-center">
-              <TabsList className="mx-auto grid w-full max-w-md grid-cols-2 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+              <TabsList className="mx-auto grid w-full max-w-md grid-cols-2 rounded-full border border-slate-200 bg-slate-100 p-1 shadow-sm">
                 <TabsTrigger
                   value="overview"
-                  className="rounded-full text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
+                  className="rounded-full text-slate-600 transition-colors hover:text-blue-700 data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:ring-1 data-[state=active]:ring-slate-200 data-[state=active]:font-semibold"
                 >
                   Overview
                 </TabsTrigger>
                 <TabsTrigger
                   value="news"
-                  className="rounded-full text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700"
+                  className="rounded-full text-slate-600 transition-colors hover:text-blue-700 data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:ring-1 data-[state=active]:ring-slate-200 data-[state=active]:font-semibold"
                 >
                   News
                 </TabsTrigger>
