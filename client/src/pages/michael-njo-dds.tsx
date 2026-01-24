@@ -369,11 +369,11 @@ export default function MichaelNjoDDS() {
                       key={item.postedDateTime}
                       className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
                     >
-                      <div className="overflow-hidden rounded-xl border border-gray-200 bg-gray-50">
+                      <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
                         <img
                           src={item.image.src}
                           alt={item.image.alt}
-                          className="h-56 w-full object-cover"
+                          className="w-full h-auto object-contain"
                           loading="lazy"
                           decoding="async"
                         />
