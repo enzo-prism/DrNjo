@@ -11,6 +11,11 @@ import { dugoniCollaborationImage, njoLifeGalleryImages } from "@/data/media";
 type GalleryImage = (typeof njoLifeGalleryImages)[number];
 
 export default function MichaelNjoDDS() {
+  const defaultTab =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("tab") === "news"
+      ? "news"
+      : "overview";
   const book = resources.find((resource) => resource.type === "Book");
   const institute = resources.find((resource) => resource.type === "EducationalOrganization");
   const featuredTestimonials = testimonialPages.slice(0, 6);
@@ -50,7 +55,7 @@ export default function MichaelNjoDDS() {
             </p>
           </header>
 
-          <Tabs defaultValue="overview" className="space-y-8">
+          <Tabs defaultValue={defaultTab} className="space-y-8">
             <div className="flex justify-center">
               <TabsList className="mx-auto grid w-full max-w-md grid-cols-2 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
                 <TabsTrigger
