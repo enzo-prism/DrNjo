@@ -111,6 +111,28 @@ export default function Home() {
 	              >
 	                Michael Njo, DDS
 	              </h1>
+              <div className="mb-6 flex flex-col items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-lg shadow-blue-600/30"
+                >
+                  Contact Dr. Njo
+                </Link>
+                <div className="flex flex-col items-center gap-2 text-sm text-gray-600">
+                  <a
+                    href="mailto:dentalstrategies@gmail.com"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    dentalstrategies@gmail.com
+                  </a>
+                  <a
+                    href="tel:+16504362939"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Cell: 650-436-2939
+                  </a>
+                </div>
+              </div>
 	              <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
 	                Dr. Michael Njo—widely known as Michael Njo, DDS—is a consultant, educator, and entrepreneur who has spent 25+ years guiding healthcare owners through practice launches, growth, and transitions while protecting clinical excellence.
 	              </p>
@@ -153,28 +175,6 @@ export default function Home() {
 	                  <span className="hover-underline">Trusted by hundreds of healthcare professionals</span>
 	                </Link>
                 </div>
-              </div>
-              <div className="mt-8 flex justify-center">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-lg shadow-blue-600/30"
-                >
-                  Contact Dr. Njo
-                </Link>
-              </div>
-              <div className="mt-4 flex flex-col items-center gap-2 text-sm text-gray-600">
-                <a
-                  href="mailto:dentalstrategies@gmail.com"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  dentalstrategies@gmail.com
-                </a>
-                <a
-                  href="tel:+16504362939"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Cell: 650-436-2939
-                </a>
               </div>
               <div className="mt-10 scroll-fade-in">
                 <div className="rounded-3xl border border-gray-200 overflow-hidden shadow-lg">
