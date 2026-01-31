@@ -303,6 +303,11 @@ export const testimonials: Testimonial[] = [
     author: "J C",
     stars: 5,
   },
+  {
+    quote: `We confidently recommend Dr. Michael Njo to our dental clients who are seeking thoughtful, results-driven coaching grounded in real-world ownership experience. Dr. Njo understands that a dental practice is both a clinical operation and a closely held business. His coaching helps dentists make smarter operational and strategic decisions that improve profitability, strengthen leadership, and build long-term practice value. What sets Dr. Njo apart is his ability to meet clients where they are. From associates preparing for ownership to established practice owners planning for growth or transition, his guidance is clear, disciplined, and aligned with each doctor's goals. For dentists who want to run stronger practices and create meaningful long-term value, Dr. Njo is a trusted and highly effective advisor.`,
+    author: "The Phillips Group CPA Firm (Alignable recommendation)",
+    stars: 5,
+  },
 ];
 
 export const testimonialPages: TestimonialPage[] = (() => {
