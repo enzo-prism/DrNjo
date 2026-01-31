@@ -162,20 +162,6 @@ export default function Home() {
                   Contact Dr. Njo
                 </Link>
               </div>
-              <div className="mt-4 flex flex-col items-center gap-2 text-sm text-gray-600">
-                <a
-                  href="mailto:dentalstrategies@gmail.com"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  dentalstrategies@gmail.com
-                </a>
-                <a
-                  href="tel:+16504362939"
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Cell: 650-436-2939
-                </a>
-              </div>
               <div className="mt-10 scroll-fade-in">
                 <div className="rounded-3xl border border-gray-200 overflow-hidden shadow-lg">
 	                  <img
