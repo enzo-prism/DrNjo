@@ -1,5 +1,9 @@
-export const PREFERRED_HOSTNAME = "michaelnjodds.com";
-export const CANONICAL_ORIGIN = `https://${PREFERRED_HOSTNAME}`;
+const FALLBACK_HOSTNAME = "michaelnjodds.com";
+const FALLBACK_PROTOCOL = "https";
+
+export const PREFERRED_HOSTNAME = (process.env.PREFERRED_HOSTNAME || FALLBACK_HOSTNAME).toLowerCase();
+export const CANONICAL_PROTOCOL = (process.env.CANONICAL_PROTOCOL || FALLBACK_PROTOCOL).toLowerCase();
+export const CANONICAL_ORIGIN = `${CANONICAL_PROTOCOL}://${PREFERRED_HOSTNAME}`;
 
 export function normalizePathname(pathname: string): string {
   if (!pathname.startsWith("/")) return "/";
@@ -32,7 +36,9 @@ export function getCanonicalRedirectLocation({
   const needsHostRedirect = shouldNormalizeHost && isWww;
 
   const currentProtocol = (protocol || "http").toLowerCase();
-  const needsProtocolRedirect = shouldNormalizeHost && currentProtocol !== "https";
+  const shouldNormalizeProtocol = CANONICAL_PROTOCOL === "https" || CANONICAL_PROTOCOL === "http";
+  const needsProtocolRedirect =
+    shouldNormalizeHost && shouldNormalizeProtocol && currentProtocol !== CANONICAL_PROTOCOL;
 
   const parsed = new URL(originalUrl, CANONICAL_ORIGIN);
   const normalizedPath = normalizePathname(parsed.pathname);
@@ -43,6 +49,6 @@ export function getCanonicalRedirectLocation({
   }
 
   const targetHost = PREFERRED_HOSTNAME;
-  const targetProtocol = "https";
+  const targetProtocol = shouldNormalizeProtocol ? CANONICAL_PROTOCOL : currentProtocol || "https";
   return `${targetProtocol}://${targetHost}${normalizedPath}${parsed.search}`;
 }

@@ -24,6 +24,7 @@ const compressionFactory = (() => {
 app.set("trust proxy", true);
 app.use((req, res, next) => {
   if (app.get("env") !== "production") return next();
+  if (req.get("x-forwarded-proto") === "https") return next();
   const redirectLocation = getCanonicalRedirectLocation({
     host: req.get("host") || undefined,
     protocol: req.protocol,

@@ -58,6 +58,8 @@ Create a `.env` (or export vars in your shell) with the following:
 |----------|----------|-------------|
 | `PORT` | No (defaults to `5000`) | Single exposed port for both API & client. Must match your hosting provider’s allowed port. |
 | `NODE_ENV` | No | `development` (default) enables Vite middleware + better logs. `production` serves the prebuilt bundle from `dist/public`. |
+| `PREFERRED_HOSTNAME` | No (defaults to `michaelnjodds.com`) | Canonical host used for 301 redirects in production (set to match the TLS certificate hostname). |
+| `CANONICAL_PROTOCOL` | No (defaults to `https`) | Canonical protocol for redirects; use `http` if TLS is terminated elsewhere. |
 | `DATABASE_URL` | **Yes for Drizzle CLI / future DB storage** | Postgres connection string used by `drizzle-kit push` and any real storage implementation. |
 
 > ⚠️ `drizzle.config.ts` throws if `DATABASE_URL` is missing; set it before running any Drizzle commands (or temporarily stub it when running `npm run check` in CI).
