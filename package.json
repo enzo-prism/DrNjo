@@ -25,7 +25,8 @@
     "prerender": "tsx scripts/prerender.ts",
     "check:prerender": "tsx scripts/check-prerender.ts",
     "lighthouse:ci": "tsx scripts/lighthouse-ci.ts",
-    "seo:qa": "tsx scripts/seo-qa.ts"
+    "seo:qa": "tsx scripts/seo-qa.ts",
+    "check:tls": "tsx scripts/check-tls-certificate.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

@@ -79,6 +79,7 @@ npm run dev
 Useful helpers:
 
 - **Type checking**: `npm run check`
+- **TLS certificate health check**: `npm run check:tls`
 - **Generate OG image** (optional): `python create_og_image.py`
 
 ---
@@ -142,6 +143,11 @@ The logging middleware in `server/index.ts` automatically times every `/api` res
 - **Express crashes on error**: inspect the server logs printed by the custom logger; Express rethrows in development so the stack trace is visible.
 - **Drizzle CLI fails immediately**: double-check `DATABASE_URL` exists before running `npm run db:push`.
 - **Static build missing**: run `npm run build` before `npm run start`; production mode expects `dist/public/index.html` to be present.
+- **Browser shows `NET::ERR_CERT_DATE_INVALID`**:
+  1. Run `npm run check:tls` to confirm the public certificate expiry date.
+  2. In your hosting provider dashboard (e.g., Replit Deployments), remove and re-add the custom domain to trigger certificate re-issuance.
+  3. Verify DNS still points at the active deployment target before re-adding the domain.
+  4. Keep `PREFERRED_HOSTNAME` aligned with the hostname covered by the active certificate.
 
 ---
 
