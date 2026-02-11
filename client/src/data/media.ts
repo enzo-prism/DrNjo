@@ -37,12 +37,10 @@ const baseNjoLifeGalleryImages = [
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776279/3_yt7juv.jpg",
     alt: "From admissions interviewee to UOP IDS senior in Sacramento, showing gratitude to Dr. Njo.",
-    caption: "UOP IDS senior attendee in Sacramento.",
   },
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776282/2_lxrfhn.jpg",
     alt: "Kind gifts from Shuang's country shared with Dr. Michael Njo in gratitude for his kindness and mentorship.",
-    caption: "A thoughtful gift shared with Dr. Njo.",
   },
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776307/Updated_cskep5.png",
