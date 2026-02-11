@@ -105,6 +105,13 @@ export default function Home() {
           <div className="p-8 md:p-12">
             {/* Company Name & Introduction */}
             <div className="text-center mb-12" aria-labelledby="hero-heading">
+	              <img
+	                src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770777615/Opengraph_co7uhi.png"
+	                alt="Dr. Njo logo"
+	                className="mx-auto mb-6 h-auto w-40 md:w-48"
+	                loading="eager"
+	                decoding="async"
+	              />
 	              <h1
 	                id="hero-heading"
 	                className="text-4xl md:text-5xl font-light text-gray-800 mb-4 tracking-tight opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]"
