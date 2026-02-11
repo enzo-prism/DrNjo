@@ -37,7 +37,7 @@ export const siteMetadata = {
     "https://practicetransitionsinstitute.com/",
     "https://www.amazon.com/Dental-Practice-Transitions-Handbook-Healthcare/dp/1627878718",
   ],
-  logo: "https://michaelnjodds.com/og-image.webp",
+  logo: "https://michaelnjodds.com/og-image.svg",
 };
 
 export const contactDetails = {
@@ -169,10 +169,10 @@ export const bookReviews: BookReview[] = [
 ];
 
 export const heroImage = {
-  url: `${siteMetadata.siteUrl}/og-image.webp`,
-  width: 1024,
-  height: 768,
-  type: "image/webp",
+  url: `${siteMetadata.siteUrl}/og-image.svg`,
+  width: 1200,
+  height: 630,
+  type: "image/svg+xml",
 };
 
 export const bookEditorialReview = {
