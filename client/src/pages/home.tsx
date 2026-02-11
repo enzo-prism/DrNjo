@@ -105,6 +105,22 @@ export default function Home() {
           <div className="p-8 md:p-12">
             {/* Company Name & Introduction */}
             <div className="text-center mb-12" aria-labelledby="hero-heading">
+	              <div className="mb-5 flex justify-center opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.15s_forwards]">
+	                <div className="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-white/90 px-4 py-2 shadow-sm">
+	                  <img
+	                    src="https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770777615/Opengraph_co7uhi.png"
+	                    alt="Michael Njo icon logo"
+	                    width={44}
+	                    height={44}
+	                    className="h-11 w-11 rounded-full object-cover ring-2 ring-blue-100"
+	                    loading="eager"
+	                    decoding="async"
+	                  />
+	                  <span className="text-xs font-semibold uppercase tracking-[0.28em] text-blue-700">
+	                    Trusted guidance
+	                  </span>
+	                </div>
+	              </div>
 	              <h1
 	                id="hero-heading"
 	                className="text-4xl md:text-5xl font-light text-gray-800 mb-4 tracking-tight opacity-0 animate-[fadeInStagger_0.8s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]"
