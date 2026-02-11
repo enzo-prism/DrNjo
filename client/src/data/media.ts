@@ -31,18 +31,18 @@ const baseNjoLifeGalleryImages = [
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776241/1_uiehhq.jpg",
     alt: "Interviewee thanking Dr. Michael Njo for inspiring insights and mentorship.",
-    caption: "Thank you for the interview and your inspiring insights.",
+    caption:
+      "Thank you for the interview and your inspiring insights. (Showing gratitude with kind gifts from Shuang’s country to Dr. Njo. From admissions interviewee to attendee as a senior at UOP’s IDS program in Sacramento.)",
   },
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776279/3_yt7juv.jpg",
     alt: "From admissions interviewee to UOP IDS senior in Sacramento, showing gratitude to Dr. Njo.",
-    caption:
-      "From admissions interviewee to attendee as a senior at UOP’s IDS program in Sacramento.",
+    caption: "UOP IDS senior attendee in Sacramento.",
   },
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776282/2_lxrfhn.jpg",
     alt: "Kind gifts from Shuang's country shared with Dr. Michael Njo in gratitude for his kindness and mentorship.",
-    caption: "Showing gratitude with kind gifts from Shuang’s country to Dr. Njo.",
+    caption: "A thoughtful gift shared with Dr. Njo.",
   },
   {
     src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1770776307/Updated_cskep5.png",
