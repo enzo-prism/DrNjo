@@ -12,6 +12,7 @@ const ContactSuccess = lazy(() => import("@/pages/contact-success"));
 const TestimonialsPage = lazy(() => import("@/pages/testimonials"));
 const TestimonialDetailPage = lazy(() => import("@/pages/testimonial-detail"));
 const ResourcesPage = lazy(() => import("@/pages/resources"));
+const DentalflixPage = lazy(() => import("@/pages/dentalflix"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/testimonials" component={TestimonialsPage} />
             <Route path="/testimonials/:slug" component={TestimonialDetailPage} />
             <Route path="/resources" component={ResourcesPage} />
+            <Route path="/dentalflix" component={DentalflixPage} />
             <Route path="/contact" component={Contact} />
             <Route path="/contact/success" component={ContactSuccess} />
             <Route component={NotFound} />
