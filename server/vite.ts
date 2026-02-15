@@ -10,9 +10,11 @@ import { buildPageDescription, buildPageTitle } from "./head";
 
 const viteLogger = createLogger();
 const FAVICON_LINKS = [
-  '<link rel="icon" href="/favicon.ico" sizes="any" />',
-  '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />',
+  '<link rel="icon" type="image/svg+xml" href="/favicon.svg" />',
+  '<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />',
+  '<link rel="shortcut icon" href="/favicon.ico" />',
   '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />',
+  '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />',
   '<link rel="icon" type="image/png" sizes="256x256" href="/favicon-256x256.png" />',
   '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />',
 ].join("\n    ");
@@ -135,7 +137,7 @@ function injectHeadTags(template: string, originalUrl: string): string {
 
   // Keep favicon links consistent for every rendered route, including prerendered files.
   updated = updated.replace(
-    /\s*<link[^>]+rel=["'](?:icon|apple-touch-icon)["'][^>]*>\s*/gi,
+    /\s*<link[^>]+rel=["'](?:icon|apple-touch-icon|shortcut icon)["'][^>]*>\s*/gi,
     "\n",
   );
 
