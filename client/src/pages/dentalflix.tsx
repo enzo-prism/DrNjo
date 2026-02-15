@@ -12,16 +12,19 @@ export default function DentalflixPage() {
             Welcome, DentalFlix Community
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg">
-            Thanks for stopping by. We’re glad you found us through DentalFlix and we’d love to help with your next
-            step—whether that’s learning more about Dr. Michael Njo, exploring resources, or reaching out directly.
+            Special DentalFlix event offer: get <span className="font-semibold text-gray-900">$500 off any service</span>
+            with Dr. Michael Njo.
           </p>
         </header>
 
-        <section className="w-full rounded-3xl border border-gray-200 bg-gray-50 p-6 shadow-sm md:p-8">
-          <h2 className="text-xl font-semibold text-gray-900">Start here</h2>
+        <section className="w-full rounded-3xl border border-blue-200 bg-blue-50 p-6 shadow-sm md:p-8">
+          <h2 className="text-xl font-semibold text-gray-900">How to claim your $500 event offer</h2>
+          <p className="mt-3 text-sm leading-relaxed text-gray-700 md:text-base">
+            When you book or reach out, please mention: <span className="font-semibold">"I heard about Michael from the DentalFlix event."</span>
+          </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button asChild>
-              <Link href="/contact">Contact us</Link>
+              <Link href="/contact">Claim $500 off - Contact Dr. Njo</Link>
             </Button>
             <Button variant="secondary" asChild>
               <Link href="/michael-njo-dds">Learn more about Dr. Njo</Link>

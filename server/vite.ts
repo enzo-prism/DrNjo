@@ -9,6 +9,13 @@ import { buildCanonicalUrl, CANONICAL_ORIGIN, normalizePathname } from "./canoni
 import { buildPageDescription, buildPageTitle } from "./head";
 
 const viteLogger = createLogger();
+const FAVICON_LINKS = [
+  '<link rel="icon" href="/favicon.ico" sizes="any" />',
+  '<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />',
+  '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />',
+  '<link rel="icon" type="image/png" sizes="256x256" href="/favicon-256x256.png" />',
+  '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />',
+].join("\n    ");
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -124,6 +131,27 @@ function injectHeadTags(template: string, originalUrl: string): string {
       /<meta\s+name=["']description["'][^>]*content=["'][^"']*["'][^>]*>/i,
       `<meta name="description" content="${description}" />`,
     );
+  }
+
+  // Keep favicon links consistent for every rendered route, including prerendered files.
+  updated = updated.replace(
+    /\s*<link[^>]+rel=["'](?:icon|apple-touch-icon)["'][^>]*>\s*/gi,
+    "\n",
+  );
+
+  const faviconBlock = `\n    ${FAVICON_LINKS}\n`;
+  if (/<link\s+rel=["']preload["'][^>]+as=["']image["'][^>]*>/i.test(updated)) {
+    updated = updated.replace(
+      /(<link\s+rel=["']preload["'][^>]+as=["']image["'][^>]*>)/i,
+      `$1${faviconBlock}`,
+    );
+  } else if (/<link\s+rel=["']canonical["'][^>]*>/i.test(updated)) {
+    updated = updated.replace(
+      /(<link\s+rel=["']canonical["'][^>]*>)/i,
+      `$1${faviconBlock}`,
+    );
+  } else {
+    updated = updated.replace(/<\/head>/i, `${faviconBlock}</head>`);
   }
 
   return updated;
