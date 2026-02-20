@@ -4,7 +4,7 @@ import path from "node:path";
 import {
   getHomeStructuredData,
   getMichaelNjoStructuredData,
-  getMichaelNealInterviewStructuredData,
+  getMichaelNjoInterviewStructuredData,
 } from "../client/src/seo/structured-data";
 
 type PageCheck = {
@@ -27,7 +27,7 @@ const checks: PageCheck[] = [
   {
     name: "dr-michael-neal-interview",
     file: path.resolve(process.cwd(), "client", "src", "pages", "dr-michael-neal-interview.tsx"),
-    generator: getMichaelNealInterviewStructuredData,
+    generator: getMichaelNjoInterviewStructuredData,
   },
 ];
 

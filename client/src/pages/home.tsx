@@ -153,11 +153,12 @@ export default function Home() {
               <section className="mb-10 rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-left scroll-fade-in" aria-labelledby="interview-highlight-heading">
                 <p className="text-xs uppercase tracking-[0.28em] text-blue-600">Featured conversation</p>
                 <h2 id="interview-highlight-heading" className="mt-3 text-2xl font-medium text-gray-900">
-                  New Interview: Dr. Michael Neal
+                  New Interview: Dr. Michael Njo
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600 max-w-xl">
-                  From a career-ending injury to building Dental Strategies, Dr. Michael Neal shares his framework for transitions,
+                  From a career-ending injury to building Dental Strategies, Dr. Michael Njo shares his framework for transitions,
                   management, legal guidance, and long-term culture-first practice leadership.
+                  Interviewed by Dr. Farokh Jiveh.
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <Button asChild className="h-10">

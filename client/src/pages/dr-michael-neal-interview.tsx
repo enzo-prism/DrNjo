@@ -3,13 +3,13 @@ import { ArrowRight, CalendarDays, Copy, Download, Link2, Mail, Play } from "luc
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
-import { getMichaelNealInterviewStructuredData } from "@/seo/structured-data";
+import { getMichaelNjoInterviewStructuredData } from "@/seo/structured-data";
 
 const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4";
 const transcriptUrl = "/dr-michael-neal-interview-transcript.txt";
 const sharePageUrl = "https://michaelnjodds.com/dr-michael-neal-interview";
 const shareHeadline = "Helping Dentists Thrive Through Every Stage of Their Career";
-const shareText = `Watch this featured conversation with Dr. Michael Neal on practice transitions, management, and legal guidance for dentists.`;
+const shareText = `Watch this featured conversation with Dr. Michael Njo on practice transitions, management, and legal guidance for dentists.`;
 
 const corePrinciples = [
   {
@@ -65,14 +65,14 @@ const audiencePoints = [
   "People who want growth aligned with personal life",
 ];
 
-export default function DrMichaelNealInterview() {
+export default function DrMichaelNjoInterview() {
   const [copied, setCopied] = useState(false);
 
   const shareLinks = useMemo(() => {
     const encodedUrl = encodeURIComponent(sharePageUrl);
     const encodedHeadline = encodeURIComponent(shareHeadline);
     const encodedText = encodeURIComponent(`${shareText} ${sharePageUrl}`);
-    const encodedMailSubject = encodeURIComponent("Dr. Michael Neal Interview");
+    const encodedMailSubject = encodeURIComponent("Dr. Michael Njo Interview");
 
     return [
       {
@@ -106,7 +106,7 @@ export default function DrMichaelNealInterview() {
 
   return (
     <>
-      <StructuredData data={getMichaelNealInterviewStructuredData()} id="structured-data-dr-michael-neal-interview" />
+      <StructuredData data={getMichaelNjoInterviewStructuredData()} id="structured-data-dr-michael-neal-interview" />
       <main className="min-h-screen bg-white px-4 py-12 transition-colors duration-300">
         <div className="mx-auto w-full max-w-4xl space-y-10">
           <header className="rounded-3xl border border-blue-100/80 bg-gradient-to-b from-white to-blue-50/50 p-7 md:p-10">
@@ -115,7 +115,7 @@ export default function DrMichaelNealInterview() {
               Helping Dentists Thrive Through Every Stage of Their Career
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 md:text-lg">
-              In this featured conversation, Dr. Michael Neal shares how a career-ending injury led to a 22-year journey guiding dentists through
+              In this featured conversation with interviewer Dr. Farokh Jiveh, Dr. Michael Njo shares how a career-ending injury led to a 22-year journey guiding dentists through
               transitions, management growth, and difficult legal moments.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -128,7 +128,7 @@ export default function DrMichaelNealInterview() {
               <Button asChild variant="secondary">
                 <a
                   href={transcriptUrl}
-                  download="Dr-Michael-Neal-interview-transcript.txt"
+                  download="Dr-Michael-Njo-interview-transcript.txt"
                   className="inline-flex items-center justify-center gap-2"
                 >
                   <Download className="h-4 w-4" />
@@ -208,7 +208,7 @@ export default function DrMichaelNealInterview() {
               Introduction
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              For more than two decades, Dr. Michael Neal has helped dentists across the country make strategic practice decisions:
+              For more than two decades, Dr. Michael Njo has helped dentists across the country make strategic practice decisions:
               private practice transitions, team growth, legal challenges, and ownership structure.
             </p>
             <ul className="space-y-2 pl-5 text-gray-700">
@@ -226,7 +226,7 @@ export default function DrMichaelNealInterview() {
               From Private Practice to Dental Strategies
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Dr. Neal graduated from UOP Dental School and practiced dentistry until a C6–C7 disc injury required him to step away from clinical work. Instead of leaving the profession,
+              Dr. Njo graduated from UOP Dental School and practiced dentistry until a C6–C7 disc injury required him to step away from clinical work. Instead of leaving the profession,
               he chose to continue serving dentists through consulting.
             </p>
             <p className="text-gray-700 leading-relaxed">
