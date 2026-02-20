@@ -1,4 +1,5 @@
-import { ArrowRight, CalendarDays, Download, Play } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, CalendarDays, Copy, Download, Link2, Mail, Play } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
@@ -6,6 +7,9 @@ import { getMichaelNealInterviewStructuredData } from "@/seo/structured-data";
 
 const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4";
 const transcriptUrl = "/dr-michael-neal-interview-transcript.txt";
+const sharePageUrl = "https://michaelnjodds.com/dr-michael-neal-interview";
+const shareHeadline = "Helping Dentists Thrive Through Every Stage of Their Career";
+const shareText = `Watch this featured conversation with Dr. Michael Neal on practice transitions, management, and legal guidance for dentists.`;
 
 const corePrinciples = [
   {
@@ -62,6 +66,44 @@ const audiencePoints = [
 ];
 
 export default function DrMichaelNealInterview() {
+  const [copied, setCopied] = useState(false);
+
+  const shareLinks = useMemo(() => {
+    const encodedUrl = encodeURIComponent(sharePageUrl);
+    const encodedHeadline = encodeURIComponent(shareHeadline);
+    const encodedText = encodeURIComponent(`${shareText} ${sharePageUrl}`);
+    const encodedMailSubject = encodeURIComponent("Dr. Michael Neal Interview");
+
+    return [
+      {
+        label: "Share on X",
+        href: `https://twitter.com/intent/tweet?text=${encodedText}`,
+      },
+      {
+        label: "Share on LinkedIn",
+        href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+      },
+      {
+        label: "Share on Facebook",
+        href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+      },
+      {
+        label: "Email",
+        href: `mailto:?subject=${encodedMailSubject}&body=${encodedHeadline}%0A${encodedUrl}`,
+      },
+    ];
+  }, []);
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(sharePageUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      window.prompt("Copy this link:", sharePageUrl);
+    }
+  };
+
   return (
     <>
       <StructuredData data={getMichaelNealInterviewStructuredData()} id="structured-data-dr-michael-neal-interview" />
@@ -101,6 +143,42 @@ export default function DrMichaelNealInterview() {
               </Button>
             </div>
           </header>
+
+          <section className="space-y-4 rounded-3xl border border-indigo-100 bg-indigo-50/60 p-6 md:p-8">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm uppercase tracking-[0.3em] text-blue-600">Share this interview</p>
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-medium text-blue-700">
+                <Link2 className="h-3.5 w-3.5" />
+                Quick share
+              </span>
+            </div>
+            <h2 className="text-2xl font-semibold text-gray-900">
+              Help this conversation reach the dentists who need it most.
+            </h2>
+            <p className="text-sm leading-relaxed text-gray-600">
+              Send it to your network or keep it in your clinic team’s workflow with one quick click.
+            </p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button type="button" onClick={copyLink} variant="outline" className="inline-flex items-center gap-2">
+                <Copy className="h-4 w-4" />
+                {copied ? "Link copied" : "Copy interview link"}
+              </Button>
+              {shareLinks.map((share) => (
+                <Button key={share.label} asChild variant="secondary">
+                  <a
+                    href={share.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2"
+                  >
+                    {share.label === "Email" ? <Mail className="h-4 w-4" /> : <Link2 className="h-4 w-4" />}
+                    {share.label}
+                  </a>
+                </Button>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500">Direct link: {sharePageUrl}</p>
+          </section>
 
           <section
             id="interview-video"
