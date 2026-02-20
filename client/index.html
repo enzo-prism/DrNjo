@@ -45,28 +45,46 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     </noscript>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6HWEE040EH"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      (function () {
+        const hostname = window.location.hostname.toLowerCase();
+        const isLocalhost =
+          hostname === "localhost" ||
+          hostname === "127.0.0.1" ||
+          hostname === "::1" ||
+          hostname.endsWith(".local");
+        const isHeadless = /HeadlessChrome|Chrome-Lighthouse/i.test(navigator.userAgent || "");
 
-      gtag('config', 'G-6HWEE040EH');
-    </script>
+        if (isLocalhost || isHeadless) {
+          return;
+        }
 
-    <!-- Hotjar Tracking Code for Michael Njo DDS -->
-    <script>
-      window.addEventListener("load", function () {
-        (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:6575522,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-      });
+        const gtagScript = document.createElement("script");
+        gtagScript.async = true;
+        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-6HWEE040EH";
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-6HWEE040EH");
+
+        window.addEventListener("load", function () {
+          (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () {
+              (h.hj.q = h.hj.q || []).push(arguments);
+            };
+            h._hjSettings = { hjid: 6575522, hjsv: 6 };
+            a = o.getElementsByTagName("head")[0];
+            r = o.createElement("script");
+            r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+          })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+        });
+      })();
     </script>
   </head>
   <body>
