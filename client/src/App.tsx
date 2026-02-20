@@ -1,5 +1,5 @@
 import { Switch, Route } from "wouter";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -16,6 +16,15 @@ const ResourcesPage = lazy(() => import("@/pages/resources"));
 const DentalflixPage = lazy(() => import("@/pages/dentalflix"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
+function InterviewLegacyRedirect() {
+  useEffect(() => {
+    const hash = window.location.hash;
+    window.location.replace(`/dr-michael-njo-interview${hash}`);
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -26,6 +35,7 @@ function App() {
             <Route path="/" component={Home} />
             <Route path="/michael-njo-dds" component={MichaelNjoDDS} />
             <Route path="/dr-michael-njo-interview" component={MichaelNjoInterview} />
+            <Route path="/dr-michael-neal-interview" component={InterviewLegacyRedirect} />
             <Route path="/testimonials" component={TestimonialsPage} />
             <Route path="/testimonials/:slug" component={TestimonialDetailPage} />
             <Route path="/resources" component={ResourcesPage} />

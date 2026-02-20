@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 
 const LEGACY_REDIRECTS: Record<string, string> = {
   "/testimonials/team-member-2": "/testimonials/team-member",
+  "/dr-michael-neal-interview": "/dr-michael-njo-interview",
 };
 
 app.get(Object.keys(LEGACY_REDIRECTS), (req, res) => {
