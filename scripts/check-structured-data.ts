@@ -1,7 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { getHomeStructuredData, getMichaelNjoStructuredData } from "../client/src/seo/structured-data";
+import {
+  getHomeStructuredData,
+  getMichaelNjoStructuredData,
+  getMichaelNealInterviewStructuredData,
+} from "../client/src/seo/structured-data";
 
 type PageCheck = {
   name: string;
@@ -19,6 +23,11 @@ const checks: PageCheck[] = [
     name: "michael-njo-dds",
     file: path.resolve(process.cwd(), "client", "src", "pages", "michael-njo-dds.tsx"),
     generator: getMichaelNjoStructuredData,
+  },
+  {
+    name: "dr-michael-neal-interview",
+    file: path.resolve(process.cwd(), "client", "src", "pages", "dr-michael-neal-interview.tsx"),
+    generator: getMichaelNealInterviewStructuredData,
   },
 ];
 
@@ -50,4 +59,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-

@@ -361,6 +361,62 @@ const buildWebPage = ({
   },
 });
 
+export const getMichaelNealInterviewStructuredData = () => {
+  const interviewUrl = `${siteMetadata.siteUrl}/dr-michael-neal-interview`;
+  const breadcrumb = buildBreadcrumb([
+    { name: "Home", item: siteMetadata.siteUrl },
+    { name: "Featured Interview", item: interviewUrl },
+  ]);
+
+  const interviewVideo = {
+    "@type": "VideoObject",
+    "@id": `${interviewUrl}#video`,
+    name: "Dr. Michael Neal Interview | Michael Njo, DDS",
+    description:
+      "An in-depth conversation on career transitions, management consulting, and legal guidance for dentists, hosted on Dr. Michael Njo, DDS.",
+    contentUrl: "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4",
+    embedUrl: "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4",
+    url: interviewUrl,
+    inLanguage: "en",
+    creator: {
+      "@id": personProfile.id,
+    },
+  };
+
+  const interviewPage: SchemaNode = {
+    ...buildWebPage({
+      id: `${interviewUrl}#webpage`,
+      name: "Dr. Michael Neal Interview",
+      description:
+        "Watch Dr. Michael Neal discuss moving from private dentistry to building Dental Strategies through practice transitions, management consulting, and legal support.",
+      url: interviewUrl,
+      breadcrumbId: breadcrumb["@id"] as string,
+    }),
+    "@type": ["WebPage", "WebPageElement"],
+    mainEntity: {
+      "@id": interviewVideo["@id"] as string,
+    },
+    about: {
+      "@id": personProfile.id,
+    },
+    primaryImageOfPage: {
+      "@id": `${siteMetadata.siteUrl}#hero-image`,
+    },
+  };
+
+  const graph = [
+    ...getCoreGraphNodes(),
+    interviewPage,
+    interviewVideo,
+    breadcrumb,
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
+};
+
 export const getHomeStructuredData = () => {
   const breadcrumb = buildBreadcrumb([
     { name: "Home", item: siteMetadata.siteUrl },

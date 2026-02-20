@@ -47,6 +47,8 @@ function getPageFileForPath(pathname: string): string | null {
   if (pathname === "/") return path.resolve(process.cwd(), "client", "src", "pages", "home.tsx");
   if (pathname === "/michael-njo-dds")
     return path.resolve(process.cwd(), "client", "src", "pages", "michael-njo-dds.tsx");
+  if (pathname === "/dr-michael-neal-interview")
+    return path.resolve(process.cwd(), "client", "src", "pages", "dr-michael-neal-interview.tsx");
   if (pathname === "/testimonials") return path.resolve(process.cwd(), "client", "src", "pages", "testimonials.tsx");
   if (pathname.startsWith("/testimonials/"))
     return path.resolve(process.cwd(), "client", "src", "pages", "testimonial-detail.tsx");

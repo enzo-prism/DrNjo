@@ -5,7 +5,7 @@ import { renderToString } from "react-dom/server";
 import App from "../client/src/App";
 import { Router } from "wouter";
 
-const routesToPrerender = ["/", "/michael-njo-dds"] as const;
+const routesToPrerender = ["/", "/michael-njo-dds", "/dr-michael-neal-interview"] as const;
 
 function getStaticHook(route: string) {
   return () => [route, () => null] as const;
@@ -53,4 +53,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-

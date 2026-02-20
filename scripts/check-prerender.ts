@@ -25,6 +25,15 @@ const checks: PrerenderCheck[] = [
       "Services",
     ],
   },
+  {
+    route: "/dr-michael-neal-interview",
+    file: "dr-michael-neal-interview.html",
+    requiredStrings: [
+      "Helping Dentists Thrive Through Every Stage of Their Career",
+      "Full Interview",
+      "Download Full Transcript",
+    ],
+  },
 ];
 
 function main() {
@@ -56,4 +65,3 @@ try {
   console.error(err);
   process.exitCode = 1;
 }
-

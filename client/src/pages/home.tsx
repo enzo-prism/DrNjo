@@ -1,4 +1,4 @@
-import { Mail, BookOpen, ExternalLink, GraduationCap, Star, Users } from "lucide-react";
+import { ArrowRight, BookOpen, ExternalLink, GraduationCap, Mail, PlayCircle, Star, Users } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect } from "react";
 import { testimonialPages } from "@/data/testimonials";
@@ -143,12 +143,39 @@ export default function Home() {
 	              <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
 	                Dr. Michael Njo—widely known as Michael Njo, DDS—is a consultant, educator, and entrepreneur who has spent 25+ years guiding healthcare owners through practice launches, growth, and transitions while protecting clinical excellence.
 	              </p>
-	              <div className="flex justify-center mb-8">
-	                <Button variant="outline" asChild>
-	                  <Link href="/michael-njo-dds">Read Michael Njo DDS profile</Link>
-	                </Button>
-	              </div>
-	              <div className="mb-10" aria-labelledby="founder-label">
+              <div className="flex justify-center mb-8">
+                <Button variant="outline" asChild>
+                  <Link href="/michael-njo-dds">Read Michael Njo DDS profile</Link>
+                </Button>
+              </div>
+              <section className="mb-10 rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-left scroll-fade-in" aria-labelledby="interview-highlight-heading">
+                <p className="text-xs uppercase tracking-[0.28em] text-blue-600">Featured conversation</p>
+                <h2 id="interview-highlight-heading" className="mt-3 text-2xl font-medium text-gray-900">
+                  New Interview: Dr. Michael Neal
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-gray-600 max-w-xl">
+                  From a career-ending injury to building Dental Strategies, Dr. Michael Neal shares his framework for transitions,
+                  management, legal guidance, and long-term culture-first practice leadership.
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <Button asChild className="h-10">
+                    <Link href="/dr-michael-neal-interview" className="inline-flex items-center gap-2">
+                      <PlayCircle className="h-4 w-4" />
+                      Watch the Interview
+                    </Link>
+                  </Button>
+                  <Button variant="outline" asChild className="h-10">
+                    <a href="/dr-michael-neal-interview#interview-video">Jump to full interview</a>
+                  </Button>
+                  <Button variant="ghost" asChild className="h-10">
+                    <Link href="/dr-michael-neal-interview#transcript" className="inline-flex items-center gap-2">
+                      <ArrowRight className="h-4 w-4" />
+                      Read transcript
+                    </Link>
+                  </Button>
+                </div>
+              </section>
+              <div className="mb-10" aria-labelledby="founder-label">
                 <h2
                   id="founder-label"
                   className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-sm font-medium tracking-wide uppercase"
