@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import MichaelNjoDDS from "@/pages/michael-njo-dds";
+import MichaelNealInterview from "@/pages/dr-michael-neal-interview";
 
 const Contact = lazy(() => import("@/pages/contact"));
 const ContactSuccess = lazy(() => import("@/pages/contact-success"));
@@ -13,7 +14,6 @@ const TestimonialsPage = lazy(() => import("@/pages/testimonials"));
 const TestimonialDetailPage = lazy(() => import("@/pages/testimonial-detail"));
 const ResourcesPage = lazy(() => import("@/pages/resources"));
 const DentalflixPage = lazy(() => import("@/pages/dentalflix"));
-const MichaelNealInterview = lazy(() => import("@/pages/dr-michael-neal-interview"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function App() {
