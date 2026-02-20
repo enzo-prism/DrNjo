@@ -26,8 +26,8 @@ const checks: PrerenderCheck[] = [
     ],
   },
   {
-    route: "/dr-michael-neal-interview",
-    file: "dr-michael-neal-interview.html",
+    route: "/dr-michael-njo-interview",
+    file: "dr-michael-njo-interview.html",
     requiredStrings: [
       "Helping Dentists Thrive Through Every Stage of Their Career",
       "Full Interview",

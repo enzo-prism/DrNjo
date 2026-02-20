@@ -362,7 +362,7 @@ const buildWebPage = ({
 });
 
 export const getMichaelNjoInterviewStructuredData = () => {
-  const interviewUrl = `${siteMetadata.siteUrl}/dr-michael-neal-interview`;
+  const interviewUrl = `${siteMetadata.siteUrl}/dr-michael-njo-interview`;
   const breadcrumb = buildBreadcrumb([
     { name: "Home", item: siteMetadata.siteUrl },
     { name: "Featured Interview", item: interviewUrl },

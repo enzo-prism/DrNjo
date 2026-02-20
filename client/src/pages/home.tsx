@@ -162,16 +162,16 @@ export default function Home() {
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <Button asChild className="h-10">
-                    <Link href="/dr-michael-neal-interview" className="inline-flex items-center gap-2">
+                    <Link href="/dr-michael-njo-interview" className="inline-flex items-center gap-2">
                       <PlayCircle className="h-4 w-4" />
                       Watch the Interview
                     </Link>
                   </Button>
                   <Button variant="outline" asChild className="h-10">
-                    <a href="/dr-michael-neal-interview#interview-video">Jump to full interview</a>
+                    <a href="/dr-michael-njo-interview#interview-video">Jump to full interview</a>
                   </Button>
                   <Button variant="ghost" asChild className="h-10">
-                    <Link href="/dr-michael-neal-interview#transcript" className="inline-flex items-center gap-2">
+                    <Link href="/dr-michael-njo-interview#transcript" className="inline-flex items-center gap-2">
                       <ArrowRight className="h-4 w-4" />
                       Read transcript
                     </Link>

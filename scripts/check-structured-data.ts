@@ -25,8 +25,8 @@ const checks: PageCheck[] = [
     generator: getMichaelNjoStructuredData,
   },
   {
-    name: "dr-michael-neal-interview",
-    file: path.resolve(process.cwd(), "client", "src", "pages", "dr-michael-neal-interview.tsx"),
+    name: "dr-michael-njo-interview",
+    file: path.resolve(process.cwd(), "client", "src", "pages", "dr-michael-njo-interview.tsx"),
     generator: getMichaelNjoInterviewStructuredData,
   },
 ];

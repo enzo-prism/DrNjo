@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import MichaelNjoDDS from "@/pages/michael-njo-dds";
-import MichaelNjoInterview from "@/pages/dr-michael-neal-interview";
+import MichaelNjoInterview from "@/pages/dr-michael-njo-interview";
 
 const Contact = lazy(() => import("@/pages/contact"));
 const ContactSuccess = lazy(() => import("@/pages/contact-success"));
@@ -25,7 +25,7 @@ function App() {
           <Switch>
             <Route path="/" component={Home} />
             <Route path="/michael-njo-dds" component={MichaelNjoDDS} />
-            <Route path="/dr-michael-neal-interview" component={MichaelNjoInterview} />
+            <Route path="/dr-michael-njo-interview" component={MichaelNjoInterview} />
             <Route path="/testimonials" component={TestimonialsPage} />
             <Route path="/testimonials/:slug" component={TestimonialDetailPage} />
             <Route path="/resources" component={ResourcesPage} />

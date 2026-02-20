@@ -6,8 +6,8 @@ import { StructuredData } from "@/components/structured-data";
 import { getMichaelNjoInterviewStructuredData } from "@/seo/structured-data";
 
 const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4";
-const transcriptUrl = "/dr-michael-neal-interview-transcript.txt";
-const sharePageUrl = "https://michaelnjodds.com/dr-michael-neal-interview";
+const transcriptUrl = "/dr-michael-njo-interview-transcript.txt";
+const sharePageUrl = "https://michaelnjodds.com/dr-michael-njo-interview";
 const shareHeadline = "Helping Dentists Thrive Through Every Stage of Their Career";
 const shareText = `Watch this featured conversation with Dr. Michael Njo on practice transitions, management, and legal guidance for dentists.`;
 
@@ -106,7 +106,7 @@ export default function DrMichaelNjoInterview() {
 
   return (
     <>
-      <StructuredData data={getMichaelNjoInterviewStructuredData()} id="structured-data-dr-michael-neal-interview" />
+      <StructuredData data={getMichaelNjoInterviewStructuredData()} id="structured-data-dr-michael-njo-interview" />
       <main className="min-h-screen bg-white px-4 py-12 transition-colors duration-300">
         <div className="mx-auto w-full max-w-4xl space-y-10">
           <header className="rounded-3xl border border-blue-100/80 bg-gradient-to-b from-white to-blue-50/50 p-7 md:p-10">

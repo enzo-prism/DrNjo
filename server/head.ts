@@ -68,7 +68,7 @@ export function buildPageTitle(pathname: string): string {
     case "/about":
     case "/michael-njo-dds":
       return "Michael Njo DDS | Practice Transitions Consultant";
-    case "/dr-michael-neal-interview":
+    case "/dr-michael-njo-interview":
       return "Dr. Michael Njo Interview | Dental Practice Transitions & Consulting";
     case "/testimonials":
       return "Testimonials for Michael Njo, DDS | Dental Strategies";
@@ -110,7 +110,7 @@ export function buildPageDescription(pathname: string): string {
     case "/about":
     case "/michael-njo-dds":
       return "Learn about Michael Njo DDS, founder of Dental Strategies Consulting and Practice Transitions Institute, specializing in dental practice transitions and growth strategy.";
-    case "/dr-michael-neal-interview":
+    case "/dr-michael-njo-interview":
       return "Watch Dr. Michael Njo discuss his journey from private practice to building Dental Strategies through transitions, management, and legal guidance.";
     case "/testimonials":
       return "Read testimonials from dentists and healthcare professionals who have worked with Michael Njo, DDS through Dental Strategies and Practice Transitions Institute.";
