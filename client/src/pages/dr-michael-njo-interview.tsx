@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { getMichaelNjoInterviewStructuredData } from "@/seo/structured-data";
 
-const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771604636/interview_osy2ak.mp4";
+const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771798426/drnjo_avytsr.mp4";
 const transcriptUrl = "/dr-michael-njo-interview-transcript.txt";
 const sharePageUrl = "https://michaelnjodds.com/dr-michael-njo-interview";
 const shareHeadline = "Helping Dentists Thrive Through Every Stage of Their Career";
