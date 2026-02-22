@@ -189,13 +189,11 @@ export default function DrMichaelNjoInterview() {
             <h2 id="interview-video-heading" className="text-2xl font-semibold text-gray-900">
               Full Interview
             </h2>
-            <p className="text-sm text-gray-600">
-              Below is the full conversation. If your browser does not support streaming, the transcript is available for download.
-            </p>
+            <p className="text-sm text-gray-600">Below is the full conversation.</p>
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-black">
               <video controls className="h-auto w-full bg-black" preload="metadata" playsInline>
                 <source src={videoUrl} type="video/mp4" />
-                Your browser does not support embedded video. Download it from the file at the top of this page.
+                Your browser does not support embedded video.
               </video>
             </div>
           </section>
