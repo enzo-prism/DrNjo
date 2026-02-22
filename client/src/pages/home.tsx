@@ -167,9 +167,6 @@ export default function Home() {
                       Watch the Interview
                     </Link>
                   </Button>
-                  <Button variant="outline" asChild className="h-10">
-                    <a href="/dr-michael-njo-interview#interview-video">Jump to full interview</a>
-                  </Button>
                 </div>
               </section>
               <div className="mb-10" aria-labelledby="founder-label">
