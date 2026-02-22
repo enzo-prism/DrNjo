@@ -198,9 +198,6 @@ export default function DrMichaelNjoInterview() {
                 Your browser does not support embedded video. Download it from the file at the top of this page.
               </video>
             </div>
-            <p className="text-xs text-gray-500" id="transcript">
-              Download: <a href={transcriptUrl} download className="text-blue-600 underline">Complete interview transcript (.txt)</a>
-            </p>
           </section>
 
           <section className="space-y-4" aria-labelledby="intro-heading">
