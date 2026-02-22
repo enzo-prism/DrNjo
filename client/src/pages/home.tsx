@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, ExternalLink, GraduationCap, Mail, PlayCircle, Star, Users } from "lucide-react";
+import { BookOpen, ExternalLink, GraduationCap, Mail, PlayCircle, Star, Users } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect } from "react";
 import { testimonialPages } from "@/data/testimonials";
@@ -169,12 +169,6 @@ export default function Home() {
                   </Button>
                   <Button variant="outline" asChild className="h-10">
                     <a href="/dr-michael-njo-interview#interview-video">Jump to full interview</a>
-                  </Button>
-                  <Button variant="ghost" asChild className="h-10">
-                    <Link href="/dr-michael-njo-interview#transcript" className="inline-flex items-center gap-2">
-                      <ArrowRight className="h-4 w-4" />
-                      Read transcript
-                    </Link>
                   </Button>
                 </div>
               </section>
