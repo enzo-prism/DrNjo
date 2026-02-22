@@ -31,7 +31,6 @@ const checks: PrerenderCheck[] = [
     requiredStrings: [
       "Helping Dentists Thrive Through Every Stage of Their Career",
       "Full Interview",
-      "Download Full Transcript",
     ],
   },
 ];

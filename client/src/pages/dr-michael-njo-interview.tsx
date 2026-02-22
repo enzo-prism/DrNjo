@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
-import { ArrowRight, CalendarDays, Copy, Download, Link2, Mail, Play } from "lucide-react";
+import { ArrowRight, CalendarDays, Copy, Link2, Mail, Play } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { StructuredData } from "@/components/structured-data";
 import { getMichaelNjoInterviewStructuredData } from "@/seo/structured-data";
 
 const videoUrl = "https://res.cloudinary.com/dhqpqfw6w/video/upload/v1771798426/drnjo_avytsr.mp4";
-const transcriptUrl = "/dr-michael-njo-interview-transcript.txt";
 const sharePageUrl = "https://michaelnjodds.com/dr-michael-njo-interview";
 const shareHeadline = "Helping Dentists Thrive Through Every Stage of Their Career";
 const shareText = `Watch this featured conversation with Dr. Michael Njo on practice transitions, management, and legal guidance for dentists.`;
@@ -123,16 +122,6 @@ export default function DrMichaelNjoInterview() {
                 <a href="#interview-video" className="inline-flex items-center justify-center gap-2">
                   <Play className="h-4 w-4" />
                   Watch the Interview
-                </a>
-              </Button>
-              <Button asChild variant="secondary">
-                <a
-                  href={transcriptUrl}
-                  download="Dr-Michael-Njo-interview-transcript.txt"
-                  className="inline-flex items-center justify-center gap-2"
-                >
-                  <Download className="h-4 w-4" />
-                  Download Full Transcript
                 </a>
               </Button>
               <Button asChild variant="outline">
