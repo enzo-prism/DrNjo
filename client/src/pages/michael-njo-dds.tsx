@@ -168,15 +168,16 @@ export default function MichaelNjoDDS() {
             <Card>
               <CardHeader>
                 <CardTitle>Life & Leadership in Media</CardTitle>
-                <CardDescription>Gallery of speaking, mentor, and teaching moments</CardDescription>
+                <CardDescription>A visual timeline of speaking, mentoring, and leadership moments.</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <CardContent className="px-0 pt-0">
+                <div className="grid gap-3 px-4 pb-4 sm:grid-cols-2 lg:grid-cols-3">
                   {njoLifeGalleryImages.slice(0, 9).map((image) => (
                     <button
                       key={image.src}
                       type="button"
-                      className="group block overflow-hidden rounded-lg border border-border bg-white text-left"
+                      className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-card text-left"
+                      aria-label={image.alt}
                       onClick={() => setSelectedImage(image)}
                     >
                       <img
@@ -184,11 +185,16 @@ export default function MichaelNjoDDS() {
                         srcSet={image.srcSet}
                         sizes={image.sizes}
                         alt={image.alt}
-                        className="h-44 w-full object-cover transition duration-300 group-hover:scale-105"
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                         loading="lazy"
                         decoding="async"
                       />
-                      <p className="line-clamp-1 p-2 text-xs text-muted-foreground">{image.caption ?? image.alt}</p>
+                      <span
+                        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/35"
+                        aria-hidden="true"
+                      >
+                        <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-foreground shadow-sm">Open</span>
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -203,13 +209,11 @@ export default function MichaelNjoDDS() {
                 }
               }}
             >
-              <DialogContent className="max-w-6xl border-none bg-black/90 p-0 text-white">
+              <DialogContent className="max-w-5xl border-none bg-black/90 p-0 text-white">
                 {selectedImage ? (
                   <>
                     <DialogTitle className="sr-only">{selectedImage.alt}</DialogTitle>
-                    <DialogDescription className="sr-only">
-                      {selectedImage.caption ?? "Expanded gallery image of Dr. Njo."}
-                    </DialogDescription>
+                    <DialogDescription className="sr-only">{selectedImage.alt}</DialogDescription>
                     <img
                       src={selectedImage.src}
                       srcSet={selectedImage.srcSet}
@@ -218,9 +222,6 @@ export default function MichaelNjoDDS() {
                       className="h-auto w-full rounded-t-lg object-contain"
                       loading="eager"
                     />
-                    {selectedImage.caption ? (
-                      <p className="px-4 pb-4 text-sm text-slate-100">{selectedImage.caption}</p>
-                    ) : null}
                   </>
                 ) : null}
               </DialogContent>
