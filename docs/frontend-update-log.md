@@ -17,6 +17,9 @@
 - Simplified `/resources` cards so the handbook/institute cards focus on title + description + action button.
 - Adjusted `/michael-njo-dds` news card images to `object-contain` so full poster images are visible and not cropped.
 - Swapped the profile About card image to use the existing University collaboration photo.
+- Rebuilt **Life & Leadership in Media** in `/michael-njo-dds` as an image-first gallery: no captions rendered inside cards, same photo set preserved.
+- Updated gallery interaction to use a subtle corner “Open” pill that appears only on hover/focus (no center block overlay).
+- Removed the button from the **About Dr. Michael Njo** card to keep that section text-and-photo only.
 
 ### Deployment notes
 - All adjustments were made in the React page/component layer while preserving existing routes and structured-data hooks.

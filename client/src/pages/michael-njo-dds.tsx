@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { CalendarDays, GraduationCap, MessageSquareQuote, Briefcase, Globe, PlayCircle } from "lucide-react";
+import { CalendarDays, MessageSquareQuote, Briefcase, Globe, PlayCircle } from "lucide-react";
 import { TestimonialListCard } from "@/components/testimonials/testimonial-card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -122,12 +122,6 @@ export default function MichaelNjoDDS() {
                     A practitioner-turned-consultant with deep private practice experience, Dr. Njo helps healthcare owners design
                     resilient systems for team execution, growth strategy, and transitions.
                   </p>
-                  <Button variant="outline" asChild>
-                    <a href={dugoniCollaborationImage.src} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
-                      <GraduationCap className="h-4 w-4" />
-                      University profile and collaborations
-                    </a>
-                  </Button>
                 </CardContent>
               </Card>
 
@@ -190,10 +184,13 @@ export default function MichaelNjoDDS() {
                         decoding="async"
                       />
                       <span
-                        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/35"
+                        className="pointer-events-none absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/15"
                         aria-hidden="true"
+                      />
+                      <span
+                        className="pointer-events-none absolute right-2 bottom-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-medium text-white shadow-sm transition duration-300 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
                       >
-                        <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-foreground shadow-sm">Open</span>
+                        Open
                       </span>
                     </button>
                   ))}
