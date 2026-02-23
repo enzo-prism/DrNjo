@@ -20,3 +20,8 @@
 
 ### Deployment notes
 - All adjustments were made in the React page/component layer while preserving existing routes and structured-data hooks.
+
+## Follow-up update (Homepage QA)
+
+- Fixed homepage FAQ section on mobile to enforce left alignment for all FAQ questions and answers.
+- Corrected broken/barely visible icon sizing in the “Need a quick path forward?” card by increasing icon size, adding stable spacing, and preventing icon shrinkage in flex layout.

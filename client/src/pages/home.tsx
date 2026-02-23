@@ -149,11 +149,11 @@ export default function Home() {
           </div>
           <Card>
             <CardContent className="py-4">
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion type="single" collapsible className="w-full text-left">
                 {faqItems.map((faq, index) => (
                   <AccordionItem key={`${faq.question}-${index}`} value={`faq-${index}`}>
-                    <AccordionTrigger>{faq.question}</AccordionTrigger>
-                    <AccordionContent>{faq.answer}</AccordionContent>
+                    <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
+                    <AccordionContent className="text-left">{faq.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -213,15 +213,15 @@ export default function Home() {
               <CardTitle>Need a quick path forward?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-5">
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Star className="mt-0.5 h-4 w-4 text-amber-500" />
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <Star className="mt-1 h-5 w-5 flex-shrink-0 text-amber-500" />
                 <p>
                   Start with a short conversation to determine whether your goals are best served through launch support, ownership
                   transition, or team leadership work.
                 </p>
               </div>
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                <Users className="mt-0.5 h-4 w-4" />
+              <div className="flex items-start gap-3 text-sm text-muted-foreground">
+                <Users className="mt-1 h-5 w-5 flex-shrink-0" />
                 <p>Learn from direct client experiences and transition stories across dentistry and healthcare.</p>
               </div>
               <div className="flex flex-wrap gap-3">
