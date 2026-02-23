@@ -1,69 +1,100 @@
-import { testimonialPages } from "@/data/testimonials";
-import { Star } from "lucide-react";
+import { useMemo, useState } from "react";
 import { Link } from "wouter";
+import { Filter, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { TestimonialListCard } from "@/components/testimonials/testimonial-card";
+import { testimonialPages } from "@/data/testimonials";
+
+type SortMode = "newest" | "alpha";
 
 export default function TestimonialsPage() {
-  return (
-    <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <header className="text-center space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-blue-500">Testimonials</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
-            Testimonials for Michael Njo, DDS
-          </h1>
-          <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Stories from dentists and healthcare professionals guided through Dental Strategies and Practice Transitions
-            Institute.
-          </p>
-          <p className="text-sm text-gray-600">
-            Learn more about{" "}
-            <a href="/michael-njo-dds" className="text-blue-600 underline font-medium">
-              Michael Njo DDS
-            </a>
-            .
-          </p>
-        </header>
+  const [sortMode, setSortMode] = useState<SortMode>("newest");
+  const [query, setQuery] = useState("");
 
-        <div className="grid gap-6">
-          {testimonialPages.map((testimonial, index) => (
-            <article
-              key={`${testimonial.author}-${testimonial.slug}-${index}`}
-              className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"
-            >
-              <div className="flex items-center gap-1 text-amber-500">
-                {Array.from({ length: 5 }).map((_, starIndex) => (
-                  <Star
-                    key={starIndex}
-                    className={`w-4 h-4 ${starIndex < testimonial.stars ? "fill-current" : "text-gray-300"}`}
-                  />
-                ))}
+  const filteredTestimonials = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const base = testimonialPages.filter((item) => item.author.toLowerCase().includes(q));
+
+    if (sortMode === "alpha") {
+      return [...base].sort((a, b) => a.author.localeCompare(b.author));
+    }
+
+    return base;
+  }, [query, sortMode]);
+
+  return (
+    <div className="space-y-8">
+      <section className="space-y-3">
+        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Testimonials</p>
+        <h1 className="text-4xl font-semibold">Testimonials for Dr. Michael Njo</h1>
+        <p className="text-muted-foreground max-w-3xl">
+          Real-world stories from dentists and healthcare professionals who partnered with Dr. Michael Njo for transitions,
+          growth, and leadership support.
+        </p>
+      </section>
+
+      <section>
+        <Card>
+          <CardContent className="space-y-4 p-5">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+              <label className="inline-flex w-full max-w-lg items-center gap-2 text-sm text-muted-foreground">
+                <Search className="h-4 w-4" />
+                <Input
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Search by author"
+                  aria-label="Search testimonials by author"
+                />
+              </label>
+
+              <div className="flex items-center gap-2" aria-label="Sort testimonials">
+                <span className="inline-flex items-center gap-1 text-sm text-muted-foreground">
+                  <Filter className="h-4 w-4" />
+                  Sort:
+                </span>
+                <Button size="sm" variant={sortMode === "newest" ? "default" : "outline"} onClick={() => setSortMode("newest")}>
+                  Newest
+                </Button>
+                <Button size="sm" variant={sortMode === "alpha" ? "default" : "outline"} onClick={() => setSortMode("alpha")}>
+                  A-Z
+                </Button>
               </div>
-              <p className="mt-4 text-gray-700 leading-relaxed whitespace-pre-line">
-                {testimonial.excerpt}
+            </div>
+
+            {query ? (
+              <p className="text-sm text-muted-foreground">
+                Showing {filteredTestimonials.length} of {testimonialPages.length} testimonials.
               </p>
-              <p className="mt-4 text-sm font-semibold text-gray-900">
-                {testimonial.author}
-              </p>
-              <a
-                href={`/testimonials/${testimonial.slug}`}
-                className="inline-flex mt-3 text-sm text-blue-600 underline font-medium"
-              >
-                Read full story
-              </a>
-            </article>
+            ) : null}
+          </CardContent>
+        </Card>
+      </section>
+
+      {filteredTestimonials.length > 0 ? (
+        <div className="grid gap-4 md:grid-cols-2">
+          {filteredTestimonials.map((testimonial) => (
+            <TestimonialListCard key={`${testimonial.author}-${testimonial.slug}`} testimonial={testimonial} />
           ))}
         </div>
+      ) : (
+        <Card>
+          <CardHeader>
+            <CardTitle>No matching testimonials</CardTitle>
+            <CardDescription>Try a different name or clear your search.</CardDescription>
+          </CardHeader>
+        </Card>
+      )}
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
-          <Button asChild>
-            <Link href="/contact">Work with Michael Njo, DDS</Link>
-          </Button>
-          <Button variant="ghost" asChild>
-            <Link href="/">Back to home</Link>
-          </Button>
-        </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <Button asChild>
+          <Link href="/contact">Work with Michael Njo, DDS</Link>
+        </Button>
+        <Button asChild variant="outline">
+          <Link href="/">Back to home</Link>
+        </Button>
       </div>
-    </main>
+    </div>
   );
 }

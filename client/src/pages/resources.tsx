@@ -1,103 +1,95 @@
-import { resources, bookReviews } from "@/seo/structured-data";
-import { ExternalLink, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { resources, bookReviews } from "@/seo/structured-data";
 
 export default function ResourcesPage() {
   const book = resources.find((resource) => resource.type === "Book");
   const institute = resources.find((resource) => resource.type === "EducationalOrganization");
 
   return (
-    <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
-      <div className="max-w-4xl mx-auto space-y-10">
-        <header className="text-center space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-blue-500">Resources</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
-            Education &amp; Resources
-          </h1>
-          <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Explore Dr. Michael Njo’s book and educational programs designed to help healthcare owners navigate growth
-            and practice transitions.{" "}
-            <a href="/michael-njo-dds" className="text-blue-600 underline font-medium">
-              Learn more about Michael Njo DDS
-            </a>
-            .
-          </p>
-        </header>
+    <div className="space-y-8">
+      <section className="space-y-3 text-center">
+        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Resources</p>
+        <h1 className="text-4xl font-semibold">Education &amp; growth resources</h1>
+        <p className="mx-auto max-w-3xl text-sm text-muted-foreground">
+          Practical materials and learning pathways curated to support healthcare ownership, transitions, and operations leadership.
+        </p>
+      </section>
 
-        <section className="grid gap-6 md:grid-cols-2">
-          {book && (
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900">{book.name}</h2>
-              <p className="text-gray-600 leading-relaxed">{book.description}</p>
-              <a
-                href={book.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 underline font-medium"
-              >
-                View on Amazon
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </a>
-            </div>
-          )}
-
-          {institute && (
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm space-y-4">
-              <h2 className="text-xl font-semibold text-gray-900">{institute.name}</h2>
-              <p className="text-gray-600 leading-relaxed">{institute.description}</p>
-              <a
-                href={institute.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center text-blue-600 underline font-medium"
-              >
-                Visit Institute
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </a>
-            </div>
-          )}
-        </section>
-
-        {bookReviews.length > 0 && (
-          <section aria-labelledby="reviews-heading" className="space-y-4">
-            <h2 id="reviews-heading" className="text-2xl font-semibold text-gray-900 text-center">
-              Reader reviews
-            </h2>
-            <div className="grid gap-4">
-              {bookReviews.map((review, index) => (
-                <article
-                  key={`${review.author}-${index}`}
-                  className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-                >
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {Array.from({ length: 5 }).map((_, starIndex) => (
-                      <Star
-                        key={starIndex}
-                        className={`w-4 h-4 ${starIndex < review.rating ? "fill-current" : "text-gray-300"}`}
-                      />
-                    ))}
-                  </div>
-                  <h3 className="mt-3 text-lg font-medium text-gray-900">{review.title}</h3>
-                  <p className="mt-2 text-sm text-gray-600 leading-relaxed whitespace-pre-line">
-                    {review.body}
-                  </p>
-                  <p className="mt-2 text-xs text-gray-500">{review.author}</p>
-                </article>
-              ))}
-            </div>
-          </section>
+      <section className="grid gap-4 md:grid-cols-2">
+        {book && (
+          <Card className="overflow-hidden">
+            <CardHeader className="space-y-3">
+              <CardTitle className="text-2xl">{book.name}</CardTitle>
+              <CardDescription className="text-sm leading-relaxed max-w-lg">{book.description}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button asChild className="inline-flex w-full justify-center sm:w-auto">
+                <a href={book.url} target="_blank" rel="noopener noreferrer">
+                  View on Amazon
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
         )}
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button asChild>
-            <Link href="/contact">Contact Michael Njo, DDS</Link>
-          </Button>
-          <Button variant="ghost" asChild>
-            <Link href="/">Back to home</Link>
+        {institute && (
+          <Card className="overflow-hidden">
+            <CardHeader className="space-y-3">
+              <CardTitle className="text-2xl">{institute.name}</CardTitle>
+              <CardDescription className="text-sm leading-relaxed max-w-lg">{institute.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button
+                asChild
+                variant="outline"
+                className="inline-flex w-full justify-center border-primary/30 text-primary sm:w-auto"
+              >
+                <a href={institute.url} target="_blank" rel="noopener noreferrer">
+                  Visit institute
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="text-2xl font-semibold">Reader reviews</h2>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/testimonials">Explore testimonials</Link>
           </Button>
         </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {bookReviews.map((review) => (
+            <Card key={`${review.author}-${review.datePublished}`}>
+              <CardHeader className="space-y-1">
+                <p className="text-sm text-muted-foreground">{review.datePublished}</p>
+                <CardTitle className="text-lg">{review.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">{review.author}</p>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">{review.body}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        <Button asChild>
+          <Link href="/contact">Start a strategy call</Link>
+        </Button>
+        <Button asChild variant="outline">
+          <Link href="/michael-njo-dds">Back to profile</Link>
+        </Button>
       </div>
-    </main>
+    </div>
   );
 }

@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Link, useLocation } from "wouter";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link, useLocation } from "wouter";
-import { useState } from "react";
 import { StructuredData } from "@/components/structured-data";
 import { getContactStructuredData } from "@/seo/structured-data";
 
@@ -30,7 +30,6 @@ const defaultValues: ContactFormValues = {
 };
 
 export default function Contact() {
-
   const [, setLocation] = useLocation();
   const [submitError, setSubmitError] = useState<string | null>(null);
   const form = useForm<ContactFormValues>({
@@ -71,29 +70,23 @@ export default function Contact() {
   return (
     <>
       <StructuredData data={getContactStructuredData()} id="structured-data-contact" />
-      <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
-      <div className="max-w-3xl mx-auto space-y-8">
-        <div className="text-center space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-blue-500">Contact</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
-            Send a message to Michael Njo, DDS
-          </h1>
-          <p className="text-gray-600 leading-relaxed">
-            Share a message directly with Dr. Michael Njo, DDS. Let him know about your practice, goals, or questions and
-            he’ll personally reach out with next steps.
+      <div className="space-y-8">
+        <section className="space-y-3 text-center">
+          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Contact</p>
+          <h1 className="text-3xl font-semibold md:text-4xl">Send a message to Dr. Michael Njo</h1>
+          <p className="mx-auto max-w-2xl text-sm text-muted-foreground">
+            Share a message directly with Dr. Michael Njo. Let him know about your practice, goals, or questions and he’ll
+            personally reach out with next steps.
           </p>
-        </div>
+        </section>
 
-        <Card className="shadow-xl border border-gray-200">
+        <Card className="border border-border/70 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-2xl text-gray-900">Send a message to Dr. Njo</CardTitle>
+            <CardTitle className="text-2xl">Start a conversation</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
@@ -118,6 +111,7 @@ export default function Contact() {
                         <FormControl>
                           <Input type="email" placeholder="you@email.com" {...field} />
                         </FormControl>
+                        <FormDescription>Used for reply confirmation and scheduling.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -131,6 +125,7 @@ export default function Contact() {
                         <FormControl>
                           <Input type="tel" placeholder="Phone number" {...field} />
                         </FormControl>
+                        <FormDescription>Mobile preferred. Include country code if outside the US.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -160,27 +155,31 @@ export default function Contact() {
                       <FormControl>
                         <Textarea rows={6} placeholder="Share context, goals, or specific questions for Dr. Njo" {...field} />
                       </FormControl>
+                      <FormDescription>Describe your timeline, practice type, and immediate priorities.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
                 {submitError && (
-                  <p className="text-sm text-red-500">{submitError}</p>
+                  <p className="text-sm text-red-500" role="status">
+                    {submitError}
+                  </p>
                 )}
-                <Button type="submit" className="w-full md:w-auto" disabled={form.formState.isSubmitting}>
-                  Send message to Dr. Njo
-                </Button>
-                <Button variant="ghost" asChild>
-                  <Link href="/">Back to home</Link>
-                </Button>
+
+                <div className="flex flex-col gap-2 sm:flex-row sm:justify-end sm:items-center">
+                  <Button variant="outline" asChild>
+                    <Link href="/">Back to home</Link>
+                  </Button>
+                  <Button type="submit" disabled={form.formState.isSubmitting}>
+                    Send message to Dr. Njo
+                  </Button>
+                </div>
               </form>
             </Form>
           </CardContent>
         </Card>
-
       </div>
-      </main>
     </>
   );
 }

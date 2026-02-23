@@ -1,6 +1,7 @@
-import { Link } from "wouter";
 import { CheckCircle2 } from "lucide-react";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { StructuredData } from "@/components/structured-data";
 import { getContactSuccessStructuredData } from "@/seo/structured-data";
 
@@ -8,28 +9,37 @@ export default function ContactSuccess() {
   return (
     <>
       <StructuredData data={getContactSuccessStructuredData()} id="structured-data-contact-success" />
-      <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12 flex items-center">
-      <div className="max-w-2xl mx-auto text-center space-y-6">
-        <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto" />
-        <div className="space-y-3">
-          <p className="text-sm uppercase tracking-[0.4em] text-blue-500">Message sent</p>
-          <h1 className="text-3xl font-semibold text-gray-900">
-            Thank you for reaching out to Dr. Michael Njo
-          </h1>
-          <p className="text-gray-600">
-            Your message is on its way. Dr. Michael Njo (Michael Njo, DDS) reviews every inquiry personally and will respond within two business days.
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button asChild>
-            <Link href="/">Back to home</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link href="/contact">Send another message</Link>
-          </Button>
-        </div>
+      <div className="mx-auto flex min-h-[55vh] max-w-3xl items-center">
+        <Card className="w-full border border-border/80 shadow-sm">
+          <CardHeader className="text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <CheckCircle2 className="h-6 w-6" />
+            </div>
+            <CardTitle className="text-3xl">Thank you for reaching out</CardTitle>
+            <CardDescription className="mx-auto max-w-2xl">
+              Your message is on its way. Dr. Michael Njo (Michael Njo, DDS) reviews every inquiry personally and will respond
+              within two business days.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm text-muted-foreground">
+            <p>
+              If this is a high-priority transition timing or legal matter, you can still email directly at
+              dentalstrategies@gmail.com for urgent follow-up.
+            </p>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <Button asChild className="sm:w-fit">
+                <Link href="/">Back to home</Link>
+              </Button>
+              <Button asChild variant="outline" className="sm:w-fit">
+                <Link href="/contact">Send another message</Link>
+              </Button>
+              <Button asChild variant="secondary" className="sm:w-fit">
+                <Link href="/resources">Browse resources</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-      </main>
     </>
   );
 }

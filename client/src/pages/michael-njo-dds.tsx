@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { CalendarDays, GraduationCap, MessageSquareQuote, Briefcase, Globe, PlayCircle } from "lucide-react";
+import { TestimonialListCard } from "@/components/testimonials/testimonial-card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StructuredData } from "@/components/structured-data";
 import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
 import { testimonialPages } from "@/data/testimonials";
 import { dugoniCollaborationImage, njoLifeGalleryImages } from "@/data/media";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 type GalleryImage = (typeof njoLifeGalleryImages)[number];
 
@@ -16,17 +21,15 @@ export default function MichaelNjoDDS() {
     new URLSearchParams(window.location.search).get("tab") === "news"
       ? "news"
       : "overview";
-  const book = resources.find((resource) => resource.type === "Book");
-  const institute = resources.find((resource) => resource.type === "EducationalOrganization");
+
   const featuredTestimonials = testimonialPages.slice(0, 6);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+
   const newsItems = [
     {
       posted: "Jan 24, 2026",
-      postedDateTime: "2026-01-24",
-      title: "Building a dental practice that is always sale ready",
       eventDate: "Friday, February 27, 2026",
-      eventDateTime: "2026-02-27",
+      title: "Building a dental practice that is always sale ready",
       host: "Philips Group",
       sponsor: "Provide",
       image: {
@@ -34,390 +37,256 @@ export default function MichaelNjoDDS() {
         alt: "Event poster for Building a dental practice that is always sale ready",
       },
       description:
-        "Dr. Michael Njo, DDS will attend the Philips Group event \"Building a dental practice that is always sale ready\" on Friday, February 27, 2026. Sponsored by Provide, the session highlights how owners can keep their practices prepared for long-term transition value.",
+        "Dr. Michael Njo, DDS will discuss preparing ownership and operations for potential transition opportunities and long-term value creation.",
+    },
+    {
+      posted: "Nov 09, 2025",
+      eventDate: "November 09, 2025",
+      title: "Practice Culture Leadership Session",
+      host: "Practice Transitions Institute",
+      sponsor: "HealthcareStrategiesMD",
+      image: {
+        src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1767707725/UOP-board-dinner_vvxbkq.webp",
+        alt: "Culture Leadership Session",
+      },
+      description:
+        "A practical framework session focused on leadership, staffing, and organizational resilience during growth periods.",
+    },
+  ];
+
+  const organizations = [
+    {
+      title: "Dental Strategies",
+      body: "Primary consulting practice focused on practice launches, growth, and transitions.",
+    },
+    {
+      title: "Practice Transitions Institute",
+      body: "Education and transition strategy for dentists navigating ownership and partner dynamics.",
+    },
+    {
+      title: "HealthcareStrategiesMD",
+      body: "Broader operational and growth strategy for healthcare practice owners.",
+    },
+    {
+      title: "Business Strategies",
+      body: "Leadership, systems, and sustainable workflow support for growing teams.",
     },
   ];
 
   return (
     <>
       <StructuredData data={getMichaelNjoStructuredData()} id="structured-data-michael-njo-dds" />
-      <main className="min-h-screen bg-white transition-colors duration-300 px-4 py-12">
-        <div className="max-w-4xl mx-auto space-y-10">
-          <header className="text-center space-y-4">
-            <p className="text-sm uppercase tracking-[0.4em] text-blue-500">About</p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900">
-              Michael Njo DDS
-            </h1>
-            <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Michael Njo, DDS is a dental practice transitions consultant and founder of Dental Strategies Consulting. He
-              mentors dentists and healthcare owners through practice launches, growth planning, valuations, leadership
-              development, and successful practice transitions.
-            </p>
-          </header>
-
-          <Tabs defaultValue={defaultTab} className="space-y-8">
-            <div className="flex justify-center">
-              <TabsList className="mx-auto grid w-full max-w-md grid-cols-2 rounded-full border border-slate-200 bg-slate-100 p-1 shadow-sm">
-                <TabsTrigger
-                  value="overview"
-                  className="rounded-full text-slate-600 transition-colors hover:text-blue-700 data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:ring-1 data-[state=active]:ring-slate-200 data-[state=active]:font-semibold"
-                >
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="news"
-                  className="rounded-full text-slate-600 transition-colors hover:text-blue-700 data-[state=active]:bg-white data-[state=active]:text-blue-700 data-[state=active]:shadow-sm data-[state=active]:ring-1 data-[state=active]:ring-slate-200 data-[state=active]:font-semibold"
-                >
-                  News
-                </TabsTrigger>
-              </TabsList>
-            </div>
-            <TabsContent value="overview" className="mt-8 space-y-10">
-              <section aria-labelledby="background-heading" className="grid gap-8 md:grid-cols-3 items-start">
-                <div className="w-full space-y-6">
-                  <img
-                    src="/dr-njo-headshot.webp"
-                    alt="Michael Njo, DDS headshot"
-                    width={383}
-                    height={460}
-                    className="w-56 h-56 md:w-full md:h-auto rounded-3xl object-cover shadow-xl mx-auto md:mx-0"
-                  />
-                  <figure className="rounded-3xl border border-gray-200 bg-white shadow-lg overflow-hidden">
-                    <img
-                      src={dugoniCollaborationImage.src}
-                      srcSet={dugoniCollaborationImage.srcSet}
-                      sizes={dugoniCollaborationImage.sizes}
-                      width={dugoniCollaborationImage.width}
-                      height={dugoniCollaborationImage.height}
-                      alt={dugoniCollaborationImage.alt}
-                      className="w-full h-auto object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <figcaption className="px-4 py-3 text-xs text-gray-500">
-                      {dugoniCollaborationImage.caption}
-                    </figcaption>
-                  </figure>
-                </div>
-                <div className="md:col-span-2 space-y-4 text-gray-600 leading-relaxed">
-                  <h2 id="background-heading" className="text-2xl font-semibold text-gray-900">
-                    Background
-                  </h2>
-                  <p>
-                    Michael Njo, DDS is a graduate of the University of the Pacific School of Dentistry and spent years in
-                    private practice before moving into full-time consulting. His work centers on helping doctors align
-                    clinical values with the business realities of ownership.
-                  </p>
-                  <p>
-                    For more than 25 years, Dr. Njo has partnered with practice owners on start-ups, acquisitions,
-                    partnerships, expansions, retirement planning, and seller/buyer transitions. He focuses on clear strategy,
-                    strong teams, and sustainable patient-centered growth.
-                  </p>
-                  <p>
-                    Through his organizations, he works hands-on with doctors and teams to build systems that reduce
-                    operational friction, improve profitability, and protect the patient experience during periods of change.
-                  </p>
-                </div>
-              </section>
-
-              <section aria-labelledby="life-impact-heading" className="space-y-4">
-                <header className="text-center space-y-2">
-                  <h2 id="life-impact-heading" className="text-2xl font-semibold text-gray-900">
-                    Life &amp; Impact
-                  </h2>
-                  <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    Moments from Dr. Njo's leadership, mentorship, and community partnerships across his career.
-                  </p>
-                </header>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {njoLifeGalleryImages.map((image) => (
-                    <figure
-                      key={image.src}
-                      className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm"
-                    >
-                      <button
-                        type="button"
-                        onClick={() => setSelectedImage(image)}
-                        className="group block w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                        aria-haspopup="dialog"
-                        aria-label={`View photo: ${image.alt}`}
-                      >
-                        <img
-                          src={image.src}
-                          srcSet={image.srcSet}
-                          sizes={image.sizes}
-                          alt={image.alt}
-                          className="h-56 w-full object-cover transition duration-300 group-hover:scale-105 group-focus-visible:scale-105 cursor-zoom-in"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </button>
-                      {image.caption ? (
-                        <figcaption className="px-4 py-3 text-xs text-gray-500">
-                          {image.caption}
-                        </figcaption>
-                      ) : null}
-                    </figure>
-                  ))}
-                </div>
-                <Dialog
-                  open={Boolean(selectedImage)}
-                  onOpenChange={(open) => {
-                    if (!open) {
-                      setSelectedImage(null);
-                    }
-                  }}
-                >
-                  <DialogContent className="max-w-6xl w-[95vw] border-none bg-transparent p-0 shadow-none">
-                    {selectedImage ? (
-                      <>
-                        <DialogTitle className="sr-only">{selectedImage.alt}</DialogTitle>
-                        <DialogDescription className="sr-only">
-                          {selectedImage.caption ?? "Expanded view of the selected photo."}
-                        </DialogDescription>
-                        <figure className="rounded-2xl bg-black/90 p-3 sm:p-4">
-                          <img
-                            src={selectedImage.src}
-                            srcSet={selectedImage.srcSet}
-                            sizes="100vw"
-                            alt={selectedImage.alt}
-                            className="max-h-[80vh] w-full rounded-xl object-contain"
-                            loading="eager"
-                            decoding="async"
-                          />
-                          {selectedImage.caption ? (
-                            <figcaption className="mt-3 text-center text-sm text-gray-200">
-                              {selectedImage.caption}
-                            </figcaption>
-                          ) : null}
-                        </figure>
-                      </>
-                    ) : null}
-                  </DialogContent>
-                </Dialog>
-              </section>
-
-              <section aria-labelledby="testimonials-heading" className="space-y-4">
-                <header className="text-center space-y-2">
-                  <h2 id="testimonials-heading" className="text-2xl font-semibold text-gray-900">
-                    Testimonials
-                  </h2>
-                  <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    What dentists, teams, and healthcare leaders say about working with Michael Njo, DDS.
-                  </p>
-                </header>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  {featuredTestimonials.map((testimonial) => (
-                    <a
-                      key={testimonial.slug}
-                      href={`/testimonials/${testimonial.slug}`}
-                      className="group rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:border-blue-300 hover:shadow-md transition"
-                    >
-                      <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
-                        {testimonial.excerpt}
-                      </p>
-                      <p className="mt-4 text-sm font-semibold text-gray-900 group-hover:text-blue-700">
-                        {testimonial.author}
-                      </p>
-                      <p className="mt-3 text-sm text-blue-600 underline font-medium">
-                        Read full story
-                      </p>
-                    </a>
-                  ))}
-                </div>
-
-                <div className="text-center">
-                  <a href="/testimonials" className="inline-flex text-sm text-blue-600 underline font-medium">
-                    View all testimonials
-                  </a>
-                </div>
-              </section>
-
-              <section aria-labelledby="services-heading" className="space-y-4">
-                <h2 id="services-heading" className="text-2xl font-semibold text-gray-900 text-center">
-                  Services
-                </h2>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {services.map((service) => (
-                    <div
-                      key={service.name}
-                      className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-                    >
-                      <h3 className="text-lg font-medium text-gray-900">{service.name}</h3>
-                      <p className="text-sm text-gray-600 mt-2">{service.description}</p>
-                      <p className="text-xs text-gray-500 mt-2">{service.audience}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section aria-labelledby="organizations-heading" className="space-y-4">
-                <h2 id="organizations-heading" className="text-2xl font-semibold text-gray-900 text-center">
-                  Organizations
-                </h2>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {[
-                    {
-                      name: "Dental Strategies Consulting",
-                      description:
-                        "Primary consulting practice focused on practice launches, growth strategy, valuations, and transitions.",
-                    },
-                    {
-                      name: "Practice Transitions Institute",
-                      description:
-                        "Education and training platform helping dentists navigate ownership, partnerships, and retirement transitions.",
-                    },
-                    {
-                      name: "HealthcareStrategiesMD",
-                      description:
-                        "Advisory work extending transition and growth frameworks to broader healthcare practices.",
-                    },
-                    {
-                      name: "Business Strategies",
-                      description:
-                        "Business coaching for owners who want scalable systems, resilient teams, and long-term profitability.",
-                    },
-                  ].map((org) => (
-                    <div
-                      key={org.name}
-                      className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
-                    >
-                      <h3 className="text-lg font-medium text-gray-900">{org.name}</h3>
-                      <p className="text-sm text-gray-600 mt-2">{org.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section aria-labelledby="media-heading" className="space-y-4">
-                <h2 id="media-heading" className="text-2xl font-semibold text-gray-900 text-center">
-                  Media &amp; Resources
-                </h2>
-                <div className="grid gap-4 md:grid-cols-2">
-                  {book && (
-                    <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-2">
-                      <h3 className="text-lg font-medium text-gray-900">{book.name}</h3>
-                      <p className="text-sm text-gray-600">{book.description}</p>
-                      <a
-                        href={book.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-600 underline font-medium"
-                      >
-                        View the book
-                      </a>
-                    </div>
-                  )}
-                  {institute && (
-                    <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm space-y-2">
-                      <h3 className="text-lg font-medium text-gray-900">{institute.name}</h3>
-                      <p className="text-sm text-gray-600">{institute.description}</p>
-                      <a
-                        href={institute.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-blue-600 underline font-medium"
-                      >
-                        Visit the institute
-                      </a>
-                    </div>
-                  )}
-                </div>
-                <div className="text-center">
-                  <a href="/resources" className="inline-flex text-sm text-blue-600 underline font-medium">
-                    Browse all resources
-                  </a>
-                </div>
-              </section>
-
-              <section aria-labelledby="contact-heading" className="space-y-4 text-center">
-                <h2 id="contact-heading" className="text-2xl font-semibold text-gray-900">
-                  Contact
-                </h2>
-                <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                  For consulting inquiries, speaking requests, or practice transition support, email{" "}
-                  <a
-                    href={`mailto:${contactDetails.email}`}
-                    className="text-blue-600 underline font-medium"
-                  >
-                    {contactDetails.email}
-                  </a>{" "}
-                  or use the contact form.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asChild>
-                    <Link href="/contact">Contact Michael Njo, DDS</Link>
-                  </Button>
-                </div>
-              </section>
-            </TabsContent>
-
-            <TabsContent value="news" className="mt-8 space-y-6">
-              <section aria-labelledby="news-heading" className="space-y-6">
-                <header className="text-center space-y-2">
-                  <h2 id="news-heading" className="text-2xl font-semibold text-gray-900">
-                    News
-                  </h2>
-                  <p className="text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    Recent updates and appearances featuring Michael Njo, DDS.
-                  </p>
-                </header>
-                <div className="space-y-4">
-                  {newsItems.map((item) => (
-                    <article
-                      key={item.postedDateTime}
-                      className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
-                    >
-                      <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
-                        <img
-                          src={item.image.src}
-                          alt={item.image.alt}
-                          className="w-full h-auto object-contain"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs uppercase tracking-[0.3em] text-gray-500">
-                        <span>News update</span>
-                        <time dateTime={item.postedDateTime}>Posted {item.posted}</time>
-                      </div>
-                      <h3 className="mt-4 text-xl font-semibold text-gray-900">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                        {item.description}
-                      </p>
-                      <dl className="mt-5 grid gap-4 sm:grid-cols-3 text-sm">
-                        <div className="space-y-1">
-                          <dt className="text-xs uppercase tracking-wide text-gray-500">Event date</dt>
-                          <dd className="font-semibold text-gray-900">
-                            <time dateTime={item.eventDateTime}>{item.eventDate}</time>
-                          </dd>
-                        </div>
-                        <div className="space-y-1">
-                          <dt className="text-xs uppercase tracking-wide text-gray-500">Host</dt>
-                          <dd className="font-semibold text-gray-900">{item.host}</dd>
-                        </div>
-                        <div className="space-y-1">
-                          <dt className="text-xs uppercase tracking-wide text-gray-500">Sponsor</dt>
-                          <dd className="font-semibold text-gray-900">{item.sponsor}</dd>
-                        </div>
-                      </dl>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </TabsContent>
-          </Tabs>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button variant="ghost" asChild>
-              <Link href="/">Back to home</Link>
+      <div className="space-y-8">
+        <section className="text-center space-y-4">
+          <p className="sr-only">Background</p>
+          <p className="text-sm font-medium text-muted-foreground">Consulting Profile</p>
+          <h1 className="text-4xl font-semibold">Dr. Michael Njo</h1>
+          <p className="mx-auto max-w-3xl text-muted-foreground">
+            Founder of Dental Strategies, HealthcareStrategiesMD, Business Strategies, and Practice Transitions Institute, mentoring
+            healthcare owners through ownership, growth, and transitions.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button asChild>
+              <a href={`mailto:${contactDetails.email}`}>Send an email</a>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/contact">Request Consultation</Link>
             </Button>
           </div>
-        </div>
-      </main>
+        </section>
+
+        <Tabs defaultValue={defaultTab} className="space-y-6">
+          <TabsList className="mx-auto grid w-full max-w-md grid-cols-2">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="news">News</TabsTrigger>
+          </TabsList>
+
+        <TabsContent value="overview" className="space-y-6">
+            <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+              <Card>
+                <CardHeader>
+                  <CardTitle>About Dr. Michael Njo</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <img
+                    src={dugoniCollaborationImage.src}
+                    srcSet={dugoniCollaborationImage.srcSet}
+                    sizes={dugoniCollaborationImage.sizes}
+                    alt={dugoniCollaborationImage.alt}
+                    width={dugoniCollaborationImage.width}
+                    height={dugoniCollaborationImage.height}
+                    className="mx-auto h-64 w-64 rounded-2xl object-cover object-center"
+                    decoding="async"
+                  />
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    A practitioner-turned-consultant with deep private practice experience, Dr. Njo helps healthcare owners design
+                    resilient systems for team execution, growth strategy, and transitions.
+                  </p>
+                  <Button variant="outline" asChild>
+                    <a href={dugoniCollaborationImage.src} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2">
+                      <GraduationCap className="h-4 w-4" />
+                      University profile and collaborations
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <p className="sr-only">Services</p>
+                  <CardTitle>Core services</CardTitle>
+                  <CardDescription>Practice launches, management, and transition work</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-3">
+                  {services.map((service) => (
+                    <div key={service.name} className="rounded-lg border border-border p-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-sm font-semibold">{service.name}</p>
+                        <Badge variant="secondary">Service</Badge>
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">{service.description}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Organizations</CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-3 sm:grid-cols-2">
+                {organizations.map((org) => (
+                  <div key={org.title} className="rounded-lg border border-border p-4">
+                    <p className="font-medium">{org.title}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{org.body}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Life & Leadership in Media</CardTitle>
+                <CardDescription>Gallery of speaking, mentor, and teaching moments</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {njoLifeGalleryImages.slice(0, 9).map((image) => (
+                    <button
+                      key={image.src}
+                      type="button"
+                      className="group block overflow-hidden rounded-lg border border-border bg-white text-left"
+                      onClick={() => setSelectedImage(image)}
+                    >
+                      <img
+                        src={image.src}
+                        srcSet={image.srcSet}
+                        sizes={image.sizes}
+                        alt={image.alt}
+                        className="h-44 w-full object-cover transition duration-300 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <p className="line-clamp-1 p-2 text-xs text-muted-foreground">{image.caption ?? image.alt}</p>
+                    </button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Dialog
+              open={Boolean(selectedImage)}
+              onOpenChange={(open) => {
+                if (!open) {
+                  setSelectedImage(null);
+                }
+              }}
+            >
+              <DialogContent className="max-w-6xl border-none bg-black/90 p-0 text-white">
+                {selectedImage ? (
+                  <>
+                    <DialogTitle className="sr-only">{selectedImage.alt}</DialogTitle>
+                    <DialogDescription className="sr-only">
+                      {selectedImage.caption ?? "Expanded gallery image of Dr. Njo."}
+                    </DialogDescription>
+                    <img
+                      src={selectedImage.src}
+                      srcSet={selectedImage.srcSet}
+                      sizes="100vw"
+                      alt={selectedImage.alt}
+                      className="h-auto w-full rounded-t-lg object-contain"
+                      loading="eager"
+                    />
+                    {selectedImage.caption ? (
+                      <p className="px-4 pb-4 text-sm text-slate-100">{selectedImage.caption}</p>
+                    ) : null}
+                  </>
+                ) : null}
+              </DialogContent>
+            </Dialog>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Testimonials</CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-4 md:grid-cols-2">
+                {featuredTestimonials.map((testimonial) => (
+                  <TestimonialListCard key={testimonial.slug} testimonial={testimonial} />
+                ))}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="news" className="space-y-4">
+            {newsItems.map((news, index) => (
+              <Card key={`${news.title}-${index}`}>
+                <CardHeader>
+                  <CardTitle>{news.title}</CardTitle>
+                  <CardDescription>
+                    <span className="inline-flex items-center gap-2">
+                      <CalendarDays className="h-3.5 w-3.5" />
+                      {news.eventDate} · {news.host}
+                    </span>
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <img
+                    src={news.image.src}
+                    alt={news.image.alt}
+                    width={960}
+                    height={540}
+                    className="w-full rounded-md object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="text-sm text-muted-foreground">{news.description}</p>
+                  <p className="text-sm text-muted-foreground">Sponsor: {news.sponsor}</p>
+                </CardContent>
+              </Card>
+            ))}
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Media & Speaking</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-lg border border-border p-4">
+                  <p className="text-sm text-muted-foreground">Media & Speaking</p>
+                  <p className="mt-1">Dr. Njo is frequently asked to provide transition guidance for dental professionals.</p>
+                  <Separator className="my-3" />
+                  <Button asChild>
+                    <Link href="/contact" className="inline-flex items-center gap-2">
+                      <MessageSquareQuote className="h-4 w-4" />
+                      Request booking details
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
     </>
   );
 }
