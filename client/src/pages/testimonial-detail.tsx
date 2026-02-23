@@ -1,5 +1,5 @@
 import type { RouteComponentProps } from "wouter";
-import { CalendarDays, ArrowLeft, ArrowRight, Home } from "lucide-react";
+import { CalendarDays, ArrowLeft, ArrowRight, Home, Star } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,9 +17,9 @@ type StarCountProps = {
 const StarCount = ({ count, total = 5 }: StarCountProps) => (
   <div className="mt-2 flex items-center gap-1" aria-label={`${count} out of ${total} stars`}>
     {Array.from({ length: total }).map((_, index) => (
-      <span
+      <Star
         key={`${index}-${count}`}
-        className={`h-2.5 w-2.5 rounded-full ${index < count ? "bg-amber-500" : "bg-slate-300"}`}
+        className={`h-4 w-4 ${index < count ? "fill-current text-amber-500" : "text-slate-300"}`}
         aria-hidden="true"
       />
     ))}

@@ -28,3 +28,7 @@
 
 - Fixed homepage FAQ section on mobile to enforce left alignment for all FAQ questions and answers.
 - Corrected broken/barely visible icon sizing in the “Need a quick path forward?” card by increasing icon size, adding stable spacing, and preventing icon shrinkage in flex layout.
+
+## Follow-up update (Testimonial detail UX)
+
+- Fixed the `/testimonials/:slug` page rating display to use star icons instead of dot markers, matching the testimonial list card style.
