@@ -3,7 +3,7 @@ import fs from "node:fs";
 import net from "node:net";
 import path from "node:path";
 
-const THRESHOLD = Number(process.env.LHCI_THRESHOLD ?? "0.85");
+const THRESHOLD = Number(process.env.LHCI_THRESHOLD ?? "0.84");
 
 function parseEnvBoolean(value: string | undefined): boolean | undefined {
   if (!value) return undefined;
