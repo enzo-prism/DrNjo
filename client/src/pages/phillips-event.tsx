@@ -81,7 +81,7 @@ export default function PhillipsEvent() {
     }
     payload.append(
       "_subject",
-      `Phillips Event \u2014 New contact from ${values.name}`
+      `Phillips Event - New contact from ${values.name}`
     );
     payload.append("_replyto", values.email);
 
@@ -117,7 +117,7 @@ export default function PhillipsEvent() {
           </h1>
           <p className="text-muted-foreground">
             Dr. Njo has received your information and will follow up with you
-            personally. Thank you for attending today\u2019s presentation.
+            personally. Thank you for attending today's presentation.
           </p>
           <div className="flex justify-center gap-3">
             <Button asChild variant="outline">
@@ -163,7 +163,7 @@ export default function PhillipsEvent() {
             <div className="flex items-start gap-3">
               <Clock className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
               <div>
-                <p className="text-sm font-medium">8:30 AM \u2013 2:00 PM</p>
+                <p className="text-sm font-medium">8:30 AM - 2:00 PM</p>
                 <p className="text-xs text-muted-foreground">Pacific Time</p>
               </div>
             </div>
@@ -422,7 +422,7 @@ export default function PhillipsEvent() {
                       <FormControl>
                         <Textarea
                           rows={4}
-                          placeholder="Anything else you\u2019d like Dr. Njo to know \u2014 questions, timeline, specific challenges, etc."
+                          placeholder="Anything else you'd like Dr. Njo to know - questions, timeline, specific challenges, etc."
                           {...field}
                         />
                       </FormControl>
