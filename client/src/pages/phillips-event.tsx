@@ -22,9 +22,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, MapPin, CalendarDays, Clock, Building2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 const SERVICE_OPTIONS = [
   "Practice launches & acquisitions",
@@ -134,138 +132,8 @@ export default function PhillipsEvent() {
 
   return (
     <div className="space-y-8">
-      {/* Event header */}
-      <section className="space-y-4 text-center">
-        <Badge variant="secondary" className="text-xs uppercase tracking-wider">
-          Live Event
-        </Badge>
-        <h1 className="text-3xl font-semibold md:text-4xl">
-          The Practice-Ready Playbook
-        </h1>
-        <p className="mx-auto max-w-2xl text-sm text-muted-foreground">
-          Join Dr. Michael Njo in Anaheim for a practical framework on making
-          your dental practice stronger, more valuable, and ready for any future
-          transition.
-        </p>
-      </section>
-
-      {/* Event details bar */}
-      <Card className="border border-border/70 shadow-sm bg-gradient-to-r from-slate-50 to-white">
-        <CardContent className="py-5">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="flex items-start gap-3">
-              <CalendarDays className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">Friday, February 27, 2026</p>
-                <p className="text-xs text-muted-foreground">Event date</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Clock className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">8:30 AM - 2:00 PM</p>
-                <p className="text-xs text-muted-foreground">Pacific Time</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">
-                  2300 E. Katella Ave., Ste. 405
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Anaheim, CA 92806
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Building2 className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium">The Phillips Group</p>
-                <p className="text-xs text-muted-foreground">
-                  Sponsor
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Presenter + Form grid */}
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-        {/* Presenter card */}
-        <Card className="border border-border/70 shadow-sm h-fit">
-          <CardHeader className="pb-4">
-            <div className="flex items-center gap-4">
-              <img
-                src="/dr-njo-headshot.webp"
-                alt="Dr. Michael Njo, DDS"
-                width={80}
-                height={80}
-                className="h-20 w-20 rounded-full object-cover object-center shadow-md"
-                loading="eager"
-              />
-              <div>
-                <CardTitle className="text-xl">Dr. Michael Njo</CardTitle>
-                <CardDescription>
-                  Founder, Dental Strategies
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              With more than two decades of hands-on experience, Dr. Njo helps
-              dentists and healthcare professionals build practices that are
-              structured for sustainable growth and positioned for high-value
-              transitions.
-            </p>
-            <Separator />
-            <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Areas of expertise
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {SERVICE_OPTIONS.slice(0, 4).map((svc) => (
-                  <Badge key={svc} variant="secondary" className="text-xs">
-                    {svc}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-            <Separator />
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-              Event focus
-            </p>
-            <div className="space-y-2 text-sm text-muted-foreground">
-              <p>
-                Learn practical systems across operations, leadership, valuation,
-                and succession planning.
-              </p>
-              <p>
-                Leave with a clear view of where your practice is strong and
-                where it needs strategic upgrades before a sale or handoff.
-              </p>
-            </div>
-            <Separator />
-            <div className="space-y-1 text-sm">
-              <a
-                href="mailto:dentalstrategies@gmail.com"
-                className="block font-medium text-foreground hover:underline"
-              >
-                dentalstrategies@gmail.com
-              </a>
-              <a
-                href="tel:+16504362939"
-                className="block font-medium text-foreground hover:underline"
-              >
-                (650) 436-2939
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Contact form card */}
+      {/* Contact form */}
+      <div className="mx-auto w-full max-w-3xl">
         <Card className="border border-border/70 shadow-sm">
           <CardHeader>
             <CardTitle className="text-2xl">Connect with Dr. Njo</CardTitle>
