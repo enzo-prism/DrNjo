@@ -68,8 +68,12 @@ export function buildPageTitle(pathname: string): string {
     case "/about":
     case "/michael-njo-dds":
       return "Michael Njo DDS | Practice Transitions Consultant";
+    case "/phillips-event":
+      return "Dental Practice Sales Readiness Event | Michael Njo, DDS";
     case "/dr-michael-njo-interview":
       return "Dr. Michael Njo Interview | Dental Practice Transitions & Consulting";
+    case "/dr-michael-neal-interview":
+      return "Dr. Michael Neal Interview (Legacy Route) | Michael Njo, DDS";
     case "/testimonials":
       return "Testimonials for Michael Njo, DDS | Dental Strategies";
     case "/resources":
@@ -116,8 +120,12 @@ export function buildPageDescription(pathname: string): string {
       return "Read testimonials from dentists and healthcare professionals who have worked with Michael Njo, DDS through Dental Strategies and Practice Transitions Institute.";
     case "/resources":
       return "Access Dental Practice Transitions Handbook, Practice Transitions Institute, and other resources curated by Michael Njo, DDS for practice owners.";
+    case "/phillips-event":
+      return "Register for Dr. Michael Njo's sale-ready practice webinar and request a follow-up with Dental Strategies.";
     case "/dentalflix":
       return "DentalFlix event offer: get $500 off any service with Dr. Michael Njo. When you book or reach out, mention you heard about Michael from the DentalFlix event.";
+    case "/dr-michael-neal-interview":
+      return "Legacy interview route for Dr. Michael Njo that redirects to the latest interview page.";
     case "/contact/success":
       return "Confirmation that your message was sent to Michael Njo, DDS. Dental Strategies will respond within two business days.";
     default:
