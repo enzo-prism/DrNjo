@@ -16,6 +16,7 @@ const TestimonialsPage = lazy(() => import("@/pages/testimonials"));
 const TestimonialDetailPage = lazy(() => import("@/pages/testimonial-detail"));
 const ResourcesPage = lazy(() => import("@/pages/resources"));
 const DentalflixPage = lazy(() => import("@/pages/dentalflix"));
+const PhillipsEventPage = lazy(() => import("@/pages/phillips-event"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function InterviewLegacyRedirect() {
@@ -44,6 +45,7 @@ function App() {
               <Route path="/testimonials/:slug" component={TestimonialDetailPage} />
               <Route path="/resources" component={ResourcesPage} />
               <Route path="/dentalflix" component={DentalflixPage} />
+              <Route path="/phillips-event" component={PhillipsEventPage} />
               <Route path="/contact" component={Contact} />
               <Route path="/contact/success" component={ContactSuccess} />
               <Route component={NotFound} />

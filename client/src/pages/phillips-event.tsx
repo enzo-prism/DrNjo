@@ -1,0 +1,442 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Link } from "wouter";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { CheckCircle2, MapPin, CalendarDays, Clock, Building2 } from "lucide-react";
+
+const SERVICE_OPTIONS = [
+  "Practice launches & acquisitions",
+  "Growth planning & leadership",
+  "Practice valuations & transitions",
+  "Conflict resolution & compliance",
+  "General consultation",
+] as const;
+
+const eventFormSchema = z.object({
+  name: z.string().min(2, "Please enter your full name."),
+  email: z.string().email("Enter a valid email address."),
+  practiceCity: z.string().min(2, "Please enter your practice city."),
+  practiceWebsite: z.string().optional(),
+  services: z
+    .array(z.string())
+    .min(1, "Please select at least one service of interest."),
+  notes: z.string().optional(),
+});
+
+type EventFormValues = z.infer<typeof eventFormSchema>;
+
+const defaultValues: EventFormValues = {
+  name: "",
+  email: "",
+  practiceCity: "",
+  practiceWebsite: "",
+  services: [],
+  notes: "",
+};
+
+export default function PhillipsEvent() {
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  const form = useForm<EventFormValues>({
+    resolver: zodResolver(eventFormSchema),
+    defaultValues,
+  });
+
+  const onSubmit = async (values: EventFormValues) => {
+    setSubmitError(null);
+
+    const payload = new FormData();
+    payload.append("name", values.name);
+    payload.append("email", values.email);
+    payload.append("practice_city", values.practiceCity);
+    if (values.practiceWebsite) {
+      payload.append("practice_website", values.practiceWebsite);
+    }
+    payload.append("services_interested", values.services.join(", "));
+    if (values.notes) {
+      payload.append("additional_notes", values.notes);
+    }
+    payload.append(
+      "_subject",
+      `Phillips Event \u2014 New contact from ${values.name}`
+    );
+    payload.append("_replyto", values.email);
+
+    try {
+      const res = await fetch("https://formspree.io/f/mdalbpae", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: payload,
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed with status ${res.status}`);
+      }
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      setSubmitError(
+        "We couldn't send your information. Please try again or email dentalstrategies@gmail.com."
+      );
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="space-y-8">
+        <section className="mx-auto max-w-2xl space-y-6 text-center py-16">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50">
+            <CheckCircle2 className="h-8 w-8 text-emerald-600" />
+          </div>
+          <h1 className="text-3xl font-semibold md:text-4xl">
+            Thank you for connecting
+          </h1>
+          <p className="text-muted-foreground">
+            Dr. Njo has received your information and will follow up with you
+            personally. Thank you for attending today\u2019s presentation.
+          </p>
+          <div className="flex justify-center gap-3">
+            <Button asChild variant="outline">
+              <Link href="/">Visit michaelnjodds.com</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/contact">Send a direct message</Link>
+            </Button>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-8">
+      {/* Event header */}
+      <section className="space-y-4 text-center">
+        <Badge variant="secondary" className="text-xs uppercase tracking-wider">
+          Live Event
+        </Badge>
+        <h1 className="text-3xl font-semibold md:text-4xl">
+          Building a Dental Practice That Is Always Sale-Ready
+        </h1>
+        <p className="mx-auto max-w-2xl text-sm text-muted-foreground">
+          Why your practice is one of your largest assets \u2014 and a vehicle for
+          leverage, liquidity, and long-term wealth.
+        </p>
+      </section>
+
+      {/* Event details bar */}
+      <Card className="border border-border/70 shadow-sm bg-gradient-to-r from-slate-50 to-white">
+        <CardContent className="py-5">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="flex items-start gap-3">
+              <CalendarDays className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">Friday, February 27, 2026</p>
+                <p className="text-xs text-muted-foreground">Event date</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">8:30 AM \u2013 2:00 PM</p>
+                <p className="text-xs text-muted-foreground">Pacific Time</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">
+                  2300 E. Katella Ave., Ste. 405
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Anaheim, CA 92806
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Building2 className="mt-0.5 h-5 w-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-sm font-medium">The Phillips Group</p>
+                <p className="text-xs text-muted-foreground">
+                  Sponsored by Provide
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Presenter + Form grid */}
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+        {/* Presenter card */}
+        <Card className="border border-border/70 shadow-sm h-fit">
+          <CardHeader className="pb-4">
+            <div className="flex items-center gap-4">
+              <img
+                src="/dr-njo-headshot.webp"
+                alt="Dr. Michael Njo, DDS"
+                width={80}
+                height={80}
+                className="h-20 w-20 rounded-full object-cover object-center shadow-md"
+                loading="eager"
+              />
+              <div>
+                <CardTitle className="text-xl">Dr. Michael Njo</CardTitle>
+                <CardDescription>
+                  Founder, Dental Strategies
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              With more than two decades of hands-on experience, Dr. Njo helps
+              dentists and healthcare professionals build practices that are
+              structured for sustainable growth and always positioned for
+              transition opportunities.
+            </p>
+            <Separator />
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Areas of expertise
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {SERVICE_OPTIONS.slice(0, 4).map((svc) => (
+                  <Badge key={svc} variant="secondary" className="text-xs">
+                    {svc}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            <Separator />
+            <div className="space-y-1 text-sm">
+              <a
+                href="mailto:dentalstrategies@gmail.com"
+                className="block font-medium text-foreground hover:underline"
+              >
+                dentalstrategies@gmail.com
+              </a>
+              <a
+                href="tel:+16504362939"
+                className="block font-medium text-foreground hover:underline"
+              >
+                (650) 436-2939
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contact form card */}
+        <Card className="border border-border/70 shadow-sm">
+          <CardHeader>
+            <CardTitle className="text-2xl">Connect with Dr. Njo</CardTitle>
+            <CardDescription>
+              Interested in learning more after today\u2019s presentation? Share your
+              details and Dr. Njo will follow up personally.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-5"
+              >
+                {/* Name */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your full name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Email */}
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="you@email.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Dr. Njo will use this to follow up with you directly.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Practice city */}
+                <FormField
+                  control={form.control}
+                  name="practiceCity"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Practice city / location</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g. Anaheim, CA"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Practice website */}
+                <FormField
+                  control={form.control}
+                  name="practiceWebsite"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Practice website (optional)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="https://yourpractice.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Services checkboxes */}
+                <FormField
+                  control={form.control}
+                  name="services"
+                  render={() => (
+                    <FormItem>
+                      <FormLabel>
+                        Service(s) you\u2019re interested in
+                      </FormLabel>
+                      <FormDescription>
+                        Select all that apply.
+                      </FormDescription>
+                      <div className="grid gap-2 sm:grid-cols-2 pt-1">
+                        {SERVICE_OPTIONS.map((svc) => {
+                          const checked =
+                            form.watch("services").includes(svc);
+                          return (
+                            <label
+                              key={svc}
+                              className={`flex cursor-pointer items-center gap-2.5 rounded-lg border px-3 py-2.5 text-sm transition-colors ${
+                                checked
+                                  ? "border-primary bg-primary/5 text-foreground"
+                                  : "border-border bg-background text-muted-foreground hover:border-primary/40"
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                className="accent-primary h-4 w-4 rounded"
+                                checked={checked}
+                                onChange={(e) => {
+                                  const current =
+                                    form.getValues("services");
+                                  if (e.target.checked) {
+                                    form.setValue("services", [
+                                      ...current,
+                                      svc,
+                                    ]);
+                                  } else {
+                                    form.setValue(
+                                      "services",
+                                      current.filter(
+                                        (s) => s !== svc
+                                      )
+                                    );
+                                  }
+                                  form.trigger("services");
+                                }}
+                              />
+                              {svc}
+                            </label>
+                          );
+                        })}
+                      </div>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Notes */}
+                <FormField
+                  control={form.control}
+                  name="notes"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Additional notes (optional)</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          rows={4}
+                          placeholder="Anything else you\u2019d like Dr. Njo to know \u2014 questions, timeline, specific challenges, etc."
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {submitError && (
+                  <p className="text-sm text-red-500" role="status">
+                    {submitError}
+                  </p>
+                )}
+
+                <div className="flex flex-col gap-2 sm:flex-row sm:justify-end sm:items-center pt-2">
+                  <Button
+                    type="submit"
+                    disabled={form.formState.isSubmitting}
+                    className="w-full sm:w-auto"
+                  >
+                    {form.formState.isSubmitting
+                      ? "Sending..."
+                      : "Submit"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
