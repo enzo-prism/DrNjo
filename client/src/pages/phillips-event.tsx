@@ -140,11 +140,12 @@ export default function PhillipsEvent() {
           Live Event
         </Badge>
         <h1 className="text-3xl font-semibold md:text-4xl">
-          Building a Dental Practice That Is Always Sale-Ready
+          The Practice-Ready Playbook
         </h1>
         <p className="mx-auto max-w-2xl text-sm text-muted-foreground">
-          Why your practice is one of your largest assets \u2014 and a vehicle for
-          leverage, liquidity, and long-term wealth.
+          Join Dr. Michael Njo in Anaheim for a practical framework on making
+          your dental practice stronger, more valuable, and ready for any future
+          transition.
         </p>
       </section>
 
@@ -182,7 +183,7 @@ export default function PhillipsEvent() {
               <div>
                 <p className="text-sm font-medium">The Phillips Group</p>
                 <p className="text-xs text-muted-foreground">
-                  Sponsored by Provide
+                  Sponsor
                 </p>
               </div>
             </div>
@@ -216,8 +217,8 @@ export default function PhillipsEvent() {
             <p className="text-sm text-muted-foreground">
               With more than two decades of hands-on experience, Dr. Njo helps
               dentists and healthcare professionals build practices that are
-              structured for sustainable growth and always positioned for
-              transition opportunities.
+              structured for sustainable growth and positioned for high-value
+              transitions.
             </p>
             <Separator />
             <div className="space-y-2">
@@ -231,6 +232,20 @@ export default function PhillipsEvent() {
                   </Badge>
                 ))}
               </div>
+            </div>
+            <Separator />
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Event focus
+            </p>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <p>
+                Learn practical systems across operations, leadership, valuation,
+                and succession planning.
+              </p>
+              <p>
+                Leave with a clear view of where your practice is strong and
+                where it needs strategic upgrades before a sale or handoff.
+              </p>
             </div>
             <Separator />
             <div className="space-y-1 text-sm">
@@ -255,8 +270,9 @@ export default function PhillipsEvent() {
           <CardHeader>
             <CardTitle className="text-2xl">Connect with Dr. Njo</CardTitle>
             <CardDescription>
-              Interested in learning more after today\u2019s presentation? Share your
-              details and Dr. Njo will follow up personally.
+              Interested in learning more after today&apos;s presentation? Share
+              your details and Dr. Njo will follow up personally with tailored
+              next steps.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -308,7 +324,7 @@ export default function PhillipsEvent() {
                   name="practiceCity"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Practice city / location</FormLabel>
+                      <FormLabel>Practice city or location</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Anaheim, CA"
@@ -345,10 +361,10 @@ export default function PhillipsEvent() {
                   render={() => (
                     <FormItem>
                       <FormLabel>
-                        Service(s) you\u2019re interested in
+                        Services you&apos;re interested in
                       </FormLabel>
                       <FormDescription>
-                        Select all that apply.
+                        Select the services that align with your priorities.
                       </FormDescription>
                       <div className="grid gap-2 sm:grid-cols-2 pt-1">
                         {SERVICE_OPTIONS.map((svc) => {
@@ -428,8 +444,8 @@ export default function PhillipsEvent() {
                     className="w-full sm:w-auto"
                   >
                     {form.formState.isSubmitting
-                      ? "Sending..."
-                      : "Submit"}
+                      ? "Submitting..."
+                      : "Request a follow-up"}
                   </Button>
                 </div>
               </form>

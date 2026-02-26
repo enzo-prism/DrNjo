@@ -69,7 +69,7 @@ export function buildPageTitle(pathname: string): string {
     case "/michael-njo-dds":
       return "Michael Njo DDS | Practice Transitions Consultant";
     case "/phillips-event":
-      return "Phillips Event | Dental Strategies";
+      return "Phillips Event | Building a Sale-Ready Dental Practice | Dental Strategies";
     case "/dr-michael-njo-interview":
       return "Dr. Michael Njo Interview | Dental Practice Transitions & Consulting";
     case "/dr-michael-neal-interview":
@@ -121,7 +121,7 @@ export function buildPageDescription(pathname: string): string {
     case "/resources":
       return "Access Dental Practice Transitions Handbook, Practice Transitions Institute, and other resources curated by Michael Njo, DDS for practice owners.";
     case "/phillips-event":
-      return "Join the Phillips Event to learn how to position your dental practice for growth and transition readiness.";
+      return "Attend the Phillips Event in Anaheim to learn how to make your dental practice more valuable, more durable, and ready for any transition.";
     case "/dentalflix":
       return "DentalFlix event offer: get $500 off any service with Dr. Michael Njo. When you book or reach out, mention you heard about Michael from the DentalFlix event.";
     case "/dr-michael-neal-interview":
