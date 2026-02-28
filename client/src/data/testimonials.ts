@@ -89,7 +89,39 @@ export const testimonials: Testimonial[] = [
     stars: 5,
   },
   {
-    quote: `Dr. Njo is an exceptional dental consultant and broker who brings unmatched expertise, integrity and strategic insight to every engagement. His deep understanding of both clinical practice operations and the business side of dentistry makes him an invaluable resource for dentists at every stage of their careers. As a consultant, Dr. Njo has a remarkable ability to evaluate a practice comprehensively--from production and profitability to systems, team performance and growth opportunities. His recommendations are thoughtful, data-driven and tailored to the specific goals of each client. He doesn't just identify opportunities; he provides clear, actionable strategies that lead to measurable results. As a broker, Dr. Njo demonstrates professionalism and transparency throughout the entire transaction process. He skillfully guides buyers and sellers with confidence, ensuring smooth transitions while protecting their best interests. His attention to detail, market knowledge and negotiation skills consistently lead to successful outcomes. What truly sets Dr. Njo apart is his commitment to relationships. He builds trust, communicates clearly and genuinely cares about the long-term success of the dentists and practices he serves. I highly recommend Dr. Njo to any dental professional seeking expert consulting guidance or a trusted partner in buying or selling a practice.`,
+    quote: `I have known Dr. Michael Nio since 2016, and over the years he has played an important role in some of the biggest professional decisions of my career.
+
+When Michael sold our practice in 2020, he delivered exactly what he said he would. His valuation proved accurate, the process was smooth, and his guidance gave us confidence every step of the way. In an environment where uncertainty can be overwhelming, Michael brought clarity, honesty, and calm leadership.
+
+I've also watched him step in for colleagues during some of the most stressful moments of their careers. One close friend of mine needed to sell his practice quickly because of serious health concerns. Michael was able to find the right buyer and secure an excellent price in less than 90 days, allowing that doctor to step away with dignity and financial stability. That is the kind of impact that goes beyond business.
+
+Michael has also helped me personally during a very contentious partnership situation. His advice steered me away from what could have been a long and damaging legal battle. By trusting his experience, I was ultimately able to walk away with every dollar owed to me under my contract. That kind of real-world guidance is invaluable and only comes from someone who truly understands both the business and the people involved.
+
+What makes Michael unique is that he doesn't just act as a broker - he becomes a trusted advisor. He works with an excellent legal team that understands how to structure strong dental agreements. He is deeply connected with everyone from large DSOs to boutique private practices, and he brings trusted relationships in marketing, SEO, and malpractice insurance. Having that level of support through one person is incredibly rare.
+
+Beyond his professional skill, Michael is someone I consider a friend and like family. He has a steady, calming presence that makes complex transitions feel manageable. People often say that herding dentists is like herding cats - if that's true, Michael is the shepherd who knows how to bring everyone together and guide them safely forward.
+
+I recommend him without hesitation to any dentist facing a transition, partnership decision, or major career move. Few people combine experience, integrity, and genuine care for their clients the way Michael does.`,
+    author: "Dr. Lee Boese",
+    stars: 5,
+  },
+  {
+    quote: `I would like to sincerely thank Dr. Njo for once again taking the time to come and share his knowledge with us. Having attended his previous session as well, I truly appreciate his continued support and commitment to mentoring us.
+
+His detailed lessons on how to carefully read and analyze dental benefit contracts, understand critical clauses, evaluate reimbursement structures, and assess long-term financial implications have truly opened our horizons. Additionally, his guidance on buying a dental practice - what numbers to review, what contractual points to look over, and how to approach decision-making analytically rather than emotionally - has given me clarity and confidence for the years ahead.
+
+Beyond his expertise, Dr. Njo is such a humble person, always approachable with an ever-smiling face. Despite his busy schedule, he generously gives us his time and attention. I feel truly thankful and blessed to not only learn from him professionally but also to know him as a person.`,
+    author: "Ankit Sidana",
+    stars: 5,
+  },
+  {
+    quote: `Dr. Njo is an exceptional dental consultant and broker who brings unmatched expertise, integrity, and strategic insight to every engagement. His deep understanding of both clinical practice operations and the business side of dentistry makes him an invaluable resource for dentists at every stage of their careers.
+
+As a consultant, Dr. Njo has a remarkable ability to evaluate a practice comprehensively - from production and profitability to systems, team performance, and growth opportunities. His recommendations are thoughtful, data-driven, and tailored to the specific goals of each client. He doesn't just identify opportunities; he provides clear, actionable strategies that lead to measurable results.
+
+As a broker, Dr. Njo demonstrates professionalism and transparency throughout the entire transaction process. He skillfully guides buyers and sellers with confidence, ensuring smooth transitions while protecting their best interests. His attention to detail, market knowledge, and negotiation skills consistently lead to successful outcomes.
+
+What truly sets Dr. Njo apart is his commitment to relationships. He builds trust, communicates clearly, and genuinely cares about the long-term success of the dentists and practices he serves. I highly recommend Dr. Njo to any dental professional seeking expert consulting guidance or a trusted partner in buying or selling a practice.`,
     author: "Kevin Valle",
     stars: 5,
   },
@@ -100,17 +132,13 @@ Michael has great experience in practice consulting because he has worked with d
 
 Michael has a vast network of contacts that is invaluable. He has referred me to professionals in the banking, personal financial, dental insurance, fee schedules, payment processing, and staffing industries, among others. Specifically, Michael has helped us adopt marketing strategies to attract new patients, help our practice stand out in a crowded market, and deliver an exceptional patient experience.
 
-In my practice, Michael's skill with team building has been instrumental in attracting, onboarding and maintaining talent in a challenging labor market. He is the first person I reach out to when there are staff issues in my practice. He created a bonus program to incentivize our team to go above and beyond. Michael gives me strategies to employ with my team while calmly reassuring me things will improve when I overreact to minor personality conflicts.
+In my practice, Michael's skill with team building has been instrumental in attracting, onboarding, and maintaining talent in a challenging labor market. He created a bonus program to incentivize our team, and his advice has helped me handle staff challenges with confidence.
 
-In all he does, Michael operates with integrity in his work. I have known him to dismiss clients because he didn't feel they operated ethically. Michael feels that distancing from these clients actually improves his business by upholding his standard. He is very loyal in his service to improving dental practice performance and enjoyment through his coaching.
+Michael operates with integrity in all he does, even parting ways with clients who do not share his ethical standards. His focus on doing what's right ultimately strengthens his business and the community he serves.
 
-Michael is true to improving the entire dental practice. He understands that if a dental team is not taken care of, we cannot care for our patients. Michael will assess situations from a neutral perspective to give the best advice, even telling me things I do not want to hear when needed. Similarly, when helping with practice transitions, he understands that any deal must take care of all parties in the transaction or it will not be a success.
+Over the years, he has guided me through lease negotiations, real estate purchases, loan restructuring, and the opening of a second practice - all while ensuring alignment between professional success and personal goals.
 
-Each practice owner has a different path and Michael helps optimize each situation with his bold vision. He has helped me negotiate leases, analyze opportunities to purchase real estate, review contracts, lower interest rates on loans and open a second practice. Michael's coaching is invaluable to ensure that our satellite office does not detract from our main practice location.
-
-Michael understands how our professional life relates to, and supports our personal goals. His experience consulting with many practitioners in different phases of life gives him a foundation to provide the guidance I have needed. During hard times he has an uncanny sense of when I need him to check in to see how I am doing.
-
-I want to thank Michael for his help throughout my career. We began working together a few years after I opened my practice when I was struggling during the Great Recession of 2008. He picked me up during the most challenging time of my life and has since helped double the production in my office many times over. Michael has helped me grow as a person and dental professional and I look forward to continuing our relationship.`,
+I began working with Michael after struggling through the Great Recession of 2008. With his support, my office production has multiplied many times over, and I've grown both as a professional and as a person. I'm deeply grateful for his mentorship and look forward to many more years of collaboration.`,
     author: "Jon Sierk",
     stars: 5,
   },
@@ -310,8 +338,14 @@ I want to thank Michael for his help throughout my career. We began working toge
     stars: 5,
   },
   {
-    quote: `I began working with Dr. Michale Njo in 2006 during the purchase of a highly respected Prosthodontic practice. While the practice was already well established, transitioning ownership at that level required thoughtful leadership and experienced guidance. Dr. Njo was instrumental in making that transition seamless. He helped me establish credibility as the new owner, maintain patient confidence, and guide an established team through change with clarity and professionalism. His business and team coaching strengthened systems, workflows, and accountability, and his ability to coach people through change while maintaining morale was invaluable. His leadership coaching had an equally meaningful impact. He helped me create a culture rooted in pride, expertise, and professionalism, and supported my growth not only as a practice owner, but as a leader within the broader dental community. I firmly believe that without his guidance, the transition would have been far more challenging and my success significantly slower to achieve. His influence sharpened my leadership, strengthened the practice, and accelerated meaningful, sustainable growth. I recommend Dr. Michael Njo without reservation to any clinician seeking a successful transition and sustained, high-level practice performance.`,
-    author: "Diana Fat, DDS",
+    quote: `I began working with Dr. Michale Njo in 2006 during the purchase of a highly respected prosthodontic practice. While the practice was already well established, transitioning ownership at that level required thoughtful leadership and experienced guidance.
+
+Dr. Njo was instrumental in making that transition seamless. He helped me establish credibility as the new owner, maintain patient confidence, and guide an established team through change with clarity and professionalism. His business and team coaching strengthened systems, workflows, and accountability, and his ability to coach people through change while maintaining morale was invaluable.
+
+His leadership coaching had an equally meaningful impact. He helped me create a culture rooted in pride, expertise, and professionalism, and supported my growth not only as a practice owner but as a leader within the broader dental community.
+
+I firmly believe that without his guidance, the transition would have been far more challenging and my success significantly slower to achieve. His influence sharpened my leadership, strengthened the practice, and accelerated meaningful, sustainable growth. I recommend Dr. Michael Njo without reservation to any clinician seeking a successful transition and sustained, high-level practice performance.`,
+    author: "Dr. Fat",
     stars: 5,
   },
   {

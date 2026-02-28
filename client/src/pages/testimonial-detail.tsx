@@ -26,8 +26,13 @@ const StarCount = ({ count, total = 5 }: StarCountProps) => (
   </div>
 );
 
+const LEGACY_TESTIMONIAL_SLUGS: Record<string, string> = {
+  "diana-fat-dds": "dr-fat",
+};
+
 export default function TestimonialDetailPage({ params }: TestimonialDetailProps) {
-  const slug = params.slug || "";
+  const requestedSlug = params.slug || "";
+  const slug = LEGACY_TESTIMONIAL_SLUGS[requestedSlug] || requestedSlug;
   const index = testimonialPages.findIndex((item) => item.slug === slug);
   const testimonial = index >= 0 ? testimonialPages[index] : null;
 
