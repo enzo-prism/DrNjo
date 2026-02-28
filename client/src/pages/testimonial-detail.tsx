@@ -27,7 +27,8 @@ const StarCount = ({ count, total = 5 }: StarCountProps) => (
 );
 
 const LEGACY_TESTIMONIAL_SLUGS: Record<string, string> = {
-  "diana-fat-dds": "dr-fat",
+  "dr-fat": "diana-fat-dds",
+  "richard-and-kimberly-crum": "kimberly-crum",
 };
 
 export default function TestimonialDetailPage({ params }: TestimonialDetailProps) {

@@ -2,6 +2,7 @@ export type Testimonial = {
   quote: string;
   author: string;
   stars: number;
+  publishedAt?: string;
 };
 
 export type TestimonialPage = Testimonial & {
@@ -22,11 +23,27 @@ const buildExcerpt = (quote: string, maxLength = 200) => {
   return `${cleaned.slice(0, maxLength - 1).trimEnd()}…`;
 };
 
+const parsePublishedAt = (value?: string) => {
+  if (!value) return Number.NEGATIVE_INFINITY;
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp;
+};
+
+const sortByNewest = (
+  a: Testimonial & { _index: number },
+  b: Testimonial & { _index: number },
+) => {
+  const dateDelta = parsePublishedAt(b.publishedAt) - parsePublishedAt(a.publishedAt);
+  if (dateDelta !== 0) return dateDelta;
+  return a._index - b._index;
+};
+
 export const testimonials: Testimonial[] = [
   {
     quote: `I started with Michael in 2018 and have had an outstanding experience! He brings a wealth of knowledge and a truly professional, friendly approach to my dental practice. His advice is not only practical but also easy to implement, and I've seen improvements in patient satisfaction and office efficiency. Most recently, Michael and his team helped facilitate a chart sale that was fair to both seller and buyer (myself). He expertly guided us through the process and continues to monitor our progress, ensuring a smooth and successful transfer of patients. I highly recommend Michael to any dental team looking to level up their game!`,
     author: "G. Allen Herrera, DDS",
     stars: 5,
+    publishedAt: "2025-10-18",
   },
   {
     quote: `PURPOSE..... Michael, your purpose in making Queensboro Oral Surgery an amazing and truly functioning workplace is definitely working. There have been many positive changes since you have arrived and as for me it has helped me immensely. After your first visit I was hesitant in believing that change can occur here but it has. So a huge thank you to you!!!`,
@@ -42,16 +59,19 @@ export const testimonials: Testimonial[] = [
     quote: `Dr. Michael has become not only a colleague, but a trusted friend who has helped navigate the challenging landscape of a multi state, multi- practice operation. His availability is his best ability. His efficient, calm leadership really made our transition smooth. Providing healthcare for patients becomes harder every day. Dr. Michael makes it easier.`,
     author: "Blaine Leeds",
     stars: 5,
+    publishedAt: "2025-10-04",
   },
   {
     quote: `Michael has made this such a smooth process for me. He knew my inexperience, but still guided and protected my decision making. I felt that everything was fairly and graciously handled. I am so grateful for his guidance. I am happy I was able to buy my first practice with Michael.`,
     author: "Justus Williams",
     stars: 5,
+    publishedAt: "2025-10-04",
   },
   {
     quote: `Michael worked with me on a practice acquisition and I couldn't be more pleased. The help and advice given during the process made me feel secure in the purchase and decisions along the way of my practice. Someone as experienced as Michael in your corner is essential to navigating through the process. He's my coach, confidante, and provides honest, unfiltered advice.`,
     author: "Erica Haskett",
     stars: 5,
+    publishedAt: "2025-08-30",
   },
   {
     quote: `Despite taking numerous courses on buying a dental practice, I still felt overwhelmed and unsure of where to begin. Working with Michael Njo and attending one of his seminars was a turning point. I gained valuable insights that I hadn't encountered elsewhere. Michael is not only incredibly knowledgeable but also genuinely cares about the success of those he works with. I also purchased his book, Dental Practice Transitions Handbook, which provided clear, practical guidance and further deepened my understanding of the transition process. Michael and his team at Dental Transitions bring both expertise and integrity to the table, and working with them has been a truly positive experience. I'm confident in the path ahead and look forward to continuing to work with Dental Transitions as I move into the next stage of my professional journey.`,
@@ -67,26 +87,31 @@ export const testimonials: Testimonial[] = [
     quote: `I am so glad that I attended Dr. Michael Njo's recent seminar. He went into meticulous detail about acquiring and selling a dental practice. I was fortunate to attend dental school with Dr. Njo, and I am so impressed with how he pivoted and became counsel for countless people in practice transitions. When it is my time to sell, I know I will be in good hands!`,
     author: "Kevin Barry",
     stars: 5,
+    publishedAt: "2025-08-02",
   },
   {
     quote: `I recently sold my dental practice after 41 years. I was primarily concerned to find a dentist who matched my treatment planning philosophy and to take good care of my wonderful patients and staff. In the current environment of corporate dentistry, I knew that it would not be an easy task. Fortunately, a colleague gave me the name of Michael Njo and Dental Strategies. Because Michael is a dentist with general practice experience, he has a great understanding of the important aspects for a transfer of a practice, not only for the seller but also for the buyer. I am quite happy that I had Dr Njo to help me navigate my sale! He was very easy to work with. I am glad to report that together we found a great match for my staff and patients.`,
     author: "Gregory Baird",
     stars: 5,
+    publishedAt: "2024-11-20",
   },
   {
     quote: `I attended Mike's practice transition seminar and read his book. He was a very knowledgeable and seasoned expert in this area. I decided to use his consultation service to handle my practice sale. He was able to match a buyer within 2 weeks and completed the transaction within 45 days. He was so amazingly efficient throughout the transition process. I highly recommend him to any dentist interested in selling or buying a dental practice. Thanks again, Mike, you are my Superman.`,
     author: "Tony Choi",
     stars: 5,
+    publishedAt: "2024-10-22",
   },
   {
     quote: `I had the opportunity of attending a transition program by Dr. Michael Njo. I was impressed beyond belief with his knowledge, expertise, and caring manner when helping practice buyers and sellers. I am getting ready to transition out of practice and want my patients to be cared for in the same manner they have been for 30 years. As a dentist I knew that Michael's level of understanding and calming expertise would allow him to guide me through this experience without a doubt. I did not hesitate for one minute before committing to work with him on this very important life change. I look forward to his guidance and have shared with my peers that any transition they plan should involve Dr. Njo. Thank you!!`,
     author: "Linnea Westerberg",
     stars: 5,
+    publishedAt: "2025-08-02",
   },
   {
     quote: `After 35 years of owning my private dental practice, deciding to sell was both a deeply personal and professional milestone. I was fortunate to work with Michael Njo at Practice Transitions Institute, whose expertise, integrity, and calm guidance made all the difference in this life changing process. Michael approached the transition with genuine care. As a fellow dentist himself he understood the emotional weight of passing on a practice built over decades - not just the business side, but the relationships with my patients, staff, as well as the legacy I wanted to preserve. His firsthand experience gave me confidence and I knew I was in good hands. Michael navigated every stage of the transition with professionalism and respect for my goals. He found the perfect buyer who shares my commitment to high quality dental care and will carry on the legacy I worked so hard to build. I know my patients and staff will be left in good hands. If you are considering selling your practice and want a team that truly understands the emotional and practical complexities of the process, I highly recommend Michael and the Practice Transitions Institute.`,
     author: "Brian Valle",
     stars: 5,
+    publishedAt: "2025-07-26",
   },
   {
     quote: `I have known Dr. Michael Nio since 2016, and over the years he has played an important role in some of the biggest professional decisions of my career.
@@ -104,6 +129,7 @@ Beyond his professional skill, Michael is someone I consider a friend and like f
 I recommend him without hesitation to any dentist facing a transition, partnership decision, or major career move. Few people combine experience, integrity, and genuine care for their clients the way Michael does.`,
     author: "Dr. Lee Boese",
     stars: 5,
+    publishedAt: "2026-02-24",
   },
   {
     quote: `I would like to sincerely thank Dr. Njo for once again taking the time to come and share his knowledge with us. Having attended his previous session as well, I truly appreciate his continued support and commitment to mentoring us.
@@ -113,6 +139,7 @@ His detailed lessons on how to carefully read and analyze dental benefit contrac
 Beyond his expertise, Dr. Njo is such a humble person, always approachable with an ever-smiling face. Despite his busy schedule, he generously gives us his time and attention. I feel truly thankful and blessed to not only learn from him professionally but also to know him as a person.`,
     author: "Ankit Sidana",
     stars: 5,
+    publishedAt: "2026-02-14",
   },
   {
     quote: `Dr. Njo is an exceptional dental consultant and broker who brings unmatched expertise, integrity, and strategic insight to every engagement. His deep understanding of both clinical practice operations and the business side of dentistry makes him an invaluable resource for dentists at every stage of their careers.
@@ -141,36 +168,43 @@ Over the years, he has guided me through lease negotiations, real estate purchas
 I began working with Michael after struggling through the Great Recession of 2008. With his support, my office production has multiplied many times over, and I've grown both as a professional and as a person. I'm deeply grateful for his mentorship and look forward to many more years of collaboration.`,
     author: "Jon Sierk",
     stars: 5,
+    publishedAt: "2026-02-07",
   },
   {
     quote: `Michael and I have worked together for almost two years in pursuit of achieving my goal of practice ownership. He has coached, supported, encouraged, and guided me through the process from start to finish. He has made a breeze of what could have been the most stressful time in my career, and I have confidently taken one step after another knowing I was being coached by the best. I cannot recommend Michael and the Dental Strategies team more.`,
     author: "Christian Lopez Cornejo",
     stars: 5,
+    publishedAt: "2025-05-17",
   },
   {
     quote: `Thank you Michael. We appreciated your experience, kindness, professionalism, patience, and help when we needed it.`,
     author: "Mike Miller",
     stars: 5,
+    publishedAt: "2025-05-17",
   },
   {
     quote: `Practice sales are emotional and trying and yet also exciting. I was glad I had PRACTICE TRANSITION INSTITUTE and Michael Njo in my corner. Thank you Michael.`,
     author: "Scott Smith",
-    stars: 5,
+    stars: 4,
+    publishedAt: "2025-11-01",
   },
   {
     quote: `I have worked with Michael on several deals now, and I can honestly say there aren't many people capable of doing what Michael does. I have even sent many dentist friends his way and they all say the same thing. He is efficient, incredibly responsive, very thoughtful about crafting win-win deals for both the buyer and seller. I honestly would never consider working with anyone else. I give him my highest recommendation possible!`,
     author: "Jack Ohanesian",
     stars: 5,
+    publishedAt: "2025-05-10",
   },
   {
     quote: `After being diagnosed with serious health conditions that led to having to step away from dentistry Michael Ngo was able to negotiate and complete the transition of my practice smoothly. I am relieved that both my valued patients and staff have been taken care of and that I am able to focus on healing. I believe that anyone wanting to transition their practice will find themselves in competent hands that will make their journey as easy as possible. Thanks...`,
     author: "Alec Ferradas",
     stars: 5,
+    publishedAt: "2025-03-29",
   },
   {
     quote: `I attended one of Michael Njo's seminars and was pleasantly surprised by the amount of information presented. As I am considering retiring in the next few years and selling my office, I had been feeling overwhelmed by all the details involved. However, the seminar and the book Dental Practice Transitions Handbook turned out to be a great starting point. Michael is perceptive of each dentist's needs and unique situation. I shared my timeline, and he adapted his approach accordingly. His organization has a team of professionals with the depth of expertise to handle every aspect of the transition. I look forward to working with Dental Transitions as I move into the next stage of my life.`,
     author: "Richard Dare",
     stars: 5,
+    publishedAt: "2025-03-15",
   },
   {
     quote: `Favorite part about DBC is learning from Dr. Njo and working with the rest of the executive board.`,
@@ -179,8 +213,9 @@ I began working with Michael after struggling through the Great Recession of 200
   },
   {
     quote: `As we were in the midst of a complex process to sell our dental practice, we encountered challenges in securing an offer that reflected the true value of our well-established family practice. Despite garnering interest from several dentists, it proved to be a daunting task. Additionally, my need for orthopedic surgery necessitated the hiring of a dentist to fill in for a six-month period during my recovery. It was during this time that we were introduced to Dental Strategies by one of the bankers assisting us. Michael promptly met with us and initiated the process. Within just two months, we were introduced to a prospective buyer. Working with someone like Michael, who is not only a former dentist but also possesses expertise that surpasses that of a traditional real estate broker, proved to be advantageous for us. His knowledge in the field allowed us to navigate through the complexities of selling our dental practice with confidence. The assistance provided by attorney Mike Treppa, and Dental Strategies played a crucial role in successfully selling our dental practice. Their expertise and guidance not only facilitated the process but also ensured that we received an offer that truly reflected the value of our well-established family practice.`,
-    author: "Richard & Kimberly Crum",
+    author: "Kimberly Crum",
     stars: 5,
+    publishedAt: "2024-08-13",
   },
   {
     quote: `In the world of dentistry, owning your own practice is often a dream that many dentists aspire to achieve. However, the road to becoming a practice owner is not always an easy one. It requires careful planning, hard work, and the right guidance to navigate through the complex process of purchasing a dental clinic. I have always dreamed of owning my own dental practice, but I was unsure of where to begin. I attended numerous seminars and scoured online listings for dental practices on sale, but I struggled to find a clinic that met my expectations. I was overwhelmed by the amount of work and the steps required to make this dream a reality. For instance, I had no idea which attorney or lender to use, and I felt lost in the sea of information. It was during this uncertain period that I connected with Michael. He proved to be a tremendous asset, guiding me through the entire process of purchasing a dental clinic. He patiently answered all of my questions and went above and beyond to help me every step of the way. With his expertise and guidance, I was able to find a clinic that not only met my needs but exceeded my expectations. The transfer of ownership was not without its challenges, but Michael was by my side every step of the way. He fostered a positive relationship between myself and the selling dentist, ensuring a smooth and successful transition. Thanks to Michael's help, I was able to retain a highly experienced team and continue to grow this beautiful dental practice. I am grateful for his expertise and dedication, and I couldn't have achieved this dream without him. I would highly recommend Michael to anyone looking to purchase a dental clinic, as he truly goes above and beyond to make dreams a reality.`,
@@ -345,13 +380,15 @@ Dr. Njo was instrumental in making that transition seamless. He helped me establ
 His leadership coaching had an equally meaningful impact. He helped me create a culture rooted in pride, expertise, and professionalism, and supported my growth not only as a practice owner but as a leader within the broader dental community.
 
 I firmly believe that without his guidance, the transition would have been far more challenging and my success significantly slower to achieve. His influence sharpened my leadership, strengthened the practice, and accelerated meaningful, sustainable growth. I recommend Dr. Michael Njo without reservation to any clinician seeking a successful transition and sustained, high-level practice performance.`,
-    author: "Dr. Fat",
+    author: "Diana Fat, DDS",
     stars: 5,
+    publishedAt: "2026-01-03",
   },
   {
     quote: `I had the privilege of meeting Michael through my dental architect, who highly recommended him. At the time, I was already working with a startup and business coach, but I was dissatisfied with the level of service relative to the fees I was paying. Despite the premium cost, most of my interactions were with assistants rather than the coach directly. In contrast, Michael is consistently accessible by text, email, or phone and provides direct, hands-on guidance. He has a strong understanding of the business aspects of running a dental practice and has supported my startup office in multiple areas, including leadership development, staff management, and overall business coaching. I feel very fortunate to have worked with him and would confidently recommend his services to any dentist seeking to grow their practice in a thoughtful and effective way.`,
     author: "John Yun",
     stars: 5,
+    publishedAt: "2025-12-27",
   },
   {
     quote: `When I first started working with Michael at Dental Strategies, I wasn't sure exactly how he could help my practice. I quickly learned that the key was actively reaching out and using him as a resource, and I'm so glad I did. Over the past several years, Michael has had a profound impact on both my professional and personal life. He's been instrumental in helping me improve my communication skills and coaching me through the complexities of managing staff effectively. What sets him apart is his ability to serve as an excellent liaison between me and my team. My staff knows they can turn to him with questions or concerns, which has created a valuable support system for everyone. The results speak for themselves: Michael has significantly strengthened my relationship with my office manager and helped us achieve consistent growth year after year. For the right practice, Michael is an exceptional resource, and I recommend him without reservation.`,
@@ -362,6 +399,7 @@ I firmly believe that without his guidance, the transition would have been far m
     quote: `Mike Njo was instrumental in helping me relocate from Chicago to California and guiding me through my practice acquisition. His book and webinars were also incredibly helpful, offering clear, practical insight throughout the process. Mike combines deep industry knowledge with genuine care and professionalism. I'm very grateful for his guidance and highly recommend him to any dentist considering a transition or practice purchase.`,
     author: "J C",
     stars: 5,
+    publishedAt: "2025-11-08",
   },
   {
     quote: `We confidently recommend Dr. Michael Njo to our dental clients who are seeking thoughtful, results-driven coaching grounded in real-world ownership experience. Dr. Njo understands that a dental practice is both a clinical operation and a closely held business. His coaching helps dentists make smarter operational and strategic decisions that improve profitability, strengthen leadership, and build long-term practice value. What sets Dr. Njo apart ishis ability to meet clients where they are. From associates preparing for ownership to established practice owners planning for growth or transition, his guidance is clear, disciplined, and aligned with each doctor’s goals. For dentists who want to run stronger practices and create meaningful long-term value, Dr. Njo is a trusted and highly effective advisor.`,
@@ -372,7 +410,11 @@ I firmly believe that without his guidance, the transition would have been far m
 
 export const testimonialPages: TestimonialPage[] = (() => {
   const seen = new Map<string, number>();
-  return testimonials.map((testimonial) => {
+  const orderedTestimonials = testimonials
+    .map((testimonial, index) => ({ ...testimonial, _index: index }))
+    .sort(sortByNewest);
+
+  return orderedTestimonials.map(({ _index, ...testimonial }) => {
     const base = slugify(testimonial.author || "testimonial");
     const nextCount = (seen.get(base) || 0) + 1;
     seen.set(base, nextCount);
