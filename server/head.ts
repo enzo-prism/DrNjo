@@ -1,5 +1,12 @@
 import { buildCanonicalUrl, CANONICAL_ORIGIN, normalizePathname } from "./canonical";
 import { testimonialPages } from "../client/src/data/testimonials";
+import {
+  getContactStructuredData,
+  getContactSuccessStructuredData,
+  getHomeStructuredData,
+  getMichaelNjoInterviewStructuredData,
+  getMichaelNjoStructuredData,
+} from "../client/src/seo/structured-data";
 
 const LEGACY_TESTIMONIAL_SLUGS: Record<string, string> = {
   "dr-fat": "diana-fat-dds",
@@ -325,6 +332,26 @@ function buildTestimonialDetailStructuredData(pathname: string): SchemaNode | nu
 
 export function buildPageStructuredData(pathname: string): SchemaNode | null {
   const normalizedPath = normalizePathname(pathname);
+
+  if (normalizedPath === "/") {
+    return getHomeStructuredData();
+  }
+
+  if (normalizedPath === "/about" || normalizedPath === "/michael-njo-dds") {
+    return getMichaelNjoStructuredData();
+  }
+
+  if (normalizedPath === "/dr-michael-njo-interview") {
+    return getMichaelNjoInterviewStructuredData();
+  }
+
+  if (normalizedPath === "/contact") {
+    return getContactStructuredData();
+  }
+
+  if (normalizedPath === "/contact/success") {
+    return getContactSuccessStructuredData();
+  }
 
   if (normalizedPath === "/testimonials") {
     return buildTestimonialsCollectionStructuredData();

@@ -2,6 +2,15 @@
 
 ## 2026-03-02
 
+### Server-side structured data parity
+- Expanded `server/head.ts` route-level JSON-LD coverage beyond testimonials to include:
+  - `/` (home graph)
+  - `/michael-njo-dds` (profile graph + upcoming event entities)
+  - `/dr-michael-njo-interview` (video/interview graph)
+  - `/contact` and `/contact/success` (contact flow graphs)
+- This ensures bots that do not execute client JavaScript still receive core schema directly in HTML via `route-structured-data`.
+- Enhanced `scripts/check-structured-data.ts` to validate server-routed schema presence/types for the paths above, including `EducationEvent`/`Event` assertions on `/michael-njo-dds`.
+
 ### Upcoming events area for Dr. Njo
 - Reworked `/michael-njo-dds` **News** tab into an events-focused experience with an **Upcoming Events** header and clear event cards.
 - Added two live event programs:

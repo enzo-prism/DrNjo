@@ -62,9 +62,10 @@ Use this checklist before every deploy and whenever adding new routes/content.
 ## 6) Structured Data
 - **What we ship**
   - Core JSON‑LD is generated in `client/src/seo/structured-data.ts`.
-  - Testimonial route JSON‑LD is generated server-side via `server/head.ts` and injected by `server/vite.ts`.
+  - Route-level JSON‑LD is generated server-side via `server/head.ts` and injected by `server/vite.ts`.
   - Home and `/michael-njo-dds` include `WebSite`, `Organization`, `Person`, and `ProfilePage`.
   - `/michael-njo-dds` also includes upcoming `EducationEvent` / `Event` nodes that mirror the visible events area.
+  - `/dr-michael-njo-interview` includes `VideoObject`; `/contact` includes `ContactPage`.
   - `/testimonials` includes `CollectionPage` + `ItemList`.
   - `/testimonials/<slug>` includes `Article` + `CreativeWork`.
   - We do **not** include `Review` / `AggregateRating` / `Rating` schema anywhere.
@@ -74,7 +75,7 @@ Use this checklist before every deploy and whenever adding new routes/content.
     - `npm run check:reviews`
   - Manual Rich Results Test:
     1. Open Google Rich Results Test.
-    2. Test `https://michaelnjodds.com/`, `https://michaelnjodds.com/testimonials`, and at least one `https://michaelnjodds.com/testimonials/<slug>`.
+    2. Test `https://michaelnjodds.com/`, `https://michaelnjodds.com/michael-njo-dds?tab=news`, `https://michaelnjodds.com/testimonials`, and at least one `https://michaelnjodds.com/testimonials/<slug>`.
     3. Confirm no errors/warnings and entities match visible content.
 
 ## 7) Search Console (manual setup)

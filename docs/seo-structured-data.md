@@ -9,6 +9,10 @@ This site outputs Google‑friendly JSON‑LD to clarify the main entities (Mich
   - `getContactStructuredData()` and `getContactSuccessStructuredData()` for contact flows
 - Static script renderer: `client/src/components/structured-data.tsx`
 - Route-aware schema generators: `server/head.ts`
+  - `buildPageStructuredData("/")` for homepage schema injection
+  - `buildPageStructuredData("/michael-njo-dds")` for profile + event schema injection
+  - `buildPageStructuredData("/dr-michael-njo-interview")` for interview schema injection
+  - `buildPageStructuredData("/contact")` and `buildPageStructuredData("/contact/success")` for contact flows
   - `buildPageStructuredData("/testimonials")` for the testimonials archive
   - `buildPageStructuredData("/testimonials/:slug")` for testimonial detail pages
 - Route injection point: `server/vite.ts`
@@ -28,7 +32,9 @@ Base graph nodes (shared across pages):
 Per‑page nodes:
 - `/`: `WebPage` + `ProfilePage`, `FAQPage`, `BreadcrumbList`
 - `/michael-njo-dds`: `WebPage` + `ProfilePage`, `BreadcrumbList`, plus upcoming event nodes
+- `/dr-michael-njo-interview`: `WebPage` + `VideoObject`, `BreadcrumbList`
 - `/contact`: `ContactPage`, `BreadcrumbList`
+- `/contact/success`: `WebPage`, `BreadcrumbList`
 - `/testimonials`: `CollectionPage`, `BreadcrumbList`, and `ItemList` of testimonial `CreativeWork` items
 - `/testimonials/:slug`: `WebPage` + `Article`, `BreadcrumbList`, and a testimonial `CreativeWork` main entity
 
@@ -43,5 +49,6 @@ Build checks:
   - Fails if `Review`, `AggregateRating`, or `Rating` types appear in any checked graph, including testimonial route graphs.
 
 HTTP verification (recommended):
+- `curl --compressed https://michaelnjodds.com/michael-njo-dds?tab=news | rg "route-structured-data|EducationEvent|EventScheduled"`
 - `curl --compressed https://michaelnjodds.com/testimonials | rg "route-structured-data|CollectionPage|ItemList"`
 - `curl --compressed https://michaelnjodds.com/testimonials/<slug> | rg "route-structured-data|Article|CreativeWork"`
