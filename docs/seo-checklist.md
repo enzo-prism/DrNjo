@@ -64,6 +64,7 @@ Use this checklist before every deploy and whenever adding new routes/content.
   - Core JSON‑LD is generated in `client/src/seo/structured-data.ts`.
   - Testimonial route JSON‑LD is generated server-side via `server/head.ts` and injected by `server/vite.ts`.
   - Home and `/michael-njo-dds` include `WebSite`, `Organization`, `Person`, and `ProfilePage`.
+  - `/michael-njo-dds` also includes upcoming `EducationEvent` / `Event` nodes that mirror the visible events area.
   - `/testimonials` includes `CollectionPage` + `ItemList`.
   - `/testimonials/<slug>` includes `Article` + `CreativeWork`.
   - We do **not** include `Review` / `AggregateRating` / `Rating` schema anywhere.

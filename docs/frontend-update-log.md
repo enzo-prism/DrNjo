@@ -2,6 +2,18 @@
 
 ## 2026-03-02
 
+### Upcoming events area for Dr. Njo
+- Reworked `/michael-njo-dds` **News** tab into an events-focused experience with an **Upcoming Events** header and clear event cards.
+- Added two live event programs:
+  - **Mastering Your Dental Transition Into and Out of Practice** (`seminar`, registration open, 5 dates with 3 upcoming dates/locations rendered and a “View 2 completed events” marker)
+  - **Leadership Retreat** (`conference`, registration open, June 4-6, 2026 in Savannah, GA)
+- Added direct registration CTAs for the seminar event (`tel:` and `mailto:` links) while preserving the existing card style and responsive behavior.
+- Moved event copy into a dedicated data source (`client/src/data/events.ts`) for easier future updates.
+
+### Event structured data updates
+- Added event JSON-LD nodes to `getMichaelNjoStructuredData()` so bots can interpret upcoming seminar/retreat details as machine-readable `EducationEvent` / `Event` entities.
+- Event schema now includes: title, description, schedule status, attendance mode, location, organizer, performer, and event URL.
+
 ### Testimonial metadata and crawler updates
 - Updated testimonial publication dates (`publishedAt`) so testimonial ordering reflects the intended recency sequence.
 - Added route-level structured data for testimonial pages:

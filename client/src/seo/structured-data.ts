@@ -1,3 +1,5 @@
+import { eventPrograms } from "@/data/events";
+
 export type FAQItem = {
   question: string;
   answer: string;
@@ -214,6 +216,38 @@ const getFAQEntity = (): SchemaNode => ({
     },
   })),
 });
+
+const getUpcomingEventNodes = (): SchemaNode[] =>
+  eventPrograms.flatMap((program) => {
+    const eventType = program.category === "conference" ? "Event" : "EducationEvent";
+    const pageUrl = `${siteMetadata.siteUrl}/michael-njo-dds?tab=news`;
+    const occurrences = program.upcomingDates?.length
+      ? program.upcomingDates
+      : [{ location: program.locationLabel, startDateTime: program.nextDateTime, endDateTime: undefined }];
+
+    return occurrences.map((occurrence, index) => ({
+      "@type": eventType,
+      "@id": `${siteMetadata.siteUrl}/michael-njo-dds#event-${program.slug}-${index + 1}`,
+      name: program.title,
+      description: program.description,
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      startDate: occurrence.startDateTime,
+      endDate: occurrence.endDateTime || undefined,
+      location: {
+        "@type": "Place",
+        name: occurrence.location,
+      },
+      organizer: {
+        "@id": `${siteMetadata.siteUrl}#pti`,
+      },
+      performer: {
+        "@id": personProfile.id,
+      },
+      inLanguage: "en",
+      url: pageUrl,
+    }));
+  });
 
 const getResourceNodes = (): SchemaNode[] =>
   resources.map((resource) => {
@@ -477,6 +511,7 @@ export const getMichaelNjoStructuredData = () => {
     ...getCoreGraphNodes(),
     ...getServiceNodes(),
     ...getResourceNodes(),
+    ...getUpcomingEventNodes(),
     profilePage,
     breadcrumb,
   ];

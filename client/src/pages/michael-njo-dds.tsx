@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { CalendarDays, MessageSquareQuote, Briefcase, Globe, PlayCircle } from "lucide-react";
+import { CalendarDays, CheckCircle2, Clock3, Mail, MapPin, MessageSquareQuote, PhoneCall } from "lucide-react";
 import { TestimonialListCard } from "@/components/testimonials/testimonial-card";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { StructuredData } from "@/components/structured-data";
-import { contactDetails, getMichaelNjoStructuredData, resources, services } from "@/seo/structured-data";
+import { contactDetails, getMichaelNjoStructuredData, services } from "@/seo/structured-data";
 import { testimonialPages } from "@/data/testimonials";
 import { dugoniCollaborationImage, njoLifeGalleryImages } from "@/data/media";
+import { eventPrograms } from "@/data/events";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -24,35 +25,6 @@ export default function MichaelNjoDDS() {
 
   const featuredTestimonials = testimonialPages.slice(0, 6);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-
-  const newsItems = [
-    {
-      posted: "Jan 24, 2026",
-      eventDate: "Friday, February 27, 2026",
-      title: "Building a dental practice that is always sale ready",
-      host: "Philips Group",
-      sponsor: "Provide",
-      image: {
-        src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1769271338/event-poster-image_lmuwfb.webp",
-        alt: "Event poster for Building a dental practice that is always sale ready",
-      },
-      description:
-        "Dr. Michael Njo, DDS will discuss preparing ownership and operations for potential transition opportunities and long-term value creation.",
-    },
-    {
-      posted: "Nov 09, 2025",
-      eventDate: "November 09, 2025",
-      title: "Practice Culture Leadership Session",
-      host: "Practice Transitions Institute",
-      sponsor: "HealthcareStrategiesMD",
-      image: {
-        src: "https://res.cloudinary.com/dhqpqfw6w/image/upload/v1767707725/UOP-board-dinner_vvxbkq.webp",
-        alt: "Culture Leadership Session",
-      },
-      description:
-        "A practical framework session focused on leadership, staffing, and organizational resilience during growth periods.",
-    },
-  ];
 
   const organizations = [
     {
@@ -237,29 +209,101 @@ export default function MichaelNjoDDS() {
           </TabsContent>
 
           <TabsContent value="news" className="space-y-4">
-            {newsItems.map((news, index) => (
-              <Card key={`${news.title}-${index}`}>
-                <CardHeader>
-                  <CardTitle>{news.title}</CardTitle>
-                  <CardDescription>
+            <Card>
+              <CardHeader className="space-y-3">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="space-y-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Upcoming Events</p>
+                    <CardTitle>Don&apos;t miss our latest educational opportunities</CardTitle>
+                  </div>
+                  <Button asChild variant="outline" size="sm">
+                    <a href="#past-events">View Past Events</a>
+                  </Button>
+                </div>
+              </CardHeader>
+            </Card>
+
+            {eventPrograms.map((program) => (
+              <Card key={program.slug}>
+                <CardHeader className="space-y-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Badge variant="secondary" className="capitalize">
+                      {program.category}
+                    </Badge>
+                    <Badge>{program.registrationStatus}</Badge>
+                    {program.scheduleLabel ? (
+                      <Badge variant="outline">{program.scheduleLabel}</Badge>
+                    ) : null}
+                  </div>
+                  <CardTitle>{program.title}</CardTitle>
+                  <CardDescription className="flex flex-wrap gap-4">
                     <span className="inline-flex items-center gap-2">
                       <CalendarDays className="h-3.5 w-3.5" />
-                      {news.eventDate} · {news.host}
+                      Next: {program.nextDateLabel}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <Clock3 className="h-3.5 w-3.5" />
+                      {program.timeLabel}
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {program.locationLabel}
                     </span>
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <img
-                    src={news.image.src}
-                    alt={news.image.alt}
-                    width={960}
-                    height={540}
-                    className="w-full rounded-md object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <p className="text-sm text-muted-foreground">{news.description}</p>
-                  <p className="text-sm text-muted-foreground">Sponsor: {news.sponsor}</p>
+                <CardContent className="space-y-4">
+                  <p className="text-sm leading-relaxed text-muted-foreground">{program.description}</p>
+
+                  {program.highlights?.length ? (
+                    <div className="space-y-3">
+                      <p className="text-sm font-semibold">At this seminar, you&apos;ll discover how to:</p>
+                      <ul className="space-y-2">
+                        {program.highlights.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-600" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  {program.upcomingDates?.length ? (
+                    <div className="space-y-3 rounded-lg border border-border p-4">
+                      <p className="text-sm font-semibold">Available Dates &amp; Locations</p>
+                      <div className="grid gap-3 md:grid-cols-3">
+                        {program.upcomingDates.map((date) => (
+                          <article key={`${program.slug}-${date.startDateTime}`} className="rounded-md border border-border/80 p-3">
+                            <p className="text-sm font-medium">{date.dateLabel}</p>
+                            <p className="mt-1 text-xs text-muted-foreground">{date.timeLabel}</p>
+                            <p className="mt-2 text-sm text-muted-foreground">{date.location}</p>
+                          </article>
+                        ))}
+                      </div>
+                      {program.completedEventsLabel ? (
+                        <p id="past-events" className="text-sm text-muted-foreground">
+                          {program.completedEventsLabel}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+
+                  {program.callToAction ? (
+                    <div className="flex flex-wrap gap-2">
+                      <Button asChild size="sm">
+                        <a href={`tel:${program.callToAction.phone}`} className="inline-flex items-center gap-2">
+                          <PhoneCall className="h-4 w-4" />
+                          Call or text to register
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline" size="sm">
+                        <a href={`mailto:${program.callToAction.email}`} className="inline-flex items-center gap-2">
+                          <Mail className="h-4 w-4" />
+                          Email us to register
+                        </a>
+                      </Button>
+                    </div>
+                  ) : null}
                 </CardContent>
               </Card>
             ))}
