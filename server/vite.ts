@@ -6,7 +6,7 @@ import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import { buildCanonicalUrl, CANONICAL_ORIGIN, normalizePathname } from "./canonical";
-import { buildPageDescription, buildPageTitle } from "./head";
+import { buildOpenGraphType, buildPageDescription, buildPageStructuredData, buildPageTitle } from "./head";
 
 const viteLogger = createLogger();
 const FAVICON_LINKS = [
@@ -103,37 +103,101 @@ export function serveStatic(app: Express) {
   });
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function setMetaTagContent({
+  html,
+  attr,
+  key,
+  content,
+}: {
+  html: string;
+  attr: "name" | "property";
+  key: string;
+  content: string;
+}): string {
+  const escapedContent = escapeHtml(content);
+  const tagPattern = new RegExp(
+    `<meta\\s+[^>]*${attr}=["']${escapeRegExp(key)}["'][^>]*>`,
+    "i",
+  );
+  const replacement = `<meta ${attr}="${key}" content="${escapedContent}" />`;
+
+  if (tagPattern.test(html)) {
+    return html.replace(tagPattern, replacement);
+  }
+
+  return html.replace(/<\/head>/i, `    ${replacement}\n  </head>`);
+}
+
+function setCanonicalLink(html: string, canonical: string): string {
+  const canonicalTag = `<link rel="canonical" href="${escapeHtml(canonical)}" />`;
+
+  if (html.includes("__CANONICAL_URL__")) {
+    return html.replace("__CANONICAL_URL__", escapeHtml(canonical));
+  }
+
+  if (/<link\s+rel=["']canonical["'][^>]*>/i.test(html)) {
+    return html.replace(
+      /<link\s+rel=["']canonical["'][^>]*>/i,
+      canonicalTag,
+    );
+  }
+
+  return html.replace(/<\/head>/i, `    ${canonicalTag}\n  </head>`);
+}
+
+function setTitleTag(html: string, title: string): string {
+  const escapedTitle = escapeHtml(title);
+  if (html.includes("__PAGE_TITLE__")) {
+    return html.replace("__PAGE_TITLE__", escapedTitle);
+  }
+  return html.replace(/<title>[^<]*<\/title>/i, `<title>${escapedTitle}</title>`);
+}
+
+function setStructuredDataScript(html: string, pathname: string): string {
+  const withoutExisting = html.replace(
+    /\s*<script[^>]*id=["']route-structured-data["'][^>]*>[\s\S]*?<\/script>\s*/i,
+    "\n",
+  );
+
+  const data = buildPageStructuredData(pathname);
+  if (!data) return withoutExisting;
+
+  const payload = JSON.stringify(data).replace(/</g, "\\u003c");
+  const script = `\n    <script type="application/ld+json" id="route-structured-data">${payload}</script>\n`;
+  return withoutExisting.replace(/<\/head>/i, `${script}</head>`);
+}
+
 function injectHeadTags(template: string, originalUrl: string): string {
   const pathname = new URL(originalUrl, CANONICAL_ORIGIN).pathname;
   const canonical = buildCanonicalUrl(pathname);
   const title = buildPageTitle(pathname);
   const description = buildPageDescription(pathname);
+  const ogType = buildOpenGraphType(pathname);
 
   let updated = template;
-
-  if (updated.includes("__CANONICAL_URL__")) {
-    updated = updated.replace("__CANONICAL_URL__", canonical);
-  } else {
-    updated = updated.replace(
-      /<link\s+rel=["']canonical["'][^>]*href=["'][^"']*["'][^>]*>/i,
-      `<link rel="canonical" href="${canonical}" />`,
-    );
-  }
-
-  if (updated.includes("__PAGE_TITLE__")) {
-    updated = updated.replace("__PAGE_TITLE__", title);
-  } else {
-    updated = updated.replace(/<title>[^<]*<\/title>/i, `<title>${title}</title>`);
-  }
-
-  if (updated.includes("__PAGE_DESCRIPTION__")) {
-    updated = updated.replace("__PAGE_DESCRIPTION__", description);
-  } else {
-    updated = updated.replace(
-      /<meta\s+name=["']description["'][^>]*content=["'][^"']*["'][^>]*>/i,
-      `<meta name="description" content="${description}" />`,
-    );
-  }
+  updated = setCanonicalLink(updated, canonical);
+  updated = setTitleTag(updated, title);
+  updated = setMetaTagContent({ html: updated, attr: "name", key: "description", content: description });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "og:type", content: ogType });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "og:title", content: title });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "og:description", content: description });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "og:url", content: canonical });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "twitter:title", content: title });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "twitter:description", content: description });
+  updated = setMetaTagContent({ html: updated, attr: "property", key: "twitter:url", content: canonical });
 
   // Keep favicon links consistent for every rendered route, including prerendered files.
   updated = updated.replace(
@@ -155,6 +219,8 @@ function injectHeadTags(template: string, originalUrl: string): string {
   } else {
     updated = updated.replace(/<\/head>/i, `${faviconBlock}</head>`);
   }
+
+  updated = setStructuredDataScript(updated, pathname);
 
   return updated;
 }

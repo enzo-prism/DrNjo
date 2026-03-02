@@ -3,16 +3,16 @@
 This site outputs Google‑friendly JSON‑LD to clarify the main entities (Michael Njo, DDS and Dental Strategies) and to support rich results.
 
 ## Where it lives
-- Schema generators: `client/src/seo/structured-data.ts`
+- Static schema generators: `client/src/seo/structured-data.ts`
   - `getHomeStructuredData()` for `/`
   - `getMichaelNjoStructuredData()` for `/michael-njo-dds`
   - `getContactStructuredData()` and `getContactSuccessStructuredData()` for contact flows
-- Script tag renderer: `client/src/components/structured-data.tsx`
-- Attached to pages:
-  - `client/src/pages/home.tsx`
-  - `client/src/pages/michael-njo-dds.tsx`
-  - `client/src/pages/contact.tsx`
-  - `client/src/pages/contact-success.tsx` (if present)
+- Static script renderer: `client/src/components/structured-data.tsx`
+- Route-aware schema generators: `server/head.ts`
+  - `buildPageStructuredData("/testimonials")` for the testimonials archive
+  - `buildPageStructuredData("/testimonials/:slug")` for testimonial detail pages
+- Route injection point: `server/vite.ts`
+  - Injects `application/ld+json` into `<head>` with `id="route-structured-data"`
 
 ## What’s included
 Base graph nodes (shared across pages):
@@ -28,11 +28,19 @@ Per‑page nodes:
 - `/`: `WebPage` + `ProfilePage`, `FAQPage`, `BreadcrumbList`
 - `/michael-njo-dds`: `WebPage` + `ProfilePage`, `BreadcrumbList`
 - `/contact`: `ContactPage`, `BreadcrumbList`
+- `/testimonials`: `CollectionPage`, `BreadcrumbList`, and `ItemList` of testimonial `CreativeWork` items
+- `/testimonials/:slug`: `WebPage` + `Article`, `BreadcrumbList`, and a testimonial `CreativeWork` main entity
 
 ## Updating sameAs / social links
 Only add `sameAs` URLs (LinkedIn, X, YouTube, etc.) if they are also linked visibly on the site. This keeps structured data aligned with on‑page content and avoids Search Console “unsupported/incorrect field” warnings.
 
 ## Validation
-Build‑time check: `npm run check:structured-data`
-- Ensures JSON‑LD is rendered on `/` and `/michael-njo-dds`
-- Ensures the JSON produced by the generators serializes cleanly
+Build checks:
+- `npm run check:structured-data`
+  - Ensures core page JSON‑LD generators serialize correctly.
+- `npm run check:reviews`
+  - Fails if `Review`, `AggregateRating`, or `Rating` types appear in any checked graph, including testimonial route graphs.
+
+HTTP verification (recommended):
+- `curl --compressed https://michaelnjodds.com/testimonials | rg "route-structured-data|CollectionPage|ItemList"`
+- `curl --compressed https://michaelnjodds.com/testimonials/<slug> | rg "route-structured-data|Article|CreativeWork"`

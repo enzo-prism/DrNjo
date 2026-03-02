@@ -1,5 +1,29 @@
 # Frontend Update Log
 
+## 2026-03-02
+
+### Testimonial metadata and crawler updates
+- Updated testimonial publication dates (`publishedAt`) so testimonial ordering reflects the intended recency sequence.
+- Added route-level structured data for testimonial pages:
+  - `/testimonials` now emits `CollectionPage` + `ItemList` + `CreativeWork` entries.
+  - `/testimonials/:slug` now emits `WebPage` + `Article` + `CreativeWork` with `datePublished` when available.
+- Added legacy testimonial URL redirects:
+  - `/testimonials/dr-fat` → `/testimonials/diana-fat-dds`
+  - `/testimonials/richard-and-kimberly-crum` → `/testimonials/kimberly-crum`
+
+### Head metadata hardening
+- Made server-side head injection route-aware for:
+  - canonical URL
+  - title
+  - meta description
+  - Open Graph (`og:type`, `og:title`, `og:description`, `og:url`)
+  - Twitter (`twitter:title`, `twitter:description`, `twitter:url`)
+- Added HTML escaping for injected head values to prevent malformed meta tags when testimonial text includes punctuation/quotes.
+
+### Sitemap improvements
+- Sitemap generation now includes `<lastmod>` for testimonial URLs when `publishedAt` is present.
+- Regenerated `client/public/sitemap.xml` to publish updated last-modified signals.
+
 ## 2026-02-23
 
 ### Branding and navigation changes

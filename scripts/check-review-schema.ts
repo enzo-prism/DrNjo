@@ -4,6 +4,8 @@ import {
   getHomeStructuredData,
   getMichaelNjoStructuredData,
 } from "../client/src/seo/structured-data";
+import { testimonialPages } from "../client/src/data/testimonials";
+import { buildPageStructuredData } from "../server/head";
 
 type SchemaValue = unknown;
 
@@ -51,14 +53,23 @@ function assertNoSelfServingReviews(data: SchemaValue, label: string) {
 }
 
 function main() {
+  const sampleTestimonialSlug = testimonialPages[0]?.slug;
+
   const pages = [
     ["home", getHomeStructuredData()],
     ["michael-njo-dds", getMichaelNjoStructuredData()],
     ["contact", getContactStructuredData()],
     ["contact-success", getContactSuccessStructuredData()],
+    ["testimonials", buildPageStructuredData("/testimonials")],
+    ...(sampleTestimonialSlug
+      ? [[`testimonial:${sampleTestimonialSlug}`, buildPageStructuredData(`/testimonials/${sampleTestimonialSlug}`)]]
+      : []),
   ] as const;
 
   for (const [label, data] of pages) {
+    if (!data) {
+      throw new Error(`Expected structured data for ${label}, got null.`);
+    }
     assertNoSelfServingReviews(data, label);
   }
 

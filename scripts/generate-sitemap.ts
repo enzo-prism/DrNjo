@@ -44,16 +44,24 @@ function buildLoc(baseUrl: string, route: string): string {
   return `${baseUrl}${route}`;
 }
 
-function buildSitemapXml(locs: string[]): string {
-  const urlEntries = locs
-    .map(
-      (loc) =>
-        [
-          "  <url>",
-          `    <loc>${loc}</loc>`,
-          "  </url>",
-        ].join("\n"),
-    )
+type SitemapEntry = {
+  loc: string;
+  lastmod?: string;
+};
+
+function buildSitemapXml(entries: SitemapEntry[]): string {
+  const urlEntries = entries
+    .map((entry) => {
+      const lines = [
+        "  <url>",
+        `    <loc>${entry.loc}</loc>`,
+      ];
+      if (entry.lastmod) {
+        lines.push(`    <lastmod>${entry.lastmod}</lastmod>`);
+      }
+      lines.push("  </url>");
+      return lines.join("\n");
+    })
     .join("\n");
 
   return [
@@ -79,13 +87,26 @@ function writeSitemap(xml: string) {
 function main() {
   const baseUrl = normalizeBaseUrl(process.env.SITEMAP_BASE_URL || DEFAULT_BASE_URL);
   const staticRoutes = getRoutesFromApp().filter(isIndexableRoute);
-  const testimonialRoutes = testimonialPages.map((testimonial) => `/testimonials/${testimonial.slug}`);
+  const staticRouteEntries: SitemapEntry[] = staticRoutes.map((route) => ({
+    loc: buildLoc(baseUrl, route),
+  }));
 
-  const routes = Array.from(new Set([...staticRoutes, ...testimonialRoutes])).filter(isIndexableRoute);
-  const locs = routes.map((route) => buildLoc(baseUrl, route)).sort();
-  const xml = buildSitemapXml(locs);
+  const testimonialEntries: SitemapEntry[] = testimonialPages.map((testimonial) => ({
+    loc: buildLoc(baseUrl, `/testimonials/${testimonial.slug}`),
+    lastmod: testimonial.publishedAt,
+  }));
+
+  const mergedEntries = Array.from(
+    new Map(
+      [...staticRouteEntries, ...testimonialEntries]
+        .filter((entry) => isIndexableRoute(new URL(entry.loc).pathname))
+        .map((entry) => [entry.loc, entry] as const),
+    ).values(),
+  ).sort((a, b) => a.loc.localeCompare(b.loc));
+
+  const xml = buildSitemapXml(mergedEntries);
   writeSitemap(xml);
-  console.log(`Generated sitemap with ${locs.length} URLs -> client/public/sitemap.xml`);
+  console.log(`Generated sitemap with ${mergedEntries.length} URLs -> client/public/sitemap.xml`);
 }
 
 main();
